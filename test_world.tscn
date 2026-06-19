@@ -1,0 +1,16 @@
+[gd_scene format=4 uid="uid://dan2h2fcttp21"]
+
+[ext_resource type="PackedScene" uid="uid://cji2yg5dqgn0q" path="res://environment/environment.tscn" id="1_dxppu"]
+[ext_resource type="PackedScene" uid="uid://cmrgjdrggd1x0" path="res://troopers/trooper.tscn" id="2_gy3sr"]
+
+[node name="TestWorld" type="Node2D" unique_id=1846508072]
+
+[node name="Environment" parent="." unique_id=123182581 instance=ExtResource("1_dxppu")]
+
+[node name="TileMapLayer" parent="Environment" index="0" unique_id=108710037]
+tile_map_data = PackedByteArray("AAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAFAAEAAAABAAAAAAAFAAIAAAAAAAEAAAAEAAIAAAAAAAEAAAADAAIAAAAAAAEAAAACAAIAAAAAAAEAAAABAAIAAAABAAAAAAABAAMAAAABAAAAAAABAAQAAAAAAAAAAAACAAQAAAABAAEAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAABAAAAAAAEAAMAAAABAAAAAAAEAAQAAAAAAAEAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAHAAUAAAABAAEAAAAHAAQAAAABAAEAAAAHAAMAAAABAAEAAAAHAAIAAAABAAEAAAAHAAEAAAACAAAAAAA=")
+
+[node name="Trooper" parent="." unique_id=109828530 instance=ExtResource("2_gy3sr")]
+position = Vector2(151, 148)
+
+[editable path="Environment"]

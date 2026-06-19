@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cji2yg5dqgn0q"]
+
+[ext_resource type="Script" uid="uid://y5y80yr7ysjw" path="res://environment/environment.gd" id="1_wjl7u"]
+[ext_resource type="Texture2D" uid="uid://gl622atrk15j" path="res://environment/placeholder_tiles.png" id="2_7uceq"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7b2gm"]
+texture = ExtResource("2_7uceq")
+texture_region_size = Vector2i(100, 100)
+0:0/0 = 0
+1:0/0 = 0
+1:0/0/custom_data_0 = 1
+2:0/0 = 0
+2:0/0/custom_data_0 = 4
+1:1/0 = 0
+1:1/0/custom_data_0 = 3
+0:1/0 = 0
+0:1/0/custom_data_0 = 2
+
+[sub_resource type="TileSet" id="TileSet_wetts"]
+tile_size = Vector2i(100, 100)
+custom_data_layer_0/name = "Type"
+custom_data_layer_0/type = 2
+sources/0 = SubResource("TileSetAtlasSource_7b2gm")
+
+[node name="Environment" type="Node2D" unique_id=123182581 node_paths=PackedStringArray("tilemap")]
+script = ExtResource("1_wjl7u")
+tilemap = NodePath("TileMapLayer")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=108710037]
+tile_set = SubResource("TileSet_wetts")
+rendering_quadrant_size = 100
