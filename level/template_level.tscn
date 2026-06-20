@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c0nyrmno1wcfb" path="res://level/level.gd" id="1_7lnir"]
 [ext_resource type="PackedScene" uid="uid://cji2yg5dqgn0q" path="res://environment/environment.tscn" id="2_hiaeh"]
+[ext_resource type="PackedScene" uid="uid://qyhxr7brjwsw" path="res://tower/tower.tscn" id="3_rxhqx"]
 
 [sub_resource type="Curve" id="Curve_ugjw3"]
 _limits = [0.0, 5.0, 0.0, 30.0]
@@ -31,5 +32,8 @@ tile_map_data = PackedByteArray(0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 
 
 [node name="GearMap" parent="Environment" index="1" unique_id=916456414]
 tile_map_data = PackedByteArray(0, 0, 6, 0, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0)
+
+[node name="Tower" parent="." unique_id=304654658 instance=ExtResource("3_rxhqx")]
+position = Vector2(339.74548, 290.18445)
 
 [editable path="Environment"]

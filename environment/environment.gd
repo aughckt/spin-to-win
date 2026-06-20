@@ -361,6 +361,15 @@ func log_set_count() -> bool:
 
 	return true
 
+
+func is_position_powered(pos: Vector2) -> bool:
+	var tile: Vector2i = gearmap.local_to_map(pos)
+	
+	if not tile_to_gear_set.has(tile):
+		return false
+	
+	var gear_set: GearSet = tile_to_gear_set[tile]
+	return is_gear_set_powered(gear_set)
 func spend(credits: int) -> void:
 	budget -= credits
 	budget = max(budget, 0)

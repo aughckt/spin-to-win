@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://qyhxr7brjwsw"]
+
+[ext_resource type="Script" uid="uid://xmyvhrr2x5i2" path="res://tower/tower.gd" id="1_3fjlj"]
+[ext_resource type="Texture2D" uid="uid://btm4vlsmnxvyw" path="res://icon.svg" id="1_758mn"]
+
+[node name="Tower" type="Node2D" unique_id=304654658]
+script = ExtResource("1_3fjlj")
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=881709853]
+self_modulate = Color(1, 0, 0, 1)
+z_index = -10
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_758mn")

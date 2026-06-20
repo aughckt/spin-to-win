@@ -82,6 +82,7 @@ SecondaryInteract={
 
 [layer_names]
 
+2d_physics/layer_1="Bullet"
 2d_physics/layer_5="Gear"
 
 [physics]
