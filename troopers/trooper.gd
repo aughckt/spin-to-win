@@ -8,6 +8,8 @@ extends Node2D
 
 var target_pos: Vector2
 var walk_normal: Vector2
+var hp: int = 100
+@onready var sprite: Sprite2D = $Sprite2D
 
 
 func _ready() -> void:
@@ -28,11 +30,35 @@ func _physics_process(delta: float) -> void:
 		
 		#this shouldnt fail due to rounding errors because in move_target_from_global were returning the exact vector we pass in
 		if target_pos == global_position:
-			LevelManager.INST.take_damage(1)
-			TrooperSpawner.INST.pool_trooper(self)
+			reach_end()
+			
 		
 		
 		walk_normal = global_position.direction_to(target_pos)
 		new_pos = global_position + walk_normal * move_speed * delta
 	
 	global_position = new_pos
+
+
+func reach_end() -> void:
+	LevelManager.INST.take_damage(1)
+	TrooperSpawner.INST.pool_trooper(self)
+
+
+func die() -> void:
+	print("%s: Oof owchie I have died" % name)
+	Env.INST.budget += 1
+
+# On bullet entered trooper
+func _on_body_entered(body: Node2D) -> void:
+	# Check what type of thing hit
+	if body is Bullet:
+		take_damage(50)
+		body.queue_free()
+
+
+func take_damage(amount: int) -> void:
+	hp -= amount
+	sprite.scale = Vector2(hp/100.0,hp/100.0)
+	if hp <= 0:
+		queue_free()
