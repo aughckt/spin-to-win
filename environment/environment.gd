@@ -75,17 +75,15 @@ func delete() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if not is_build_phase:
-		return
 
 	var mouse_pos := gearmap.get_local_mouse_position()
 	var tile := gearmap.local_to_map(mouse_pos)
 
 	coords_label.text = str(tile)
 
-	if Input.is_action_just_pressed("M1"):
+	if Input.is_action_just_pressed("M1") and is_build_phase:
 		place_gear(tile)
-	elif Input.is_action_just_pressed("M2"):
+	elif Input.is_action_just_pressed("M2") and is_build_phase:
 		if tile_to_tower.has(tile):
 			remove_tower(tile)
 		else:
@@ -96,8 +94,9 @@ func _physics_process(_delta: float) -> void:
 			print("Gear power: %s" % is_gear_set_powered(gset))
 		elif ori_gear_state.has(tile):
 			toggle_ori(tile)
-	elif Input.is_action_just_pressed("SecondaryInteract"):
-		place_tower(tile)
+	elif Input.is_action_just_pressed("SecondaryInteract") and is_build_phase:
+		if budget >= tower_data.cost:
+			place_tower(tile)
 
 
 ##returns the new target position in global or the given position if its an end tile
@@ -370,6 +369,8 @@ func is_position_powered(pos: Vector2) -> bool:
 	
 	var gear_set: GearSet = tile_to_gear_set[tile]
 	return is_gear_set_powered(gear_set)
+
+
 func spend(credits: int) -> void:
 	budget -= credits
 	budget = max(budget, 0)
