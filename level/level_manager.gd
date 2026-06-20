@@ -35,6 +35,8 @@ func lose_level() -> void:
 func load_level() -> void:
 	if level_array.size() <= current_level_index:
 		print("You won the game!")
+		TrooperSpawner.INST.clear_troopers()
+		return
 	
 	current_level = level_array[current_level_index].instantiate()
 	add_child(current_level)
