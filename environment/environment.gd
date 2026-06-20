@@ -4,12 +4,24 @@ extends Node2D
 static var INST: Env
 
 @export var tilemap: TileMapLayer
+@export var gearmap: TileMapLayer
+@export var coords_label: Label
 
-const directions := [Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT, Vector2i.UP]
+var tile_to_gear_set: Dictionary[Vector2i, GearSet] = {}
+
+const directions: Array[Vector2i] = [Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT, Vector2i.UP]
 const end_tile_type := 4
+
+##source id of basic gears in the tileset
+const BASIC_GEAR := 0
+##source id of origin gears in the tileset
+const ORIGIN_GEAR := 1
+
+const ATLAS_COORDS := [Vector2i(0, 0), Vector2i(1, 0)]
 
 ##name of the tileset property Type, which is basically just an id that tells troopers what to do
 const name_type := "Type"
+
 
 func _ready() -> void:
 	assert(INST == null)
@@ -19,6 +31,21 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_PREDELETE:
 		assert(INST == self)
 		INST = null
+
+func _physics_process(_delta: float) -> void:
+	var mouse_pos := gearmap.get_local_mouse_position()
+	var tile := gearmap.local_to_map(mouse_pos)
+	
+	coords_label.text = str(tile)
+	
+	if Input.is_action_just_pressed("M1"):
+		place_gear(tile)
+	elif Input.is_action_just_pressed("M2"):
+		remove_gear(tile)
+	elif Input.is_action_just_pressed("M3"):
+		var gset: GearSet = tile_to_gear_set.get(tile)
+		if gset != null:
+			print("Gear power: %s" % gset.is_powered)
 
 ##returns the new target position in global or the given position if its an end tile
 func move_target_from_global(global_pos: Vector2) -> Vector2:
@@ -32,3 +59,171 @@ func move_target_from_global(global_pos: Vector2) -> Vector2:
 	#could walk the path until you reach a tile with a different direction so that the trooper doesnt have to check all the time.
 	#also trust that the tiles are set up correctly but that should be super obvious during development because the map would consistently crash
 	return tilemap.to_global(tilemap.map_to_local(tile + directions[idx]))
+
+
+func place_gear(tile: Vector2i) -> void:
+		if gearmap.get_cell_source_id(tile) != -1:
+			return
+		
+		
+		# none of the neighbours are allowed to be in the same set
+		# we cant have more than 1 of the neighbours sets be powered
+		
+		var neighbour_sets: Array[GearSet] = []
+		var has_powered_neighbour := false
+		for candidate: Vector2i in directions:
+			candidate += tile
+			var gset: GearSet = tile_to_gear_set.get(candidate)
+			if gset != null:
+				if neighbour_sets.has(gset):
+					print("Cannot place gear because it would create a loop")
+					return
+				
+				if gset.is_powered:
+						if has_powered_neighbour:
+							print("Cannot place gear because it would connect 2 powered sets")
+							return
+						else:
+							has_powered_neighbour = true
+				
+				neighbour_sets.push_back(gset)
+			
+			else:
+				if gear_kind_at(candidate) == ORIGIN_GEAR:
+					if has_powered_neighbour:
+						assert(false, "implement, is also invalid")
+					
+					has_powered_neighbour = true
+		
+		match neighbour_sets.size():
+			0:
+				#create new set
+				var new_set := GearSet.create(has_powered_neighbour)
+				new_set.add_gear(tile)
+				tile_to_gear_set[tile] = new_set
+				
+			1:
+				#add to set
+				var gear_set := neighbour_sets[0]
+				gear_set.is_powered = gear_set.is_powered || has_powered_neighbour
+				gear_set.add_gear(tile)
+				tile_to_gear_set[tile] = gear_set
+				
+			_:
+				#merge all of the sets
+				var new_set := GearSet.create(has_powered_neighbour)
+				
+				for gset in neighbour_sets:
+					for gear in gset.gears:
+						#i mean surely we wouldnt run into rounding errors right
+						tile_to_gear_set[gear as Vector2i] = new_set
+					
+					new_set.gears.append_array(gset.gears)
+				
+				new_set.gears.append(tile)
+				tile_to_gear_set[tile] = new_set
+		
+		gearmap.set_cell(tile, gearmap.tile_set.get_source_id(0), ATLAS_COORDS[BASIC_GEAR])
+		assert(tile_to_gear_set.get(tile) != null)
+		
+		log_set_count()
+
+func remove_gear(tile: Vector2i) -> void:
+	#only gear in set -> erase (i think this is implicit due to gc)
+	#check if this has >1 neighbours, if it does the set is split, otherwise just remove tile
+	
+	var old_set: GearSet = tile_to_gear_set.get(tile)
+	if old_set == null:
+		return
+	
+	if old_set.gears.size() == 1:
+		tile_to_gear_set.erase(tile)
+		gearmap.erase_cell(tile)
+		log_set_count()
+		return
+	
+	var next_to_origin_gear := false
+	var neighbours: Array[Vector2i] = []
+	for candidate in directions:
+		candidate += tile
+		var gset: GearSet = tile_to_gear_set.get(candidate)
+		if gset != null:
+			assert(gset == old_set)
+			neighbours.push_back(candidate)
+		
+		if gear_kind_at(candidate) == ORIGIN_GEAR:
+			assert(!next_to_origin_gear)
+			next_to_origin_gear = true
+	
+	#just remove the current tile from the set
+	if neighbours.size() == 1:
+		var removed_successfully := old_set.gears.erase(tile)
+		assert(removed_successfully)
+		
+		if next_to_origin_gear:
+			assert(old_set.is_powered)
+			old_set.is_powered = false
+		
+		tile_to_gear_set.erase(tile)
+		
+		gearmap.erase_cell(tile)
+		log_set_count()
+		return
+	
+	#split up the old set
+	for ntile in neighbours:
+		var new_set := GearSet.create(false)
+		tile_to_gear_set[ntile] = new_set
+		build_set_recursive(ntile, tile, new_set)
+		print("Create set: %s" % new_set.gears)
+	
+	tile_to_gear_set.erase(tile)
+	
+	assert(!tile_to_gear_set.values().has(old_set))
+	
+	for gear in old_set.gears:
+		var gset: GearSet = tile_to_gear_set.get(gear)
+		if gset == old_set:
+			printerr("problem at tile %s" % gear)
+		#assert(gset != old_set, "problem at tile %s" % gear)
+	
+	gearmap.erase_cell(tile)
+	log_set_count()
+
+func build_set_recursive(tile: Vector2i, previous_tile: Vector2i, gset: GearSet) -> void:
+	gset.gears.push_back(tile)
+	tile_to_gear_set[tile] = gset
+	
+	for candidate in directions:
+		candidate += tile
+		if candidate == previous_tile:
+			continue
+		
+		match gear_kind_at(candidate):
+			BASIC_GEAR:
+				build_set_recursive(candidate, tile, gset)
+			ORIGIN_GEAR:
+				gset.is_powered = true
+
+func gear_kind_at(tile: Vector2i) -> int:
+	
+	var atlas_coords := gearmap.get_cell_atlas_coords(tile)
+	match atlas_coords:
+		-Vector2i.ONE:
+			return -1
+		ATLAS_COORDS[BASIC_GEAR]:
+			return 0
+		ATLAS_COORDS[ORIGIN_GEAR]:
+			return 1
+	
+	assert(false)
+	return 0
+
+##walks every gear set so its pretty imperformant, disable later
+func log_set_count() -> void:
+	var sets: Array[GearSet] = []
+	for gset: GearSet in tile_to_gear_set.values():
+		if !sets.has(gset):
+			sets.push_back(gset)
+	
+	print("Set count: %s" % sets.size())
