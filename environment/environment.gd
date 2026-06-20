@@ -38,10 +38,11 @@ func _ready() -> void:
 		if gear_kind_at(tile) == ORIGIN_GEAR:
 			ori_gear_state[tile] = false
 
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_PREDELETE:
-		assert(INST == self)
-		INST = null
+
+func delete() -> void:
+	assert(INST == self)
+	INST = null
+
 
 func _physics_process(_delta: float) -> void:
 	var mouse_pos := gearmap.get_local_mouse_position()
@@ -62,8 +63,13 @@ func _physics_process(_delta: float) -> void:
 
 ##returns the new target position in global or the given position if its an end tile
 func move_target_from_global(global_pos: Vector2) -> Vector2:
-	var tile := tilemap.local_to_map(tilemap.to_local(global_pos))
+	if not tilemap:
+		return Vector2i.ZERO
+	
+	var tile: Vector2i = tilemap.local_to_map(tilemap.to_local(global_pos))
 	var tile_data := tilemap.get_cell_tile_data(tile)
+	if not tile_data:
+		return global_pos
 	var idx: int = tile_data.get_custom_data(name_type)
 	
 	if idx == end_tile_type:

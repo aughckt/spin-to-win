@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://b04sr3oh5d0f3"]
+
+[ext_resource type="Script" uid="uid://c0nyrmno1wcfb" path="res://level/level.gd" id="1_7lnir"]
+[ext_resource type="PackedScene" uid="uid://cji2yg5dqgn0q" path="res://environment/environment.tscn" id="2_hiaeh"]
+
+[node name="TemplateLevel" type="Node2D" unique_id=251983101 node_paths=PackedStringArray("spawn_point", "tilemap")]
+script = ExtResource("1_7lnir")
+level_hp = 3
+spawn_point = NodePath("SpawnPoint")
+tilemap = NodePath("")
+
+[node name="SpawnPoint" type="Node2D" parent="." unique_id=1156764314]
+position = Vector2(151, 148)
+
+[node name="Environment" parent="." unique_id=123182581 instance=ExtResource("2_hiaeh")]
+
+[node name="TileMapLayer" parent="Environment" index="0" unique_id=108710037]
+tile_map_data = PackedByteArray(0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0)
+
+[editable path="Environment"]
