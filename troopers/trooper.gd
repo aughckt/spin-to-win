@@ -1,5 +1,5 @@
 class_name Trooper
-extends Node2D
+extends Area2D
 
 @export var move_speed: float = 100.0
 

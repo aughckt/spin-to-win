@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://cyeody7hgvmcf"]
+
+[ext_resource type="PackedScene" uid="uid://qyhxr7brjwsw" path="res://tower/tower.tscn" id="1_w825s"]
+[ext_resource type="Script" uid="uid://b3i1ttqlnn1bq" path="res://tower/aoe_tower.gd" id="2_0draq"]
+[ext_resource type="Texture2D" uid="uid://btm4vlsmnxvyw" path="res://icon.svg" id="3_0draq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_klfgw"]
+radius = 115.01739
+
+[node name="AOETower" unique_id=304654658 instance=ExtResource("1_w825s")]
+script = ExtResource("2_0draq")
+shoot_timer_max = 0.5
+
+[node name="Icon" parent="." index="0" unique_id=881709853]
+self_modulate = Color(5.7756904e-07, 0.6231592, 0.53181416, 1)
+
+[node name="Area2D" type="Area2D" parent="." index="1" unique_id=1368491010]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0" unique_id=1282895275]
+shape = SubResource("CircleShape2D_klfgw")
+
+[node name="AreaIcon" type="Sprite2D" parent="." index="2" unique_id=2131660126]
+modulate = Color(1, 1, 1, 0.29411766)
+scale = Vector2(1.8320575, 1.8320575)
+texture = ExtResource("3_0draq")

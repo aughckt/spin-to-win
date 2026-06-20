@@ -2,8 +2,15 @@
 
 [ext_resource type="Script" uid="uid://y5y80yr7ysjw" path="res://environment/environment.gd" id="1_wjl7u"]
 [ext_resource type="Texture2D" uid="uid://gl622atrk15j" path="res://environment/placeholder_tiles.png" id="2_7uceq"]
-[ext_resource type="PackedScene" uid="uid://kh3rixkt6b3s" path="res://environment/marker.tscn" id="2_x2wa3"]
+[ext_resource type="PackedScene" uid="uid://cyeody7hgvmcf" path="res://tower/aoe_tower.tscn" id="2_x2wa3"]
+[ext_resource type="Script" uid="uid://b55436prbbuts" path="res://environment/towers/tower_data.gd" id="3_ehb6n"]
 [ext_resource type="Texture2D" uid="uid://cfh0tlhb5mhf2" path="res://environment/gears/gear_map.png" id="3_wjl7u"]
+
+[sub_resource type="Resource" id="Resource_0draq"]
+script = ExtResource("3_ehb6n")
+cost = 1
+scene = ExtResource("2_x2wa3")
+metadata/_custom_type_script = "uid://b55436prbbuts"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7b2gm"]
 texture = ExtResource("2_7uceq")
@@ -42,7 +49,7 @@ gears = NodePath("Gears")
 towers = NodePath("Towers")
 coords_label = NodePath("CoordsLabel")
 budget_label = NodePath("BudgetLabel")
-tower_scene = ExtResource("2_x2wa3")
+tower_data = SubResource("Resource_0draq")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=108710037]
 tile_set = SubResource("TileSet_wetts")

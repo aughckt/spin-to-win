@@ -2,8 +2,6 @@
 
 [ext_resource type="Script" uid="uid://c0nyrmno1wcfb" path="res://level/level.gd" id="1_7lnir"]
 [ext_resource type="PackedScene" uid="uid://cji2yg5dqgn0q" path="res://environment/environment.tscn" id="2_hiaeh"]
-[ext_resource type="PackedScene" uid="uid://qyhxr7brjwsw" path="res://tower/tower.tscn" id="3_rxhqx"]
-[ext_resource type="Script" uid="uid://b55436prbbuts" path="res://environment/towers/tower_data.gd" id="4_kan5m"]
 
 [sub_resource type="Curve" id="Curve_ugjw3"]
 _limits = [0.0, 5.0, 0.0, 30.0]
@@ -14,12 +12,6 @@ point_count = 4
 _limits = [0.0, 10.0, 0.0, 10.0]
 _data = [Vector2(0, 0.9325843), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.5617981), 0.0, 0.0, 0, 0, Vector2(3.75, 3.0337086), 0.0, 0.0, 0, 0, Vector2(6.40625, 1), 0.0, 0.0, 0, 0, Vector2(10, 1.5730343), 0.0, 0.0, 0, 0]
 point_count = 5
-
-[sub_resource type="Resource" id="Resource_wwakr"]
-script = ExtResource("4_kan5m")
-cost = 5
-scene = ExtResource("3_rxhqx")
-metadata/_custom_type_script = "uid://b55436prbbuts"
 
 [node name="TemplateLevel" type="Node2D" unique_id=251983101 node_paths=PackedStringArray("env", "spawn_point")]
 script = ExtResource("1_7lnir")
@@ -33,7 +25,6 @@ position = Vector2(151, 148)
 
 [node name="Environment" parent="." unique_id=123182581 instance=ExtResource("2_hiaeh")]
 unique_name_in_owner = true
-tower_data = SubResource("Resource_wwakr")
 
 [node name="TileMapLayer" parent="Environment" index="0" unique_id=108710037]
 tile_map_data = PackedByteArray(0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0)
