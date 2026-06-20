@@ -1,7 +1,6 @@
 class_name TrooperSpawner
 extends Node2D
 
-#TODO Currently the logic is really simple, just spawn one every 2 seconds. 
 
 static var INST: TrooperSpawner
 @export var spawn_point: Vector2 

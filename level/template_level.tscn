@@ -13,12 +13,12 @@ _limits = [0.0, 10.0, 0.0, 10.0]
 _data = [Vector2(0, 0.9325843), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.5617981), 0.0, 0.0, 0, 0, Vector2(3.75, 3.0337086), 0.0, 0.0, 0, 0, Vector2(6.40625, 1), 0.0, 0.0, 0, 0, Vector2(10, 1.5730343), 0.0, 0.0, 0, 0]
 point_count = 5
 
-[node name="TemplateLevel" type="Node2D" unique_id=251983101 node_paths=PackedStringArray("spawn_point", "env")]
+[node name="TemplateLevel" type="Node2D" unique_id=251983101 node_paths=PackedStringArray("env", "spawn_point")]
 script = ExtResource("1_7lnir")
-level_hp = 3
-spawn_point = NodePath("SpawnPoint")
-wave_list = Array[Curve]([SubResource("Curve_ugjw3"), SubResource("Curve_hiaeh"), SubResource("Curve_hiaeh")])
 env = NodePath("Environment")
+spawn_point = NodePath("SpawnPoint")
+level_hp = 3
+wave_list = Array[Curve]([SubResource("Curve_ugjw3"), SubResource("Curve_hiaeh"), SubResource("Curve_hiaeh")])
 
 [node name="SpawnPoint" type="Node2D" parent="." unique_id=1156764314]
 position = Vector2(151, 148)
