@@ -38,7 +38,6 @@ func spawn_trooper() -> void:
 	trooper.reparent.call_deferred(self)
 	trooper.global_position = spawn_point
 	trooper.target_pos = trooper.global_position 
-	trooper.enabled = true
 
 
 func clear_troopers() -> void:
@@ -48,7 +47,6 @@ func clear_troopers() -> void:
 
 
 func pool_trooper(trooper: Trooper) -> void:
-	trooper.enabled = false
 	trooper_pool.pool(trooper)
 
 
