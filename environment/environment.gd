@@ -1,4 +1,4 @@
-class_name Env #Environment was taken :(
+class_name Env # Environment was taken :(
 extends Node2D
 
 static var INST: Env
@@ -6,6 +6,10 @@ static var INST: Env
 @export var tilemap: TileMapLayer
 @export var gearmap: TileMapLayer
 @export var coords_label: Label
+@export var budget_label: Label
+@export var budget: int = 20
+
+const GEAR_COST := 2
 
 var tile_to_gear_set: Dictionary[Vector2i, GearSet] = {}
 ##true if powered
@@ -32,7 +36,9 @@ var is_build_phase: bool = true
 func _ready() -> void:
 	assert(INST == null)
 	INST = self
-	
+
+	update_budget_display()
+
 	#TODO this is pretty inefficient in theory but its only run once per level + the gear map should be close to empty.
 	#ideally youd update the gears as you go but eh
 	for tile in gearmap.get_used_cells():
@@ -48,12 +54,12 @@ func delete() -> void:
 func _physics_process(_delta: float) -> void:
 	if not is_build_phase:
 		return
-	
+
 	var mouse_pos := gearmap.get_local_mouse_position()
 	var tile := gearmap.local_to_map(mouse_pos)
-	
+
 	coords_label.text = str(tile)
-	
+
 	if Input.is_action_just_pressed("M1"):
 		place_gear(tile)
 	elif Input.is_action_just_pressed("M2"):
@@ -70,16 +76,16 @@ func _physics_process(_delta: float) -> void:
 func move_target_from_global(global_pos: Vector2) -> Vector2:
 	if not tilemap:
 		return Vector2i.ZERO
-	
+
 	var tile: Vector2i = tilemap.local_to_map(tilemap.to_local(global_pos))
 	var tile_data := tilemap.get_cell_tile_data(tile)
 	if not tile_data:
 		return global_pos
 	var idx: int = tile_data.get_custom_data(name_type)
-	
+
 	if idx == end_tile_type:
 		return global_pos
-	
+
 	#could walk the path until you reach a tile with a different direction so that the trooper doesnt have to check all the time.
 	#also trust that the tiles are set up correctly but that should be super obvious during development because the map would consistently crash
 	return tilemap.to_global(tilemap.map_to_local(tile + directions[idx]))
@@ -88,11 +94,15 @@ func move_target_from_global(global_pos: Vector2) -> Vector2:
 func place_gear(tile: Vector2i) -> void:
 		if gearmap.get_cell_source_id(tile) != -1:
 			return
-		
-		
+		#only place if you have enough money
+		if budget < GEAR_COST:
+			print("Not enough money to place gear")
+			return
+
+
 		# none of the neighbours are allowed to be in the same set
 		# we cant have more than 1 of the neighbours sets be powered
-		
+
 		var neighbour_sets: Array[GearSet] = []
 		var has_powered_neighbour := false
 		var neighbour_ori := Vector2i.ZERO
@@ -103,7 +113,7 @@ func place_gear(tile: Vector2i) -> void:
 				if neighbour_sets.has(gset):
 					print("Cannot place gear because it would create a loop")
 					return
-				
+
 				if gset.has_ori_gear:
 						if has_powered_neighbour:
 							print("Cannot place gear because it would connect 2 powered sets")
@@ -111,70 +121,77 @@ func place_gear(tile: Vector2i) -> void:
 						else:
 							has_powered_neighbour = true
 							neighbour_ori = gset.ori_gear_tile
-				
+
 				neighbour_sets.push_back(gset)
-			
+
 			else:
 				if gear_kind_at(candidate) == ORIGIN_GEAR:
 					if has_powered_neighbour:
 						print("Cannot place gear because it would connect 2 powered sets (directly next to ori)")
 						return
-					
+
 					has_powered_neighbour = true
 					neighbour_ori = candidate
-		
+
 		match neighbour_sets.size():
 			0:
 				#create new set
 				var new_set := GearSet.create(has_powered_neighbour, neighbour_ori)
 				new_set.add_gear(tile)
 				tile_to_gear_set[tile] = new_set
-				
+
 			1:
 				#add to set
 				var gear_set := neighbour_sets[0]
-				
+
 				if has_powered_neighbour:
 					assert(!gear_set.has_ori_gear || gear_set.ori_gear_tile == neighbour_ori)
 					gear_set.set_ori_gear(neighbour_ori)
-				
-				
+
+
 				gear_set.add_gear(tile)
 				tile_to_gear_set[tile] = gear_set
-				
+
 			_:
 				#merge all of the sets
 				var new_set := GearSet.create(has_powered_neighbour, neighbour_ori)
-				
+
 				for gset in neighbour_sets:
 					for gear in gset.gears:
 						#i mean surely we wouldnt run into rounding errors right
 						tile_to_gear_set[gear as Vector2i] = new_set
-					
+
 					new_set.gears.append_array(gset.gears)
-				
+
 				new_set.gears.append(tile)
 				tile_to_gear_set[tile] = new_set
-		
+
 		gearmap.set_cell(tile, gearmap.tile_set.get_source_id(0), ATLAS_COORDS[BASIC_GEAR])
 		assert(tile_to_gear_set.get(tile) != null)
 		
+		#adjust budget display
+		budget -= GEAR_COST
+		update_budget_display()
+
 		assert(log_set_count())
 
 func remove_gear(tile: Vector2i) -> void:
 	#only gear in set -> erase (i think this is implicit due to gc)
 	#check if this has >1 neighbours, if it does the set is split, otherwise just remove tile
-	
 	var old_set: GearSet = tile_to_gear_set.get(tile)
 	if old_set == null:
 		return
-	
+
 	if old_set.gears.size() == 1:
+		#refund budget
+		budget += GEAR_COST
+		update_budget_display()
+		
 		tile_to_gear_set.erase(tile)
 		gearmap.erase_cell(tile)
 		assert(log_set_count())
 		return
-	
+
 	var next_to_origin_gear := false
 	var neighbours: Array[Vector2i] = []
 	for candidate in directions:
@@ -183,55 +200,63 @@ func remove_gear(tile: Vector2i) -> void:
 		if gset != null:
 			assert(gset == old_set)
 			neighbours.push_back(candidate)
-		
+
 		if gear_kind_at(candidate) == ORIGIN_GEAR:
 			assert(!next_to_origin_gear)
 			next_to_origin_gear = true
-	
+
 	#just remove the current tile from the set
 	if neighbours.size() == 1:
 		var removed_successfully := old_set.gears.erase(tile)
 		assert(removed_successfully)
-		
+
 		if next_to_origin_gear:
 			assert(old_set.has_ori_gear)
 			old_set.clear_ori_gear()
-		
+
 		tile_to_gear_set.erase(tile)
 		
+		#refund budget
+		budget += GEAR_COST
+		update_budget_display()
+
 		gearmap.erase_cell(tile)
 		assert(log_set_count())
 		return
-	
+
 	#split up the old set
 	for ntile in neighbours:
 		var new_set := GearSet.create(false)
 		tile_to_gear_set[ntile] = new_set
 		build_set_recursive(ntile, tile, new_set)
 		#print("Create set: %s" % new_set.gears)
-	
+
 	tile_to_gear_set.erase(tile)
-	
+
+	#refund budget
+	budget += GEAR_COST
+	update_budget_display()
+
 	assert(!tile_to_gear_set.values().has(old_set))
-	
+
 	for gear in old_set.gears:
 		var gset: GearSet = tile_to_gear_set.get(gear)
 		if gset == old_set:
 			printerr("problem at tile %s" % gear)
 
-	
+
 	gearmap.erase_cell(tile)
 	assert(log_set_count())
 
 func build_set_recursive(tile: Vector2i, previous_tile: Vector2i, gset: GearSet) -> void:
 	gset.gears.push_back(tile)
 	tile_to_gear_set[tile] = gset
-	
+
 	for candidate in directions:
 		candidate += tile
 		if candidate == previous_tile:
 			continue
-		
+
 		match gear_kind_at(candidate):
 			BASIC_GEAR:
 				build_set_recursive(candidate, tile, gset)
@@ -241,34 +266,33 @@ func build_set_recursive(tile: Vector2i, previous_tile: Vector2i, gset: GearSet)
 func gear_kind_at(tile: Vector2i) -> int:
 	var atlas_coords := gearmap.get_cell_atlas_coords(tile)
 	match atlas_coords:
-		-Vector2i.ONE:
+		- Vector2i.ONE:
 			return -1
 		ATLAS_COORDS[BASIC_GEAR]:
 			return 0
 		ATLAS_COORDS[ORIGIN_GEAR]:
 			return 1
-	
+
 	assert(false)
 	return 0
 
 func is_gear_set_powered(gear_set: GearSet) -> bool:
 	#return gear_set.has_ori_gear && ori_gear_state[gear_set.ori_gear_tile]
-	
 	#long version in case of bugs
 	if !gear_set.has_ori_gear:
 		return false
-	
+
 	var state: bool = ori_gear_state.get(gear_set.ori_gear_tile)
 	if state == null:
 		push_error("Unknown origin gear at %s" % gear_set.ori_gear_tile)
 		return false
-	
+
 	return state
 
 func set_ori_on(tile: Vector2i) -> void:
 	assert(ori_gear_state.has(tile))
 	ori_gear_state[tile] = true
-	
+
 func set_ori_off(tile: Vector2i) -> void:
 	assert(ori_gear_state.has(tile))
 	ori_gear_state[tile] = false
@@ -277,13 +301,17 @@ func toggle_ori(tile: Vector2i) -> void:
 	assert(ori_gear_state.has(tile))
 	ori_gear_state[tile] = !ori_gear_state[tile]
 
+func update_budget_display() -> void:
+	if budget_label:
+		budget_label.text = str(budget)
+
 ##walks every gear set so its pretty imperformant, only use from within assert so it isnt included in the release
 func log_set_count() -> bool:
 	var sets: Array[GearSet] = []
 	for gset: GearSet in tile_to_gear_set.values():
 		if !sets.has(gset):
 			sets.push_back(gset)
-	
+
 	print("Set count: %s" % sets.size())
-	
+
 	return true

@@ -33,11 +33,12 @@ texture_region_size = Vector2i(100, 100)
 tile_size = Vector2i(100, 100)
 sources/0 = SubResource("TileSetAtlasSource_7uceq")
 
-[node name="Environment" type="Node2D" unique_id=123182581 node_paths=PackedStringArray("tilemap", "gearmap", "coords_label")]
+[node name="Environment" type="Node2D" unique_id=123182581 node_paths=PackedStringArray("tilemap", "gearmap", "coords_label", "budget_label")]
 script = ExtResource("1_wjl7u")
 tilemap = NodePath("TileMapLayer")
 gearmap = NodePath("GearMap")
 coords_label = NodePath("CoordsLabel")
+budget_label = NodePath("BudgetLabel")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=108710037]
 tile_set = SubResource("TileSet_wetts")
@@ -49,3 +50,8 @@ tile_set = SubResource("TileSet_fbxa2")
 [node name="CoordsLabel" type="Label" parent="." unique_id=1591894278]
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="BudgetLabel" type="Label" parent="." unique_id=1943656571]
+offset_top = 35.199997
+offset_right = 40.0
+offset_bottom = 58.199997
