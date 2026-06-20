@@ -1,11 +1,10 @@
-class_name Tower
+class_name GunTower
 extends Node2D
 
 const SHOOT_TIMER_MAX: float = 1.0
-const SHOOT_FORCE: float = 100.0
 var is_powered: bool = false
 var shoot_timer: float = 1.0
-var bullet_scene: PackedScene = preload("res://tower/bullet.tscn")
+var bullet_scene: PackedScene = preload("res://towers/gun_tower/bullet.tscn")
 
 
 func _physics_process(delta: float) -> void:
@@ -17,7 +16,7 @@ func _physics_process(delta: float) -> void:
 
 func shoot() -> void:
 	shoot_timer = SHOOT_TIMER_MAX
-	var bullet: Bullet = bullet_scene.instantiate()
-	add_child(bullet)
-	bullet.linear_velocity = (Vector2.UP*SHOOT_FORCE).rotated(rotation)
+	var bullet: Bullet = Bullet.create()
+	bullet.reparent.call_deferred(Env.INST.bullets)
+	bullet.dir = (Vector2.UP).rotated(rotation)
 	bullet.global_position = global_position

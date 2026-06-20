@@ -6,6 +6,7 @@ static var INST: Env
 @export var tilemap: TileMapLayer
 @export var gearmap: TileMapLayer
 @export var gears: Node2D
+@export var bullets: Node2D
 @export var towers: Node2D
 @export var coords_label: Label
 @export var budget_label: Label

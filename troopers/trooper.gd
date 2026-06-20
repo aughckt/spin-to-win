@@ -9,12 +9,13 @@ extends Node2D
 var target_pos: Vector2
 var walk_normal: Vector2
 var hp: int = 100
-@onready var sprite: Sprite2D = $Sprite2D
-
+@export var sprite: Sprite2D
+@export var collider: Area2D
 
 func _ready() -> void:
 	target_pos = global_position
 	walk_normal = Vector2.ZERO
+	collider.area_entered.connect(_on_area_entered)
 
 
 func _physics_process(delta: float) -> void:
@@ -49,12 +50,11 @@ func die() -> void:
 	print("%s: Oof owchie I have died" % name)
 	Env.INST.budget += 1
 
-# On bullet entered trooper
-func _on_body_entered(body: Node2D) -> void:
-	# Check what type of thing hit
-	if body is Bullet:
-		take_damage(50)
-		body.queue_free()
+func _on_area_entered(area: Area2D) -> void:
+	if area is Bullet:
+		take_damage(Bullet.damage)
+		(area as Bullet).remove()
+
 
 
 func take_damage(amount: int) -> void:

@@ -5,8 +5,8 @@ static var INST: LevelManager
 
 @export var current_level_index: int = 0
 var level_array: Array[PackedScene] = [
-	preload("res://level/template_level.tscn"),
-	preload("res://level/level_snake.tscn")]
+	preload("res://structure/levels/template_level.tscn"),
+	preload("res://structure/levels/level_snake.tscn")]
 var current_level: Level = null
 var current_hp: int = 20
 var is_build_phase: bool = true
