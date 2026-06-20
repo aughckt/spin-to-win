@@ -8,6 +8,8 @@ static var INST: Env
 @export var coords_label: Label
 
 var tile_to_gear_set: Dictionary[Vector2i, GearSet] = {}
+##true if powered
+var ori_gear_state: Dictionary[Vector2i, bool] = {}
 
 const directions: Array[Vector2i] = [Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT, Vector2i.UP]
 const end_tile_type := 4
@@ -23,9 +25,18 @@ const ATLAS_COORDS := [Vector2i(0, 0), Vector2i(1, 0)]
 const name_type := "Type"
 
 
+###emitted when any origin gear is powered on or off. new_status is true if the power is on, false otherwise.
+#signal OriGearPowerSet(tile: Vector2i, new_status: bool)
+
 func _ready() -> void:
 	assert(INST == null)
 	INST = self
+	
+	#TODO this is pretty inefficient in theory but its only run once per level + the gear map should be close to empty.
+	#ideally youd update the gears as you go but eh
+	for tile in gearmap.get_used_cells():
+		if gear_kind_at(tile) == ORIGIN_GEAR:
+			ori_gear_state[tile] = false
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_PREDELETE:
@@ -45,7 +56,9 @@ func _physics_process(_delta: float) -> void:
 	elif Input.is_action_just_pressed("M3"):
 		var gset: GearSet = tile_to_gear_set.get(tile)
 		if gset != null:
-			print("Gear power: %s" % gset.is_powered)
+			print("Gear power: %s" % is_gear_set_powered(gset))
+		elif ori_gear_state.has(tile):
+			toggle_ori(tile)
 
 ##returns the new target position in global or the given position if its an end tile
 func move_target_from_global(global_pos: Vector2) -> Vector2:
@@ -71,6 +84,7 @@ func place_gear(tile: Vector2i) -> void:
 		
 		var neighbour_sets: Array[GearSet] = []
 		var has_powered_neighbour := false
+		var neighbour_ori := Vector2i.ZERO
 		for candidate: Vector2i in directions:
 			candidate += tile
 			var gset: GearSet = tile_to_gear_set.get(candidate)
@@ -79,39 +93,47 @@ func place_gear(tile: Vector2i) -> void:
 					print("Cannot place gear because it would create a loop")
 					return
 				
-				if gset.is_powered:
+				if gset.has_ori_gear:
 						if has_powered_neighbour:
 							print("Cannot place gear because it would connect 2 powered sets")
 							return
 						else:
 							has_powered_neighbour = true
+							neighbour_ori = gset.ori_gear_tile
 				
 				neighbour_sets.push_back(gset)
 			
 			else:
 				if gear_kind_at(candidate) == ORIGIN_GEAR:
 					if has_powered_neighbour:
-						assert(false, "implement, is also invalid")
+						print("Cannot place gear because it would connect 2 powered sets (directly next to ori)")
+						return
 					
 					has_powered_neighbour = true
+					neighbour_ori = candidate
 		
 		match neighbour_sets.size():
 			0:
 				#create new set
-				var new_set := GearSet.create(has_powered_neighbour)
+				var new_set := GearSet.create(has_powered_neighbour, neighbour_ori)
 				new_set.add_gear(tile)
 				tile_to_gear_set[tile] = new_set
 				
 			1:
 				#add to set
 				var gear_set := neighbour_sets[0]
-				gear_set.is_powered = gear_set.is_powered || has_powered_neighbour
+				
+				if has_powered_neighbour:
+					assert(!gear_set.has_ori_gear || gear_set.ori_gear_tile == neighbour_ori)
+					gear_set.set_ori_gear(neighbour_ori)
+				
+				
 				gear_set.add_gear(tile)
 				tile_to_gear_set[tile] = gear_set
 				
 			_:
 				#merge all of the sets
-				var new_set := GearSet.create(has_powered_neighbour)
+				var new_set := GearSet.create(has_powered_neighbour, neighbour_ori)
 				
 				for gset in neighbour_sets:
 					for gear in gset.gears:
@@ -126,7 +148,7 @@ func place_gear(tile: Vector2i) -> void:
 		gearmap.set_cell(tile, gearmap.tile_set.get_source_id(0), ATLAS_COORDS[BASIC_GEAR])
 		assert(tile_to_gear_set.get(tile) != null)
 		
-		log_set_count()
+		assert(log_set_count())
 
 func remove_gear(tile: Vector2i) -> void:
 	#only gear in set -> erase (i think this is implicit due to gc)
@@ -139,7 +161,7 @@ func remove_gear(tile: Vector2i) -> void:
 	if old_set.gears.size() == 1:
 		tile_to_gear_set.erase(tile)
 		gearmap.erase_cell(tile)
-		log_set_count()
+		assert(log_set_count())
 		return
 	
 	var next_to_origin_gear := false
@@ -161,13 +183,13 @@ func remove_gear(tile: Vector2i) -> void:
 		assert(removed_successfully)
 		
 		if next_to_origin_gear:
-			assert(old_set.is_powered)
-			old_set.is_powered = false
+			assert(old_set.has_ori_gear)
+			old_set.clear_ori_gear()
 		
 		tile_to_gear_set.erase(tile)
 		
 		gearmap.erase_cell(tile)
-		log_set_count()
+		assert(log_set_count())
 		return
 	
 	#split up the old set
@@ -185,10 +207,10 @@ func remove_gear(tile: Vector2i) -> void:
 		var gset: GearSet = tile_to_gear_set.get(gear)
 		if gset == old_set:
 			printerr("problem at tile %s" % gear)
-		#assert(gset != old_set, "problem at tile %s" % gear)
+
 	
 	gearmap.erase_cell(tile)
-	log_set_count()
+	assert(log_set_count())
 
 func build_set_recursive(tile: Vector2i, previous_tile: Vector2i, gset: GearSet) -> void:
 	gset.gears.push_back(tile)
@@ -203,10 +225,9 @@ func build_set_recursive(tile: Vector2i, previous_tile: Vector2i, gset: GearSet)
 			BASIC_GEAR:
 				build_set_recursive(candidate, tile, gset)
 			ORIGIN_GEAR:
-				gset.is_powered = true
+				gset.set_ori_gear(candidate)
 
 func gear_kind_at(tile: Vector2i) -> int:
-	
 	var atlas_coords := gearmap.get_cell_atlas_coords(tile)
 	match atlas_coords:
 		-Vector2i.ONE:
@@ -219,11 +240,39 @@ func gear_kind_at(tile: Vector2i) -> int:
 	assert(false)
 	return 0
 
-##walks every gear set so its pretty imperformant, disable later
-func log_set_count() -> void:
+func is_gear_set_powered(gear_set: GearSet) -> bool:
+	#return gear_set.has_ori_gear && ori_gear_state[gear_set.ori_gear_tile]
+	
+	#long version in case of bugs
+	if !gear_set.has_ori_gear:
+		return false
+	
+	var state: bool = ori_gear_state.get(gear_set.ori_gear_tile)
+	if state == null:
+		push_error("Unknown origin gear at %s" % gear_set.ori_gear_tile)
+		return false
+	
+	return state
+
+func set_ori_on(tile: Vector2i) -> void:
+	assert(ori_gear_state.has(tile))
+	ori_gear_state[tile] = true
+	
+func set_ori_off(tile: Vector2i) -> void:
+	assert(ori_gear_state.has(tile))
+	ori_gear_state[tile] = false
+
+func toggle_ori(tile: Vector2i) -> void:
+	assert(ori_gear_state.has(tile))
+	ori_gear_state[tile] = !ori_gear_state[tile]
+
+##walks every gear set so its pretty imperformant, only use from within assert so it isnt included in the release
+func log_set_count() -> bool:
 	var sets: Array[GearSet] = []
 	for gset: GearSet in tile_to_gear_set.values():
 		if !sets.has(gset):
 			sets.push_back(gset)
 	
 	print("Set count: %s" % sets.size())
+	
+	return true
