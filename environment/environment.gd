@@ -24,6 +24,7 @@ const ATLAS_COORDS := [Vector2i(0, 0), Vector2i(1, 0)]
 ##name of the tileset property Type, which is basically just an id that tells troopers what to do
 const name_type := "Type"
 
+var is_build_phase: bool = true
 
 ###emitted when any origin gear is powered on or off. new_status is true if the power is on, false otherwise.
 #signal OriGearPowerSet(tile: Vector2i, new_status: bool)
@@ -45,6 +46,9 @@ func delete() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	if not is_build_phase:
+		return
+	
 	var mouse_pos := gearmap.get_local_mouse_position()
 	var tile := gearmap.local_to_map(mouse_pos)
 	
@@ -60,6 +64,7 @@ func _physics_process(_delta: float) -> void:
 			print("Gear power: %s" % is_gear_set_powered(gset))
 		elif ori_gear_state.has(tile):
 			toggle_ori(tile)
+
 
 ##returns the new target position in global or the given position if its an end tile
 func move_target_from_global(global_pos: Vector2) -> Vector2:
@@ -203,7 +208,7 @@ func remove_gear(tile: Vector2i) -> void:
 		var new_set := GearSet.create(false)
 		tile_to_gear_set[ntile] = new_set
 		build_set_recursive(ntile, tile, new_set)
-		print("Create set: %s" % new_set.gears)
+		#print("Create set: %s" % new_set.gears)
 	
 	tile_to_gear_set.erase(tile)
 	

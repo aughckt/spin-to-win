@@ -17,7 +17,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if not enabled:
+	if not Env.INST:
 		return
 	
 	var new_pos := global_position + walk_normal * move_speed * delta
