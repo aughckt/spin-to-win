@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://djqifncx2qi6u"]
+
+[ext_resource type="Script" uid="uid://cl14joenf3alt" path="res://environment/gears/gear_visual.gd" id="1_yhgds"]
+[ext_resource type="Texture2D" uid="uid://cnrfesr4pr7aa" path="res://environment/gears/gear_anim.png" id="2_2tn7e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tn7e"]
+atlas = ExtResource("2_2tn7e")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4u4u"]
+atlas = ExtResource("2_2tn7e")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekuh2"]
+atlas = ExtResource("2_2tn7e")
+region = Rect2(112, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88i5p"]
+atlas = ExtResource("2_2tn7e")
+region = Rect2(160, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fbxa2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tn7e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4u4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ekuh2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88i5p")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 16.0
+}]
+
+[node name="GearVisual" type="Node2D" unique_id=16609391 node_paths=PackedStringArray("sprite", "anim")]
+script = ExtResource("1_yhgds")
+sprite = NodePath("Sprite2D")
+anim = NodePath("AnimatedSprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=513854617]
+visible = false
+texture = ExtResource("2_2tn7e")
+hframes = 4
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1046480795]
+texture_filter = 1
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_fbxa2")
