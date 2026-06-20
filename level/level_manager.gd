@@ -50,6 +50,8 @@ func load_level() -> void:
 	TrooperSpawner.INST.spawn_point = current_level.get_spawn_point()
 	
 	TrooperSpawner.INST.enabled = true
+
+
 func take_damage(amount: int) -> void:
 	if current_hp <= 0:
 		return

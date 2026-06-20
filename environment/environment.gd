@@ -29,6 +29,8 @@ func move_target_from_global(global_pos: Vector2) -> Vector2:
 	
 	var tile: Vector2i = tilemap.local_to_map(tilemap.to_local(global_pos))
 	var tile_data := tilemap.get_cell_tile_data(tile)
+	if not tile_data:
+		return global_pos
 	var idx: int = tile_data.get_custom_data(name_type)
 	
 	if idx == end_tile_type:
