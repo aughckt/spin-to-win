@@ -9,6 +9,9 @@ var level_array: Array[PackedScene] = [
 	preload("res://level/level_snake.tscn")]
 var current_level: Level = null
 var current_hp: int = 20
+var is_build_phase: bool = true
+var current_wave_list: Array[Curve]
+var current_wave_index: int = 0
 
 
 func _ready() -> void:
@@ -17,6 +20,15 @@ func _ready() -> void:
 	
 	if current_level == null:
 		load_level()
+
+
+func _input(event: InputEvent) -> void:
+	## Debug. Press space to start or end a wave
+	if event.is_action_pressed("interact"):
+		if is_build_phase:
+			start_wave()
+		else:
+			end_wave()
 
 
 func win_level() -> void:
@@ -33,23 +45,43 @@ func lose_level() -> void:
 
 
 func load_level() -> void:
-	TrooperSpawner.INST.enabled = false
 	if Env.INST:
 		Env.INST.delete()
 	
 	if level_array.size() <= current_level_index:
 		print("You won the game!")
-		TrooperSpawner.INST.clear_troopers()
 		return
 	
 	current_level = level_array[current_level_index].instantiate()
+	set_build_phase(true)
 	add_child(current_level)
 	current_hp = current_level.level_hp
-	
-	TrooperSpawner.INST.clear_troopers()
+	current_wave_list = current_level.wave_list
+	current_wave_index = 0
 	TrooperSpawner.INST.spawn_point = current_level.get_spawn_point()
-	
-	TrooperSpawner.INST.enabled = true
+
+
+func start_wave() -> void:
+	set_build_phase(false)
+	print("%s: Wave %s started!" % [name, current_wave_index])
+	TrooperSpawner.INST.set_wave(current_wave_list[current_wave_index])
+
+
+func end_wave() -> void:
+	print("%s: Wave %s ended!" % [name, current_wave_index])
+	set_build_phase(true)
+	current_wave_index += 1
+	TrooperSpawner.INST.set_wave(null)
+	if current_wave_index >= current_wave_list.size():
+		win_level()
+		return
+
+
+func set_build_phase(value: bool) -> void:
+	is_build_phase = value
+	TrooperSpawner.INST.clear_troopers()
+	if current_level:
+		current_level.set_build_phase(value)
 
 
 func take_damage(amount: int) -> void:
