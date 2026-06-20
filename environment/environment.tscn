@@ -30,13 +30,14 @@ texture_region_size = Vector2i(100, 100)
 1:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_fbxa2"]
-tile_size = Vector2i(100, 100)
+tile_size = Vector2i(64, 64)
 sources/0 = SubResource("TileSetAtlasSource_7uceq")
 
-[node name="Environment" type="Node2D" unique_id=123182581 node_paths=PackedStringArray("tilemap", "gearmap", "coords_label")]
+[node name="Environment" type="Node2D" unique_id=123182581 node_paths=PackedStringArray("tilemap", "gearmap", "gears", "coords_label")]
 script = ExtResource("1_wjl7u")
 tilemap = NodePath("TileMapLayer")
 gearmap = NodePath("GearMap")
+gears = NodePath("Gears")
 coords_label = NodePath("CoordsLabel")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=108710037]
@@ -49,3 +50,5 @@ tile_set = SubResource("TileSet_fbxa2")
 [node name="CoordsLabel" type="Label" parent="." unique_id=1591894278]
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="Gears" type="Node2D" parent="." unique_id=2031837137]

@@ -8,7 +8,6 @@ extends Node2D
 
 var target_pos: Vector2
 var walk_normal: Vector2
-var enabled: bool = false
 
 
 func _ready() -> void:

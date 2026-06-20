@@ -5,6 +5,8 @@ var gears: PackedVector2Array
 var has_ori_gear: bool
 var ori_gear_tile: Vector2i
 
+var is_frozen := true
+
 static func create(has_origin_gear: bool, origin_gear_tile: Vector2i = Vector2i.ZERO) -> GearSet:
 	var gear_set := GearSet.new()
 	gear_set.gears = PackedVector2Array()

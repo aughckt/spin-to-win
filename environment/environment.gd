@@ -5,9 +5,11 @@ static var INST: Env
 
 @export var tilemap: TileMapLayer
 @export var gearmap: TileMapLayer
+@export var gears: Node2D
 @export var coords_label: Label
 
 var tile_to_gear_set: Dictionary[Vector2i, GearSet] = {}
+var tile_to_visual: Dictionary[Vector2i, GearVisual] = {}
 ##true if powered
 var ori_gear_state: Dictionary[Vector2i, bool] = {}
 
@@ -33,12 +35,32 @@ func _ready() -> void:
 	assert(INST == null)
 	INST = self
 	
+	
+	gearmap.hide()
 	#TODO this is pretty inefficient in theory but its only run once per level + the gear map should be close to empty.
 	#ideally youd update the gears as you go but eh
 	for tile in gearmap.get_used_cells():
 		if gear_kind_at(tile) == ORIGIN_GEAR:
 			ori_gear_state[tile] = false
+			
+			var visual := GearVisual.create_ori()
+			visual.global_position = gearmap.to_global(gearmap.map_to_local(tile))
+			visual.reparent.call_deferred(gears)
+			tile_to_visual[tile] = visual
 
+func _process(_delta: float) -> void:
+	#could do this through signals or explicit updated but this has a lower risk of introducing bugs
+	for gset: GearSet in tile_to_gear_set.values():
+		var powered := is_gear_set_powered(gset)
+		if powered == gset.is_frozen:
+			gset.is_frozen = !powered
+			
+			if powered:
+				for tile in gset.gears:
+					tile_to_visual[tile as Vector2i].unfreeze()
+			else:
+				for tile in gset.gears:
+					tile_to_visual[tile as Vector2i].freeze()
 
 func delete() -> void:
 	assert(INST == self)
@@ -123,6 +145,12 @@ func place_gear(tile: Vector2i) -> void:
 					has_powered_neighbour = true
 					neighbour_ori = candidate
 		
+		gearmap.set_cell(tile, gearmap.tile_set.get_source_id(0), ATLAS_COORDS[BASIC_GEAR])
+		var visual := GearVisual.create_basic()
+		visual.global_position = gearmap.to_global(gearmap.map_to_local(tile))
+		visual.reparent.call_deferred(gears)
+		tile_to_visual[tile] = visual
+		
 		match neighbour_sets.size():
 			0:
 				#create new set
@@ -130,6 +158,8 @@ func place_gear(tile: Vector2i) -> void:
 				new_set.add_gear(tile)
 				tile_to_gear_set[tile] = new_set
 				
+				if is_gear_set_powered(new_set):
+					visual.unfreeze()
 			1:
 				#add to set
 				var gear_set := neighbour_sets[0]
@@ -142,6 +172,8 @@ func place_gear(tile: Vector2i) -> void:
 				gear_set.add_gear(tile)
 				tile_to_gear_set[tile] = gear_set
 				
+				if is_gear_set_powered(gear_set):
+					visual.unfreeze()
 			_:
 				#merge all of the sets
 				var new_set := GearSet.create(has_powered_neighbour, neighbour_ori)
@@ -155,8 +187,11 @@ func place_gear(tile: Vector2i) -> void:
 				
 				new_set.gears.append(tile)
 				tile_to_gear_set[tile] = new_set
+				
+				if is_gear_set_powered(new_set):
+					visual.unfreeze()
 		
-		gearmap.set_cell(tile, gearmap.tile_set.get_source_id(0), ATLAS_COORDS[BASIC_GEAR])
+		
 		assert(tile_to_gear_set.get(tile) != null)
 		
 		assert(log_set_count())
@@ -168,6 +203,9 @@ func remove_gear(tile: Vector2i) -> void:
 	var old_set: GearSet = tile_to_gear_set.get(tile)
 	if old_set == null:
 		return
+	
+	tile_to_visual[tile].remove()
+	tile_to_visual.erase(tile)
 	
 	if old_set.gears.size() == 1:
 		tile_to_gear_set.erase(tile)
@@ -208,7 +246,12 @@ func remove_gear(tile: Vector2i) -> void:
 		var new_set := GearSet.create(false)
 		tile_to_gear_set[ntile] = new_set
 		build_set_recursive(ntile, tile, new_set)
-		#print("Create set: %s" % new_set.gears)
+		
+		#a little counter intuitive but this basically invalidates the sets state
+		#and its corrected the next time process is run
+		new_set.is_frozen = is_gear_set_powered(new_set)
+		
+		print("Create set: %s" % new_set.gears)
 	
 	tile_to_gear_set.erase(tile)
 	
@@ -268,14 +311,19 @@ func is_gear_set_powered(gear_set: GearSet) -> bool:
 func set_ori_on(tile: Vector2i) -> void:
 	assert(ori_gear_state.has(tile))
 	ori_gear_state[tile] = true
+	tile_to_visual[tile].unfreeze()
 	
 func set_ori_off(tile: Vector2i) -> void:
 	assert(ori_gear_state.has(tile))
 	ori_gear_state[tile] = false
+	tile_to_visual[tile].freeze()
 
 func toggle_ori(tile: Vector2i) -> void:
 	assert(ori_gear_state.has(tile))
-	ori_gear_state[tile] = !ori_gear_state[tile]
+	if ori_gear_state[tile]:
+		set_ori_off(tile)
+	else:
+		set_ori_on(tile)
 
 ##walks every gear set so its pretty imperformant, only use from within assert so it isnt included in the release
 func log_set_count() -> bool:
