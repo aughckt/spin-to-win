@@ -1,16 +1,11 @@
-[gd_scene format=4 uid="uid://dan2h2fcttp21"]
+[gd_scene format=3 uid="uid://5qqtrfrpq3x4"]
 
-[ext_resource type="PackedScene" uid="uid://cji2yg5dqgn0q" path="res://environment/environment.tscn" id="1_dxppu"]
-[ext_resource type="PackedScene" uid="uid://cmrgjdrggd1x0" path="res://troopers/trooper.tscn" id="2_gy3sr"]
+[ext_resource type="PackedScene" uid="uid://b04sr3oh5d0f3" path="res://level/template_level.tscn" id="2_1lwx6"]
+[ext_resource type="Script" uid="uid://bue8f1qndpe0f" path="res://trooper_spawner/trooper_spawner.gd" id="4_dsnr4"]
 
 [node name="TestWorld" type="Node2D" unique_id=1846508072]
 
-[node name="Environment" parent="." unique_id=123182581 instance=ExtResource("1_dxppu")]
+[node name="Level" parent="." unique_id=251983101 instance=ExtResource("2_1lwx6")]
 
-[node name="TileMapLayer" parent="Environment" index="0" unique_id=108710037]
-tile_map_data = PackedByteArray("AAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAFAAEAAAABAAAAAAAFAAIAAAAAAAEAAAAEAAIAAAAAAAEAAAADAAIAAAAAAAEAAAACAAIAAAAAAAEAAAABAAIAAAABAAAAAAABAAMAAAABAAAAAAABAAQAAAAAAAAAAAACAAQAAAABAAEAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAABAAAAAAAEAAMAAAABAAAAAAAEAAQAAAAAAAEAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAHAAUAAAABAAEAAAAHAAQAAAABAAEAAAAHAAMAAAABAAEAAAAHAAIAAAABAAEAAAAHAAEAAAACAAAAAAA=")
-
-[node name="Trooper" parent="." unique_id=109828530 instance=ExtResource("2_gy3sr")]
-position = Vector2(151, 148)
-
-[editable path="Environment"]
+[node name="TrooperSpawner" type="Node2D" parent="." unique_id=1142241561]
+script = ExtResource("4_dsnr4")

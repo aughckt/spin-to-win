@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bua7qsfwr841o"]
+
+[ext_resource type="Script" uid="uid://dru6i38ycl0fp" path="res://level/level_manager.gd" id="1_x4ns8"]
+[ext_resource type="Script" uid="uid://bue8f1qndpe0f" path="res://trooper_spawner/trooper_spawner.gd" id="2_yi5s1"]
+[ext_resource type="PackedScene" uid="uid://cji2yg5dqgn0q" path="res://environment/environment.tscn" id="3_u3k4v"]
+
+[node name="LevelManager" type="Node2D" unique_id=1089132439]
+script = ExtResource("1_x4ns8")
+
+[node name="TrooperSpawner" type="Node2D" parent="." unique_id=1178417419]
+script = ExtResource("2_yi5s1")
+
+[node name="Environment" parent="." unique_id=123182581 instance=ExtResource("3_u3k4v")]
