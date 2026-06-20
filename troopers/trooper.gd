@@ -15,7 +15,7 @@ func _ready() -> void:
 	walk_normal = Vector2.ZERO
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta: float) -> void:	
 	var new_pos := global_position + walk_normal * move_speed * delta
 	
 	if (global_position.distance_squared_to(target_pos) < global_position.distance_squared_to(new_pos) #this check makes sure we dont move past the point

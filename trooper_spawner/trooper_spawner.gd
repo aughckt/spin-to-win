@@ -7,6 +7,7 @@ static var INST: TrooperSpawner
 const MAX_TIMER: float = 3.0
 @export var spawn_point: Vector2 
 var timer: float = 0.0
+var enabled: bool = true
 @onready var trooper_scene: PackedScene = preload("res://troopers/trooper.tscn")
 
 
@@ -15,7 +16,10 @@ func _ready() -> void:
 	INST = self
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	if not enabled: 
+		return
+	
 	timer -= delta
 	if timer <= 0:
 		timer = MAX_TIMER

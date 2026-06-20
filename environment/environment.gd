@@ -17,10 +17,10 @@ func _ready() -> void:
 	INST = self
 
 
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_PREDELETE:
-		assert(INST == self)
-		INST = null
+func delete() -> void:
+	assert(INST == self)
+	INST = null
+
 
 ##returns the new target position in global or the given position if its an end tile
 func move_target_from_global(global_pos: Vector2) -> Vector2:

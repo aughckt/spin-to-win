@@ -33,6 +33,10 @@ func lose_level() -> void:
 
 
 func load_level() -> void:
+	TrooperSpawner.INST.enabled = false
+	if Env.INST:
+		Env.INST.delete()
+	
 	if level_array.size() <= current_level_index:
 		print("You won the game!")
 		TrooperSpawner.INST.clear_troopers()
@@ -44,9 +48,8 @@ func load_level() -> void:
 	
 	TrooperSpawner.INST.clear_troopers()
 	TrooperSpawner.INST.spawn_point = current_level.get_spawn_point()
-	Env.INST.tilemap = current_level.get_tilemap()
-
-
+	
+	TrooperSpawner.INST.enabled = true
 func take_damage(amount: int) -> void:
 	if current_hp <= 0:
 		return
