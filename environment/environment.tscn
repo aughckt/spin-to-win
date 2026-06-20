@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://y5y80yr7ysjw" path="res://environment/environment.gd" id="1_wjl7u"]
 [ext_resource type="Texture2D" uid="uid://gl622atrk15j" path="res://environment/placeholder_tiles.png" id="2_7uceq"]
+[ext_resource type="PackedScene" uid="uid://kh3rixkt6b3s" path="res://environment/marker.tscn" id="2_x2wa3"]
 [ext_resource type="Texture2D" uid="uid://cfh0tlhb5mhf2" path="res://environment/gears/gear_map.png" id="3_wjl7u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7b2gm"]
@@ -33,13 +34,15 @@ texture_region_size = Vector2i(100, 100)
 tile_size = Vector2i(64, 64)
 sources/0 = SubResource("TileSetAtlasSource_7uceq")
 
-[node name="Environment" type="Node2D" unique_id=123182581 node_paths=PackedStringArray("tilemap", "gearmap", "gears", "coords_label", "budget_label")]
+[node name="Environment" type="Node2D" unique_id=123182581 node_paths=PackedStringArray("tilemap", "gearmap", "gears", "towers", "coords_label", "budget_label")]
 script = ExtResource("1_wjl7u")
 tilemap = NodePath("TileMapLayer")
 gearmap = NodePath("GearMap")
 gears = NodePath("Gears")
+towers = NodePath("Towers")
 coords_label = NodePath("CoordsLabel")
 budget_label = NodePath("BudgetLabel")
+tower_scene = ExtResource("2_x2wa3")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=108710037]
 tile_set = SubResource("TileSet_wetts")
@@ -47,6 +50,10 @@ rendering_quadrant_size = 100
 
 [node name="GearMap" type="TileMapLayer" parent="." unique_id=916456414]
 tile_set = SubResource("TileSet_fbxa2")
+
+[node name="Gears" type="Node2D" parent="." unique_id=2031837137]
+
+[node name="Towers" type="Node2D" parent="." unique_id=1601212248]
 
 [node name="CoordsLabel" type="Label" parent="." unique_id=1591894278]
 offset_right = 40.0
@@ -56,5 +63,3 @@ offset_bottom = 23.0
 offset_top = 128.0
 offset_right = 40.0
 offset_bottom = 151.0
-
-[node name="Gears" type="Node2D" parent="." unique_id=2031837137]

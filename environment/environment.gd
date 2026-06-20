@@ -6,14 +6,18 @@ static var INST: Env
 @export var tilemap: TileMapLayer
 @export var gearmap: TileMapLayer
 @export var gears: Node2D
+@export var towers: Node2D
 @export var coords_label: Label
 @export var budget_label: Label
 @export var budget: int = 20
+
+@export var tower_data: TowerData
 
 const GEAR_COST := 2
 
 var tile_to_gear_set: Dictionary[Vector2i, GearSet] = {}
 var tile_to_visual: Dictionary[Vector2i, GearVisual] = {}
+var tile_to_tower: Dictionary[Vector2i, Node2D] = {}
 ##true if powered
 var ori_gear_state: Dictionary[Vector2i, bool] = {}
 
@@ -38,7 +42,7 @@ var is_build_phase: bool = true
 func _ready() -> void:
 	assert(INST == null)
 	INST = self
-	update_budget_display()
+	spend(0) #update budget display
 	gearmap.hide()
 	#TODO this is pretty inefficient in theory but its only run once per level + the gear map should be close to empty.
 	#ideally youd update the gears as you go but eh
@@ -82,13 +86,18 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("M1"):
 		place_gear(tile)
 	elif Input.is_action_just_pressed("M2"):
-		remove_gear(tile)
+		if tile_to_tower.has(tile):
+			remove_tower(tile)
+		else:
+			remove_gear(tile)
 	elif Input.is_action_just_pressed("M3"):
 		var gset: GearSet = tile_to_gear_set.get(tile)
 		if gset != null:
 			print("Gear power: %s" % is_gear_set_powered(gset))
 		elif ori_gear_state.has(tile):
 			toggle_ori(tile)
+	elif Input.is_action_just_pressed("SecondaryInteract"):
+		place_tower(tile)
 
 
 ##returns the new target position in global or the given position if its an end tile
@@ -201,8 +210,7 @@ func place_gear(tile: Vector2i) -> void:
 		assert(tile_to_gear_set.get(tile) != null)
 		
 		#adjust budget display
-		budget -= GEAR_COST
-		update_budget_display()
+		spend(GEAR_COST)
 
 		assert(log_set_count())
 
@@ -217,8 +225,7 @@ func remove_gear(tile: Vector2i) -> void:
 	
 	if old_set.gears.size() == 1:
 		#refund budget
-		budget += GEAR_COST
-		update_budget_display()
+		spend(-GEAR_COST)
 		
 		tile_to_gear_set.erase(tile)
 		gearmap.erase_cell(tile)
@@ -250,8 +257,7 @@ func remove_gear(tile: Vector2i) -> void:
 		tile_to_gear_set.erase(tile)
 		
 		#refund budget
-		budget += GEAR_COST
-		update_budget_display()
+		spend(-GEAR_COST)
 
 		gearmap.erase_cell(tile)
 		assert(log_set_count())
@@ -272,8 +278,7 @@ func remove_gear(tile: Vector2i) -> void:
 	tile_to_gear_set.erase(tile)
 
 	#refund budget
-	budget += GEAR_COST
-	update_budget_display()
+	spend(-GEAR_COST)
 
 	assert(!tile_to_gear_set.values().has(old_set))
 
@@ -345,10 +350,6 @@ func toggle_ori(tile: Vector2i) -> void:
 	else:
 		set_ori_on(tile)
 
-func update_budget_display() -> void:
-	if budget_label:
-		budget_label.text = str(budget)
-
 ##walks every gear set so its pretty imperformant, only use from within assert so it isnt included in the release
 func log_set_count() -> bool:
 	var sets: Array[GearSet] = []
@@ -359,3 +360,34 @@ func log_set_count() -> bool:
 	print("Set count: %s" % sets.size())
 
 	return true
+
+func spend(credits: int) -> void:
+	budget -= credits
+	budget = max(budget, 0)
+	budget_label.text = str(budget)
+
+func place_tower(tile: Vector2i) -> void:
+	if gear_kind_at(tile) != BASIC_GEAR:
+		return
+	
+	if tile_to_tower.has(tile):
+		return
+	
+	spend(tower_data.cost)
+	
+	var tower: Node2D = tower_data.scene.instantiate()
+	towers.add_child(tower)
+	tower.global_position = gearmap.to_global(gearmap.map_to_local(tile))
+	
+	tile_to_tower[tile] = tower
+
+func remove_tower(tile: Vector2i) -> void:
+	var tower: Node2D = tile_to_tower.get(tile)
+	if tile == null:
+		return
+	
+	#BUG (or possibility of): store the cost of a tower in the tower itself
+	#so that you dont accidentally refund the wrong amount
+	spend(-tower_data.cost)
+	tile_to_tower.erase(tile)
+	tower.queue_free()

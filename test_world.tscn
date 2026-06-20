@@ -1,11 +1,20 @@
 [gd_scene format=4 uid="uid://5qqtrfrpq3x4"]
 
 [ext_resource type="PackedScene" uid="uid://cji2yg5dqgn0q" path="res://environment/environment.tscn" id="1_dxppu"]
+[ext_resource type="PackedScene" uid="uid://kh3rixkt6b3s" path="res://environment/marker.tscn" id="2_dsnr4"]
 [ext_resource type="PackedScene" uid="uid://cmrgjdrggd1x0" path="res://troopers/trooper.tscn" id="2_gy3sr"]
+[ext_resource type="Script" uid="uid://b55436prbbuts" path="res://environment/towers/tower_data.gd" id="3_lf0gk"]
+
+[sub_resource type="Resource" id="Resource_gy3sr"]
+script = ExtResource("3_lf0gk")
+cost = 4
+scene = ExtResource("2_dsnr4")
+metadata/_custom_type_script = "uid://b55436prbbuts"
 
 [node name="TestWorld" type="Node2D" unique_id=1846508072]
 
 [node name="Environment" parent="." unique_id=123182581 instance=ExtResource("1_dxppu")]
+tower_data = SubResource("Resource_gy3sr")
 
 [node name="TileMapLayer" parent="Environment" index="0" unique_id=108710037]
 tile_map_data = PackedByteArray("AAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAFAAEAAAABAAAAAAAFAAIAAAAAAAEAAAAEAAIAAAAAAAEAAAADAAIAAAAAAAEAAAACAAIAAAAAAAEAAAABAAIAAAABAAAAAAABAAMAAAABAAAAAAABAAQAAAAAAAAAAAACAAQAAAABAAEAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAABAAAAAAAEAAMAAAABAAAAAAAEAAQAAAAAAAEAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAHAAUAAAABAAEAAAAHAAQAAAABAAEAAAAHAAMAAAABAAEAAAAHAAIAAAABAAEAAAAHAAEAAAACAAAAAAA=")
