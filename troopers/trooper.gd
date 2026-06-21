@@ -51,7 +51,6 @@ func _on_area_entered(area: Area2D) -> void:
 	if area is Bullet:
 		take_damage(Bullet.damage)
 		(area as Bullet).remove()
-		print("%s: Haha oww! %s" % [name, area.name])
 
 
 func take_damage(amount: int) -> void:
