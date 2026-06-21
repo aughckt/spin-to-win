@@ -1,7 +1,7 @@
 class_name Bullet
 extends Area2D
 
-const speed: float = 500
+const speed: float = 900
 const life_time: float = 5.0
 var time_left: float
 var damage: int
@@ -48,11 +48,3 @@ static func create() -> Bullet:
 
 func remove() -> void:
 	_get_pool().pool(self)
-
-
-
-func _on_area_entered(area: Area2D) -> void:
-	if area is Trooper:
-		var trooper: Trooper = area as Trooper
-		trooper.take_damage(Bullet.damage)
-		remove()
