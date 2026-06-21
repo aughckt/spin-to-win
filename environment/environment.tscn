@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://gl622atrk15j" path="res://environment/placeholder_tiles.png" id="2_7uceq"]
 [ext_resource type="Script" uid="uid://b55436prbbuts" path="res://towers/tower_data.gd" id="3_ehb6n"]
 [ext_resource type="Texture2D" uid="uid://cfh0tlhb5mhf2" path="res://environment/gears/gear_map.png" id="3_wjl7u"]
+[ext_resource type="Texture2D" uid="uid://bhh7jlosrnks0" path="res://environment/tiles.png" id="5_vh8kr"]
 [ext_resource type="PackedScene" uid="uid://u80uaujktp7f" path="res://ui/hud.tscn" id="6_ehb6n"]
 [ext_resource type="Resource" uid="uid://bvmp6r3hgihgj" path="res://towers/tower_data/gun_tower_data.tres" id="6_vh8kr"]
 [ext_resource type="Resource" uid="uid://cu1kljx46m1sk" path="res://towers/tower_data/aoe_tower_data.tres" id="7_nmo3v"]
@@ -22,10 +23,137 @@ texture_region_size = Vector2i(100, 100)
 0:1/0/custom_data_0 = 2
 
 [sub_resource type="TileSet" id="TileSet_wetts"]
-tile_size = Vector2i(100, 100)
+tile_size = Vector2i(64, 64)
 custom_data_layer_0/name = "Type"
 custom_data_layer_0/type = 2
 sources/0 = SubResource("TileSetAtlasSource_7b2gm")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nmo3v"]
+texture = ExtResource("5_vh8kr")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+0:1/0 = 0
+0:1/0/terrain_set = 0
+0:1/0/terrain = 0
+0:1/0/terrains_peering_bit/right_side = 0
+0:1/0/terrains_peering_bit/bottom_right_corner = 0
+0:1/0/terrains_peering_bit/bottom_side = 0
+0:1/0/terrains_peering_bit/bottom_left_corner = 0
+0:1/0/terrains_peering_bit/left_side = 0
+0:1/0/terrains_peering_bit/top_side = 0
+0:1/0/terrains_peering_bit/top_right_corner = 0
+1:1/0 = 0
+1:1/0/terrain_set = 0
+1:1/0/terrain = 0
+1:1/0/terrains_peering_bit/right_side = 0
+1:1/0/terrains_peering_bit/bottom_right_corner = 0
+1:1/0/terrains_peering_bit/bottom_side = 0
+1:1/0/terrains_peering_bit/bottom_left_corner = 0
+1:1/0/terrains_peering_bit/left_side = 0
+1:1/0/terrains_peering_bit/top_left_corner = 0
+1:1/0/terrains_peering_bit/top_side = 0
+2:1/0 = 0
+2:1/0/terrain_set = 0
+2:1/0/terrain = 0
+2:1/0/terrains_peering_bit/right_side = 0
+2:1/0/terrains_peering_bit/bottom_right_corner = 0
+2:1/0/terrains_peering_bit/bottom_side = 0
+3:1/0 = 0
+3:1/0/terrain_set = 0
+3:1/0/terrain = 0
+3:1/0/terrains_peering_bit/right_side = 0
+3:1/0/terrains_peering_bit/bottom_right_corner = 0
+3:1/0/terrains_peering_bit/bottom_side = 0
+3:1/0/terrains_peering_bit/bottom_left_corner = 0
+3:1/0/terrains_peering_bit/left_side = 0
+4:1/0 = 0
+4:1/0/terrain_set = 0
+4:1/0/terrain = 0
+4:1/0/terrains_peering_bit/bottom_side = 0
+4:1/0/terrains_peering_bit/bottom_left_corner = 0
+4:1/0/terrains_peering_bit/left_side = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+0:2/0 = 0
+0:2/0/terrain_set = 0
+0:2/0/terrain = 0
+0:2/0/terrains_peering_bit/right_side = 0
+0:2/0/terrains_peering_bit/bottom_right_corner = 0
+0:2/0/terrains_peering_bit/bottom_side = 0
+0:2/0/terrains_peering_bit/left_side = 0
+0:2/0/terrains_peering_bit/top_left_corner = 0
+0:2/0/terrains_peering_bit/top_side = 0
+0:2/0/terrains_peering_bit/top_right_corner = 0
+1:2/0 = 0
+1:2/0/terrain_set = 0
+1:2/0/terrain = 0
+1:2/0/terrains_peering_bit/right_side = 0
+1:2/0/terrains_peering_bit/bottom_side = 0
+1:2/0/terrains_peering_bit/bottom_left_corner = 0
+1:2/0/terrains_peering_bit/left_side = 0
+1:2/0/terrains_peering_bit/top_left_corner = 0
+1:2/0/terrains_peering_bit/top_side = 0
+1:2/0/terrains_peering_bit/top_right_corner = 0
+2:2/0 = 0
+2:2/0/terrain_set = 0
+2:2/0/terrain = 0
+2:2/0/terrains_peering_bit/right_side = 0
+2:2/0/terrains_peering_bit/bottom_right_corner = 0
+2:2/0/terrains_peering_bit/bottom_side = 0
+2:2/0/terrains_peering_bit/top_side = 0
+2:2/0/terrains_peering_bit/top_right_corner = 0
+3:2/0 = 0
+3:2/0/terrain_set = 0
+3:2/0/terrain = 0
+3:2/0/terrains_peering_bit/right_side = 0
+3:2/0/terrains_peering_bit/bottom_right_corner = 0
+3:2/0/terrains_peering_bit/bottom_side = 0
+3:2/0/terrains_peering_bit/bottom_left_corner = 0
+3:2/0/terrains_peering_bit/left_side = 0
+3:2/0/terrains_peering_bit/top_left_corner = 0
+3:2/0/terrains_peering_bit/top_side = 0
+3:2/0/terrains_peering_bit/top_right_corner = 0
+4:2/0 = 0
+4:2/0/terrain_set = 0
+4:2/0/terrain = 0
+4:2/0/terrains_peering_bit/bottom_side = 0
+4:2/0/terrains_peering_bit/bottom_left_corner = 0
+4:2/0/terrains_peering_bit/left_side = 0
+4:2/0/terrains_peering_bit/top_left_corner = 0
+4:2/0/terrains_peering_bit/top_side = 0
+2:3/0 = 0
+2:3/0/terrain_set = 0
+2:3/0/terrain = 0
+2:3/0/terrains_peering_bit/right_side = 0
+2:3/0/terrains_peering_bit/top_side = 0
+2:3/0/terrains_peering_bit/top_right_corner = 0
+3:3/0 = 0
+3:3/0/terrain_set = 0
+3:3/0/terrain = 0
+3:3/0/terrains_peering_bit/right_side = 0
+3:3/0/terrains_peering_bit/left_side = 0
+3:3/0/terrains_peering_bit/top_left_corner = 0
+3:3/0/terrains_peering_bit/top_side = 0
+3:3/0/terrains_peering_bit/top_right_corner = 0
+4:3/0 = 0
+4:3/0/terrain_set = 0
+4:3/0/terrain = 0
+4:3/0/terrains_peering_bit/left_side = 0
+4:3/0/terrains_peering_bit/top_left_corner = 0
+4:3/0/terrains_peering_bit/top_side = 0
+
+[sub_resource type="TileSet" id="TileSet_klfgw"]
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Floor"
+terrain_set_0/terrain_0/color = Color(0.70400566, 2.4065375e-07, 0.36506605, 1)
+sources/0 = SubResource("TileSetAtlasSource_nmo3v")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7uceq"]
 texture = ExtResource("3_wjl7u")
@@ -39,7 +167,7 @@ sources/0 = SubResource("TileSetAtlasSource_7uceq")
 
 [node name="Environment" type="Node2D" unique_id=123182581 node_paths=PackedStringArray("tilemap", "gearmap", "gears", "bullets", "towers", "troopers", "coords_label", "budget_label")]
 script = ExtResource("1_wjl7u")
-tilemap = NodePath("TileMapLayer")
+tilemap = NodePath("ArrowTiles")
 gearmap = NodePath("GearMap")
 gears = NodePath("Gears")
 bullets = NodePath("Bullets")
@@ -48,9 +176,19 @@ troopers = NodePath("Troopers")
 coords_label = NodePath("DebugHUD/CoordsLabel")
 budget_label = NodePath("DebugHUD/BudgetLabel")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=108710037]
+[node name="ArrowTiles" type="TileMapLayer" parent="." unique_id=108710037]
 tile_set = SubResource("TileSet_wetts")
 rendering_quadrant_size = 100
+
+[node name="BackgroundTiles" type="TileMapLayer" parent="." unique_id=1643969889]
+z_index = -5
+scale = Vector2(4, 4)
+tile_set = SubResource("TileSet_klfgw")
+
+[node name="FadeTiles" type="TileMapLayer" parent="." unique_id=817108041]
+z_index = 1
+scale = Vector2(4, 4)
+tile_set = SubResource("TileSet_klfgw")
 
 [node name="GearMap" type="TileMapLayer" parent="." unique_id=916456414]
 tile_set = SubResource("TileSet_fbxa2")
@@ -60,6 +198,8 @@ tile_set = SubResource("TileSet_fbxa2")
 [node name="Bullets" type="Node2D" parent="." unique_id=243162880]
 
 [node name="Troopers" type="Node2D" parent="." unique_id=861065965]
+z_index = 20
+y_sort_enabled = true
 
 [node name="Towers" type="Node2D" parent="." unique_id=1601212248]
 

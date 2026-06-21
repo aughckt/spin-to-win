@@ -11,7 +11,6 @@ extends Node2D
 @export var starting_budget: int = 10
 
 
-
 func get_spawn_point() -> Vector2:
 	return spawn_point.global_position
 

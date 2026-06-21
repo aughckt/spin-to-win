@@ -56,6 +56,8 @@ func _ready() -> void:
 			visual.global_position = gearmap.to_global(gearmap.map_to_local(tile))
 			visual.reparent.call_deferred(gears)
 			tile_to_visual[tile] = visual
+	tilemap.visible = false
+	
 
 func _process(_delta: float) -> void:
 	#could do this through signals or explicit updated but this has a lower risk of introducing bugs
