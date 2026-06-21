@@ -41,13 +41,8 @@ animations = [{
 
 [node name="GearVisual" type="Node2D" unique_id=16609391 node_paths=PackedStringArray("sprite", "anim")]
 script = ExtResource("1_yhgds")
-sprite = NodePath("Sprite2D")
+sprite = NodePath("")
 anim = NodePath("AnimatedSprite2D")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=513854617]
-visible = false
-texture = ExtResource("2_2tn7e")
-hframes = 4
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1046480795]
 texture_filter = 1

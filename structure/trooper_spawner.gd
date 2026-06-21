@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 
 func spawn_trooper() -> void:
 	var trooper: Trooper = trooper_pool.get_inst()
-	trooper.reparent.call_deferred(self)
+	trooper.reparent.call_deferred(Env.INST.troopers)
 	trooper.global_position = spawn_point
 	trooper.target_pos = trooper.global_position 
 	trooper.setup()

@@ -42,13 +42,14 @@ texture_region_size = Vector2i(100, 100)
 tile_size = Vector2i(64, 64)
 sources/0 = SubResource("TileSetAtlasSource_7uceq")
 
-[node name="Environment" type="Node2D" unique_id=123182581 node_paths=PackedStringArray("tilemap", "gearmap", "gears", "bullets", "towers", "coords_label", "budget_label")]
+[node name="Environment" type="Node2D" unique_id=123182581 node_paths=PackedStringArray("tilemap", "gearmap", "gears", "bullets", "towers", "troopers", "coords_label", "budget_label")]
 script = ExtResource("1_wjl7u")
 tilemap = NodePath("TileMapLayer")
 gearmap = NodePath("GearMap")
 gears = NodePath("Gears")
 bullets = NodePath("Bullets")
 towers = NodePath("Towers")
+troopers = NodePath("Troopers")
 coords_label = NodePath("DebugHUD/CoordsLabel")
 budget_label = NodePath("DebugHUD/BudgetLabel")
 tower_data = SubResource("Resource_d2jgx")
@@ -61,6 +62,10 @@ rendering_quadrant_size = 100
 tile_set = SubResource("TileSet_fbxa2")
 
 [node name="Gears" type="Node2D" parent="." unique_id=2031837137]
+
+[node name="Bullets" type="Node2D" parent="." unique_id=243162880]
+
+[node name="Troopers" type="Node2D" parent="." unique_id=861065965]
 
 [node name="Towers" type="Node2D" parent="." unique_id=1601212248]
 
@@ -79,5 +84,3 @@ offset_bottom = 151.0
 visible = false
 
 [node name="HUD" parent="HUD" unique_id=1114338 instance=ExtResource("6_ehb6n")]
-
-[node name="Bullets" type="Node2D" parent="." unique_id=243162880]

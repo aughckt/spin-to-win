@@ -19,10 +19,6 @@ static func create_ori() -> GearVisual:
 	visual.anim.self_modulate = Color.YELLOW
 	return visual
 
-func _process(delta: float) -> void:
-	if !frozen:
-		sprite.rotate(delta)
-
 static func _get_pool() -> Pool:
 	if pool == null:
 		pool = Pool.create(scene)

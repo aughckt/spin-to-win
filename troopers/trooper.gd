@@ -10,8 +10,7 @@ var target_pos: Vector2
 var walk_normal: Vector2
 const MAX_HP: int = 100
 var hp: int = MAX_HP
-@export var sprite: Sprite2D
-
+@export var sprite: AnimatedSprite2D
 
 func _ready() -> void:
 	target_pos = global_position
@@ -37,6 +36,29 @@ func _physics_process(delta: float) -> void:
 		
 		
 		walk_normal = global_position.direction_to(target_pos)
+		
+		var directions: PackedVector2Array = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]
+		var best_idx: int = 0
+		var best_dot: float = directions[best_idx].dot(walk_normal)
+		for idx in range(4):
+			var dot := directions[idx].dot(walk_normal)
+			if dot > best_dot:
+				best_dot = dot
+				best_idx = idx
+		
+		var animation := ""
+		match best_idx:
+			0:
+				animation = "walk_up"
+			1:
+				animation = "walk_down"
+			2:
+				animation = "walk_right"
+			3:
+				animation = "walk_right"
+		sprite.flip_h = best_idx == 2
+		sprite.play(animation)
+		
 		new_pos = global_position + walk_normal * move_speed * delta
 	
 	global_position = new_pos
@@ -56,7 +78,11 @@ func _on_area_entered(area: Area2D) -> void:
 
 func take_damage(amount: int) -> void:
 	hp -= amount
-	sprite.scale = Vector2(hp/100.0,hp/100.0)
+	#youre not tweening it, right? this just shrinks the clown as it takes damage?
+	#sprite.scale = Vector2(hp/100.0,hp/100.0)
+	
+	
+	
 	if hp <= 0:
 		Env.INST.budget += 1
 		pool_self()
@@ -69,7 +95,7 @@ func pool_self() -> void:
 
 
 func setup() -> void:
-	sprite.scale = Vector2(1,1)
+	#sprite.scale = Vector2(1,1)
 	set_deferred("monitorable", true)
 	set_deferred("monitoring", true)
 	hp = MAX_HP
