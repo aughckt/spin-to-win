@@ -14,14 +14,16 @@ const scene: PackedScene = preload("res://towers/gun_tower/bullet.tscn")
 func _physics_process(delta: float) -> void:
 	time_left -= delta
 	if time_left <= 0:
-		queue_free()
+		remove()
 	
 	global_position += dir * speed * delta
+
 
 static func _get_pool() -> Pool:
 	if pool == null:
 		pool = Pool.create(scene)
 	return pool
+
 
 static func create() -> Bullet:
 	var bullet: Bullet = _get_pool().get_inst()

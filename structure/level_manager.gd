@@ -81,7 +81,6 @@ func set_build_phase(value: bool) -> void:
 	is_build_phase = value
 	TrooperSpawner.INST.clear_troopers()
 	if current_level:
-		print(current_level.name)
 		current_level.set_build_phase(value)
 
 

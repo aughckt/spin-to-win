@@ -274,7 +274,7 @@ func remove_gear(tile: Vector2i) -> void:
 		#and its corrected the next time process is run
 		new_set.is_frozen = is_gear_set_powered(new_set)
 		
-		print("Create set: %s" % new_set.gears)
+		#print("Create set: %s" % new_set.gears)
 	
 	tile_to_gear_set.erase(tile)
 
@@ -358,7 +358,7 @@ func log_set_count() -> bool:
 		if !sets.has(gset):
 			sets.push_back(gset)
 
-	print("Set count: %s" % sets.size())
+	#print("Set count: %s" % sets.size())
 
 	return true
 
