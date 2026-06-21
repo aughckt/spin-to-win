@@ -1,17 +1,26 @@
+class_name PlayerMovement
 extends Node
 
 const MOVE_SPEED: float = 200
+var can_move: bool = true
 @onready var player: Player = $".."
 @onready var sprite: AnimatedSprite2D = %AnimatedSprite2D
 
 
 func _physics_process(_delta: float) -> void:
+	if not can_move:
+		return
+	
 	var move_dir: Vector2 = Input.get_vector("left","right","up","down")
 	player.velocity = move_dir * MOVE_SPEED
 	player.move_and_slide()
 
 
 func _process(_delta: float) -> void:
+	if not can_move:
+		sprite.pause()
+		return
+	
 	if player.velocity.length() == 0 and sprite.is_playing():
 		sprite.pause()
 	elif player.velocity.length() != 0 and not sprite.is_playing():

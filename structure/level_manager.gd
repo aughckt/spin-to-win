@@ -25,7 +25,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	## Debug. Press space to start or end a wave
-	if event.is_action_pressed("interact"):
+	if event.is_action_pressed("toggle_wave"):
 		if is_build_phase:
 			start_wave()
 		else:
