@@ -7,7 +7,8 @@
 radius = 24.092964
 
 [node name="Bullet" type="Area2D" unique_id=1233644382]
-collision_mask = 0
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_wwakr")
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=1605290369]

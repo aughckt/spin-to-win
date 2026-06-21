@@ -15,7 +15,6 @@ var hp: int = MAX_HP
 func _ready() -> void:
 	target_pos = global_position
 	walk_normal = Vector2.ZERO
-	area_entered.connect(_on_area_entered)
 
 
 func _physics_process(delta: float) -> void:
@@ -68,11 +67,6 @@ func reach_end() -> void:
 	LevelManager.INST.take_damage(1)
 	pool_self()
 
-
-func _on_area_entered(area: Area2D) -> void:
-	if area is Bullet:
-		take_damage(Bullet.damage)
-		(area as Bullet).remove()
 
 
 func take_damage(amount: int) -> void:

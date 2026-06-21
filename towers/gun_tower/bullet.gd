@@ -11,6 +11,10 @@ var dir: Vector2
 static var pool: Pool
 const scene: PackedScene = preload("res://towers/gun_tower/bullet.tscn")
 
+func _ready() -> void:
+	area_entered.connect(_on_area_entered)
+
+
 func _physics_process(delta: float) -> void:
 	time_left -= delta
 	if time_left <= 0:
@@ -35,3 +39,11 @@ static func create() -> Bullet:
 
 func remove() -> void:
 	_get_pool().pool(self)
+
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if area is Trooper:
+		var trooper: Trooper = area as Trooper
+		trooper.take_damage(Bullet.damage)
+		remove()
