@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://u80uaujktp7f"]
 
+[ext_resource type="Script" uid="uid://cveavlf4sypju" path="res://ui/hud.gd" id="1_en2x2"]
 [ext_resource type="PackedScene" uid="uid://deeabsnpj3v05" path="res://ui/tower_panel.tscn" id="1_rbyyf"]
 [ext_resource type="Texture2D" uid="uid://wuck5ik5v4v2" path="res://ui/temp_coin.png" id="2_7ihmi"]
 [ext_resource type="Theme" uid="uid://ofehi657nfwc" path="res://ui/theme.tres" id="2_276te"]
@@ -17,13 +18,21 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[node name="HUD" type="Control" unique_id=1114338]
+[node name="HUD" type="Control" unique_id=1114338 node_paths=PackedStringArray("tower_panels", "health_label", "money_label", "start_wave_button", "pause_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_en2x2")
+tower_panels = NodePath("PanelContainer/MarginContainer/VBoxContainer/TowerPanels")
+tower_panel_scene = ExtResource("1_rbyyf")
+health_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Health/HBoxContainer/Label")
+money_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Money/HBoxContainer/Label")
+start_wave_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/StartWaveButton")
+pause_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/PauseButton")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=518244129]
 layout_mode = 1
@@ -37,6 +46,7 @@ grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1670239560]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
@@ -44,8 +54,10 @@ theme_override_constants/margin_bottom = 15
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1778822347]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="TowerPanels" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1014919531]
+custom_minimum_size = Vector2(250, 380)
 layout_mode = 2
 mouse_filter = 2
 columns = 2
@@ -143,6 +155,7 @@ theme = ExtResource("2_276te")
 text = "good"
 
 [node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1253500517]
+visible = false
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2" unique_id=792837228]
@@ -197,3 +210,9 @@ autowrap_mode = 2
 layout_mode = 2
 size_flags_vertical = 4
 text = "Start Wave"
+
+[node name="PauseButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=691115320]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+text = "Pause"

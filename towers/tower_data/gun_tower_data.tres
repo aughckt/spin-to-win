@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TowerData" format=3 uid="uid://bvmp6r3hgihgj"]
+
+[ext_resource type="Texture2D" uid="uid://df8fpi67rq44p" path="res://environment/gears/gear.png" id="1_5xedd"]
+[ext_resource type="PackedScene" uid="uid://qyhxr7brjwsw" path="res://towers/gun_tower/gun_tower.tscn" id="2_5jrpd"]
+[ext_resource type="Script" uid="uid://b55436prbbuts" path="res://towers/tower_data.gd" id="3_j53xf"]
+
+[resource]
+script = ExtResource("3_j53xf")
+cost = 2
+scene = ExtResource("2_5jrpd")
+name = "Gun"
+icon = ExtResource("1_5xedd")
+metadata/_custom_type_script = "uid://b55436prbbuts"

@@ -13,6 +13,7 @@ var is_build_phase: bool = true
 var current_wave_list: Array[Curve]
 var current_wave_index: int = 0
 
+signal wave_finished
 
 func _ready() -> void:
 	assert(INST == null)
@@ -72,6 +73,7 @@ func end_wave() -> void:
 	set_build_phase(true)
 	current_wave_index += 1
 	TrooperSpawner.INST.set_wave(null)
+	wave_finished.emit()
 	if current_wave_index >= current_wave_list.size():
 		win_level()
 		return

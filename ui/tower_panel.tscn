@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://deeabsnpj3v05"]
 
+[ext_resource type="Script" uid="uid://0m2njoouexwx" path="res://ui/tower_panel.gd" id="1_4fi7c"]
 [ext_resource type="Texture2D" uid="uid://df8fpi67rq44p" path="res://environment/gears/gear.png" id="1_i6c17"]
 [ext_resource type="Theme" uid="uid://ofehi657nfwc" path="res://ui/theme.tres" id="1_p4yss"]
 
@@ -27,7 +28,7 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[node name="TowerPanel" type="Control" unique_id=2114563352]
+[node name="TowerPanel" type="Control" unique_id=2114563352 node_paths=PackedStringArray("button", "name_label", "cost_label", "icon_rect")]
 custom_minimum_size = Vector2(125, 125)
 layout_mode = 3
 anchors_preset = 8
@@ -38,6 +39,11 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("1_4fi7c")
+button = NodePath("PanelContainer/MarginContainer/Button")
+name_label = NodePath("PanelContainer/MarginContainer/DisplayElements/VBoxContainer/NameLabel")
+cost_label = NodePath("PanelContainer/MarginContainer/DisplayElements/VBoxContainer/CostLabel")
+icon_rect = NodePath("PanelContainer/MarginContainer/DisplayElements/VBoxContainer/Control/TextureRect")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=993517072]
 layout_mode = 1
@@ -58,6 +64,7 @@ theme_override_constants/margin_bottom = 15
 
 [node name="Button" type="Button" parent="PanelContainer/MarginContainer" unique_id=1770499033]
 layout_mode = 2
+focus_behavior_recursive = 1
 theme_override_styles/normal = SubResource("StyleBoxFlat_p4yss")
 theme_override_styles/hover = SubResource("StyleBoxFlat_4fi7c")
 

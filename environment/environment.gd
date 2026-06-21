@@ -13,7 +13,7 @@ static var INST: Env
 @export var budget_label: Label
 @export var budget: int = 20
 
-@export var tower_data: TowerData
+var tower_data: TowerData = null
 
 const GEAR_COST := 2
 
@@ -70,36 +70,54 @@ func _process(_delta: float) -> void:
 			else:
 				for tile in gset.gears:
 					tile_to_visual[tile as Vector2i].freeze()
+	
+	var mouse_pos := gearmap.get_local_mouse_position()
+	var tile := gearmap.local_to_map(mouse_pos)
+	coords_label.text = str(tile)
+
 
 func delete() -> void:
 	assert(INST == self)
 	INST = null
 
 
-func _physics_process(_delta: float) -> void:
-
+func _unhandled_input(event: InputEvent) -> void:
+	if !is_build_phase:
+		return
+	
+	if event is not InputEventMouseButton:
+		return
+	
+	var mouse_button_event := event as InputEventMouseButton
+	if !mouse_button_event.pressed:
+		return
+	
 	var mouse_pos := gearmap.get_local_mouse_position()
 	var tile := gearmap.local_to_map(mouse_pos)
-
-	coords_label.text = str(tile)
-
-	if Input.is_action_just_pressed("M1") and is_build_phase:
-		place_gear(tile)
-	elif Input.is_action_just_pressed("M2") and is_build_phase:
-		if tile_to_tower.has(tile):
-			remove_tower(tile)
-		else:
-			remove_gear(tile)
-	elif Input.is_action_just_pressed("M3"):
-		var gset: GearSet = tile_to_gear_set.get(tile)
-		if gset != null:
-			print("Gear power: %s" % is_gear_set_powered(gset))
-		elif ori_gear_state.has(tile):
-			toggle_ori(tile)
-	elif Input.is_action_just_pressed("SecondaryInteract") and is_build_phase:
-		if budget >= tower_data.cost:
-			place_tower(tile)
-
+	
+	
+	match mouse_button_event.button_index:
+		MouseButton.MOUSE_BUTTON_LEFT:
+			if ori_gear_state.get(tile) != null:
+				return
+			
+			if tile_to_gear_set.get(tile) == null:
+				place_gear(tile)
+			else:
+				place_tower(tile)
+		
+		MouseButton.MOUSE_BUTTON_RIGHT:
+			if tile_to_tower.has(tile):
+				remove_tower(tile)
+			else:
+				remove_gear(tile) #check for empty happens in remove_gear
+		
+		MouseButton.MOUSE_BUTTON_MIDDLE:
+			var gset: GearSet = tile_to_gear_set.get(tile)
+			if gset != null:
+				print("Gear power: %s" % is_gear_set_powered(gset))
+			elif ori_gear_state.has(tile):
+				toggle_ori(tile)
 
 ##returns the new target position in global or the given position if its an end tile
 func move_target_from_global(global_pos: Vector2) -> Vector2:
@@ -379,6 +397,9 @@ func spend(credits: int) -> void:
 	budget_label.text = str(budget)
 
 func place_tower(tile: Vector2i) -> void:
+	if tower_data == null || tower_data.cost > budget:
+		return
+	
 	if gear_kind_at(tile) != BASIC_GEAR:
 		return
 	
@@ -387,19 +408,22 @@ func place_tower(tile: Vector2i) -> void:
 	
 	spend(tower_data.cost)
 	
-	var tower: Node2D = tower_data.scene.instantiate()
+	var tower: GenericTower = tower_data.scene.instantiate()
 	towers.add_child(tower)
 	tower.global_position = gearmap.to_global(gearmap.map_to_local(tile))
+	tower.data = tower_data
 	
 	tile_to_tower[tile] = tower
 
 func remove_tower(tile: Vector2i) -> void:
-	var tower: Node2D = tile_to_tower.get(tile)
+	var tower: GenericTower = tile_to_tower.get(tile)
 	if tile == null:
 		return
 	
-	#BUG (or possibility of): store the cost of a tower in the tower itself
-	#so that you dont accidentally refund the wrong amount
-	spend(-tower_data.cost)
+	@warning_ignore("integer_division")
+	spend(-tower.data.cost / 2)
+	if tower.data.cost & 1 != 0:
+		push_warning("Tower %s has a cost of %s, which is not divisible by 2. Rounding down." % [tower.data.name, tower.data.cost])
+	
 	tile_to_tower.erase(tile)
 	tower.queue_free()
