@@ -1,92 +1,91 @@
-[gd_scene format=3 uid="uid://cmrgjdrggd1x0"]
+[gd_scene format=3 uid="uid://df7g5g3wu15n1"]
 
-[ext_resource type="Script" uid="uid://bl6wy11rra22g" path="res://troopers/trooper.gd" id="1_mba6l"]
-[ext_resource type="Shader" uid="uid://dbq6axlvij5a7" path="res://troopers/trooper.gdshader" id="2_kbjsr"]
-[ext_resource type="Texture2D" uid="uid://rw3ynci3ddi2" path="res://troopers/Clown_01.png" id="3_kbjsr"]
+[ext_resource type="Shader" uid="uid://dbq6axlvij5a7" path="res://troopers/trooper.gdshader" id="1_g1dw6"]
+[ext_resource type="Script" uid="uid://5yhi25jonkhe" path="res://player/player.gd" id="1_qjkh3"]
+[ext_resource type="Texture2D" uid="uid://btm4vlsmnxvyw" path="res://icon.svg" id="2_yw30f"]
+[ext_resource type="Texture2D" uid="uid://rw3ynci3ddi2" path="res://troopers/Clown_01.png" id="3_qjkh3"]
+[ext_resource type="Script" uid="uid://c2y1mhvut7grf" path="res://player/player_movement.gd" id="5_g6k8r"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_idurc"]
-radius = 30.016663
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ous1"]
-shader = ExtResource("2_kbjsr")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g6k8r"]
+shader = ExtResource("1_g1dw6")
 shader_parameter/progress = 0.999999977648
 shader_parameter/strength = 0.0
 shader_parameter/y_threshold = 0.0
 shader_parameter/grey = Color(0.12591079, 0.12591085, 0.12591082, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hlcmw"]
-atlas = ExtResource("3_kbjsr")
+atlas = ExtResource("3_qjkh3")
 region = Rect2(0, 0, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b2cam"]
-atlas = ExtResource("3_kbjsr")
+atlas = ExtResource("3_qjkh3")
 region = Rect2(18, 0, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yyerm"]
-atlas = ExtResource("3_kbjsr")
+atlas = ExtResource("3_qjkh3")
 region = Rect2(36, 0, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u8vmv"]
-atlas = ExtResource("3_kbjsr")
+atlas = ExtResource("3_qjkh3")
 region = Rect2(54, 0, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hpwyk"]
-atlas = ExtResource("3_kbjsr")
+atlas = ExtResource("3_qjkh3")
 region = Rect2(72, 0, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p8s2t"]
-atlas = ExtResource("3_kbjsr")
+atlas = ExtResource("3_qjkh3")
 region = Rect2(90, 0, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qf4j6"]
-atlas = ExtResource("3_kbjsr")
+atlas = ExtResource("3_qjkh3")
 region = Rect2(0, 18, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_14h3q"]
-atlas = ExtResource("3_kbjsr")
+atlas = ExtResource("3_qjkh3")
 region = Rect2(18, 18, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wsdla"]
-atlas = ExtResource("3_kbjsr")
+atlas = ExtResource("3_qjkh3")
 region = Rect2(36, 18, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mto0k"]
-atlas = ExtResource("3_kbjsr")
+atlas = ExtResource("3_qjkh3")
 region = Rect2(54, 18, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3g6s6"]
-atlas = ExtResource("3_kbjsr")
+atlas = ExtResource("3_qjkh3")
 region = Rect2(72, 18, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cspst"]
-atlas = ExtResource("3_kbjsr")
+atlas = ExtResource("3_qjkh3")
 region = Rect2(90, 18, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5nbpv"]
-atlas = ExtResource("3_kbjsr")
+atlas = ExtResource("3_qjkh3")
 region = Rect2(0, 36, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mdby6"]
-atlas = ExtResource("3_kbjsr")
+atlas = ExtResource("3_qjkh3")
 region = Rect2(18, 36, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1g1p7"]
-atlas = ExtResource("3_kbjsr")
+atlas = ExtResource("3_qjkh3")
 region = Rect2(36, 36, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xubjy"]
-atlas = ExtResource("3_kbjsr")
+atlas = ExtResource("3_qjkh3")
 region = Rect2(54, 36, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ojbyt"]
-atlas = ExtResource("3_kbjsr")
+atlas = ExtResource("3_qjkh3")
 region = Rect2(72, 36, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8hvgo"]
-atlas = ExtResource("3_kbjsr")
+atlas = ExtResource("3_qjkh3")
 region = Rect2(90, 36, 18, 18)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_fbxa2"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_boad6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -109,6 +108,14 @@ animations = [{
 }],
 "loop": 1,
 "name": &"walk_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_yw30f")
+}],
+"loop": 1,
+"name": &"walk_left",
 "speed": 5.0
 }, {
 "frames": [{
@@ -158,16 +165,26 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Trooper" type="Area2D" unique_id=182051846 node_paths=PackedStringArray("sprite")]
-script = ExtResource("1_mba6l")
-sprite = NodePath("AnimatedSprite2D")
+[sub_resource type="CircleShape2D" id="CircleShape2D_klfgw"]
+radius = 32.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=807592597]
-shape = SubResource("CircleShape2D_idurc")
+[node name="Player" type="CharacterBody2D" unique_id=1382910038]
+z_index = 30
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_qjkh3")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1506180497]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1304193456]
+unique_name_in_owner = true
+modulate = Color(0.33, 0.33, 0.33, 1)
 texture_filter = 1
-material = SubResource("ShaderMaterial_1ous1")
+material = SubResource("ShaderMaterial_g6k8r")
 scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_fbxa2")
+sprite_frames = SubResource("SpriteFrames_boad6")
 animation = &"walk_down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1970736098]
+shape = SubResource("CircleShape2D_klfgw")
+
+[node name="PlayerMovement" type="Node" parent="." unique_id=797876229]
+script = ExtResource("5_g6k8r")
