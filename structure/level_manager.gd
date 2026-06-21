@@ -39,6 +39,7 @@ func win_level() -> void:
 
 
 func lose_level() -> void:
+	TrooperSpawner.INST.set_wave(null)
 	print("%s: Level %s lost" % [name, current_level_index])
 	current_level.queue_free()
 	load_level()
@@ -51,7 +52,6 @@ func load_level() -> void:
 	if level_array.size() <= current_level_index:
 		print("You won the game!")
 		return
-	
 	current_level = level_array[current_level_index].instantiate()
 	set_build_phase(true)
 	add_child(current_level)
@@ -81,6 +81,7 @@ func set_build_phase(value: bool) -> void:
 	is_build_phase = value
 	TrooperSpawner.INST.clear_troopers()
 	if current_level:
+		print(current_level.name)
 		current_level.set_build_phase(value)
 
 

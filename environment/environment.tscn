@@ -6,9 +6,9 @@
 [ext_resource type="Script" uid="uid://b55436prbbuts" path="res://towers/tower_data.gd" id="3_ehb6n"]
 [ext_resource type="Texture2D" uid="uid://cfh0tlhb5mhf2" path="res://environment/gears/gear_map.png" id="3_wjl7u"]
 
-[sub_resource type="Resource" id="Resource_cec6f"]
+[sub_resource type="Resource" id="Resource_uxiiu"]
 script = ExtResource("3_ehb6n")
-cost = 4
+cost = 5
 scene = ExtResource("2_x2wa3")
 metadata/_custom_type_script = "uid://b55436prbbuts"
 
@@ -50,7 +50,7 @@ bullets = NodePath("Bullets")
 towers = NodePath("Towers")
 coords_label = NodePath("CoordsLabel")
 budget_label = NodePath("BudgetLabel")
-tower_data = SubResource("Resource_cec6f")
+tower_data = SubResource("Resource_uxiiu")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=108710037]
 tile_set = SubResource("TileSet_wetts")
@@ -60,8 +60,6 @@ rendering_quadrant_size = 100
 tile_set = SubResource("TileSet_fbxa2")
 
 [node name="Gears" type="Node2D" parent="." unique_id=2031837137]
-
-[node name="Bullets" type="Node2D" parent="." unique_id=538719117]
 
 [node name="Towers" type="Node2D" parent="." unique_id=1601212248]
 
@@ -73,3 +71,5 @@ offset_bottom = 23.0
 offset_top = 128.0
 offset_right = 40.0
 offset_bottom = 151.0
+
+[node name="Bullets" type="Node2D" parent="." unique_id=243162880]
