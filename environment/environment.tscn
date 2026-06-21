@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://qyhxr7brjwsw" path="res://towers/gun_tower/gun_tower.tscn" id="2_x2wa3"]
 [ext_resource type="Script" uid="uid://b55436prbbuts" path="res://towers/tower_data.gd" id="3_ehb6n"]
 [ext_resource type="Texture2D" uid="uid://cfh0tlhb5mhf2" path="res://environment/gears/gear_map.png" id="3_wjl7u"]
+[ext_resource type="PackedScene" uid="uid://u80uaujktp7f" path="res://ui/hud.tscn" id="6_ehb6n"]
 
 [sub_resource type="Resource" id="Resource_cec6f"]
 script = ExtResource("3_ehb6n")
@@ -48,8 +49,8 @@ gearmap = NodePath("GearMap")
 gears = NodePath("Gears")
 bullets = NodePath("Bullets")
 towers = NodePath("Towers")
-coords_label = NodePath("CoordsLabel")
-budget_label = NodePath("BudgetLabel")
+coords_label = NodePath("DebugHUD/CoordsLabel")
+budget_label = NodePath("DebugHUD/BudgetLabel")
 tower_data = SubResource("Resource_cec6f")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=108710037]
@@ -65,11 +66,18 @@ tile_set = SubResource("TileSet_fbxa2")
 
 [node name="Towers" type="Node2D" parent="." unique_id=1601212248]
 
-[node name="CoordsLabel" type="Label" parent="." unique_id=1591894278]
+[node name="DebugHUD" type="CanvasLayer" parent="." unique_id=1436650702]
+
+[node name="CoordsLabel" type="Label" parent="DebugHUD" unique_id=1591894278]
 offset_right = 40.0
 offset_bottom = 23.0
 
-[node name="BudgetLabel" type="Label" parent="." unique_id=1520008432]
+[node name="BudgetLabel" type="Label" parent="DebugHUD" unique_id=1520008432]
 offset_top = 128.0
 offset_right = 40.0
 offset_bottom = 151.0
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1083079759]
+visible = false
+
+[node name="HUD" parent="HUD" unique_id=1114338 instance=ExtResource("6_ehb6n")]

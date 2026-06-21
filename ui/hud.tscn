@@ -1,0 +1,199 @@
+[gd_scene format=3 uid="uid://u80uaujktp7f"]
+
+[ext_resource type="PackedScene" uid="uid://deeabsnpj3v05" path="res://ui/tower_panel.tscn" id="1_rbyyf"]
+[ext_resource type="Texture2D" uid="uid://wuck5ik5v4v2" path="res://ui/temp_coin.png" id="2_7ihmi"]
+[ext_resource type="Theme" uid="uid://ofehi657nfwc" path="res://ui/theme.tres" id="2_276te"]
+[ext_resource type="Texture2D" uid="uid://kv40wvt1fi4w" path="res://ui/temp_health.png" id="4_en2x2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ihmi"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="HUD" type="Control" unique_id=1114338]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=518244129]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -30.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1670239560]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1778822347]
+layout_mode = 2
+
+[node name="TowerPanels" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1014919531]
+layout_mode = 2
+mouse_filter = 2
+columns = 2
+
+[node name="TowerPanel" parent="PanelContainer/MarginContainer/VBoxContainer/TowerPanels" unique_id=2114563352 instance=ExtResource("1_rbyyf")]
+layout_mode = 2
+
+[node name="TowerPanel2" parent="PanelContainer/MarginContainer/VBoxContainer/TowerPanels" unique_id=1992502857 instance=ExtResource("1_rbyyf")]
+layout_mode = 2
+
+[node name="TowerPanel3" parent="PanelContainer/MarginContainer/VBoxContainer/TowerPanels" unique_id=2081306274 instance=ExtResource("1_rbyyf")]
+layout_mode = 2
+
+[node name="TowerPanel4" parent="PanelContainer/MarginContainer/VBoxContainer/TowerPanels" unique_id=915984292 instance=ExtResource("1_rbyyf")]
+layout_mode = 2
+
+[node name="TowerPanel5" parent="PanelContainer/MarginContainer/VBoxContainer/TowerPanels" unique_id=1600693671 instance=ExtResource("1_rbyyf")]
+layout_mode = 2
+
+[node name="HealthAndMoney" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=242510589]
+layout_mode = 2
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney" unique_id=1799730172]
+layout_mode = 2
+
+[node name="Money" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer" unique_id=1902775620]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Money" unique_id=518099955]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_right = 84.0
+offset_bottom = 8.0
+grow_vertical = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Money/HBoxContainer" unique_id=600968392]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("2_7ihmi")
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Money/HBoxContainer" unique_id=2116232395]
+layout_mode = 2
+theme = ExtResource("2_276te")
+text = "Money: "
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Money/HBoxContainer" unique_id=1888482417]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_276te")
+text = "broke"
+
+[node name="Health" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer" unique_id=130837842]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Health" unique_id=1315566167]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Health/HBoxContainer" unique_id=1281887515]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("4_en2x2")
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Health/HBoxContainer" unique_id=1929071904]
+layout_mode = 2
+theme = ExtResource("2_276te")
+text = "Health: "
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Health/HBoxContainer" unique_id=808676934]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_276te")
+text = "good"
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1253500517]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2" unique_id=792837228]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer" unique_id=289908452]
+layout_mode = 2
+theme = ExtResource("2_276te")
+text = "Wave progress?: "
+
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer" unique_id=1469699329]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/Control" unique_id=397896653]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+theme_override_styles/background = SubResource("StyleBoxFlat_7ihmi")
+value = 60.0
+show_percentage = false
+
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=2016527888]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Control" unique_id=1291061240]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Control/PanelContainer" unique_id=717595009]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme = ExtResource("2_276te")
+text = "Free space, maybe show a portrait with some quirky text from enemies?"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="StartWaveButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1684936538]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Start Wave"
