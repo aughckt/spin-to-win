@@ -20,4 +20,5 @@ cost = 4
 scene = ExtResource("2_hxcat")
 name = "AOE"
 icon = SubResource("GradientTexture2D_6qvha")
+shot_delay_sec = 1.0
 metadata/_custom_type_script = "uid://b55436prbbuts"

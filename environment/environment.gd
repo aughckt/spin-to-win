@@ -3,9 +3,12 @@ extends Node2D
 
 static var INST: Env
 
+@export var terrainmap: TileMapLayer
+##we should really rename this because its just for pathfinding
 @export var tilemap: TileMapLayer
 @export var gearmap: TileMapLayer
 @export var gears: Node2D
+@export var underground_gears: Node2D
 @export var bullets: Node2D
 @export var towers: Node2D
 @export var troopers: Node2D
@@ -16,6 +19,13 @@ static var INST: Env
 var tower_data: TowerData = null
 
 const GEAR_COST := 2
+
+const BuildPermsName = "BuildPerms"
+enum BuildPerms {
+	Nothing = 0,
+	Gears = 1,
+	GearsAndTowers = 2,
+}
 
 var tile_to_gear_set: Dictionary[Vector2i, GearSet] = {}
 var tile_to_visual: Dictionary[Vector2i, GearVisual] = {}
@@ -143,6 +153,14 @@ func move_target_from_global(global_pos: Vector2) -> Vector2:
 func place_gear(tile: Vector2i) -> void:
 		if gearmap.get_cell_source_id(tile) != -1:
 			return
+		
+		var terrain_data := terrainmap.get_cell_tile_data(tile)
+		if terrain_data != null:
+			var perms := terrain_data.get_custom_data(BuildPermsName) as BuildPerms
+			if perms == BuildPerms.Nothing:
+				print("Cannot build on this tile")
+				return
+		
 		#only place if you have enough money
 		if budget < GEAR_COST:
 			print("Not enough money to place gear")
@@ -185,7 +203,8 @@ func place_gear(tile: Vector2i) -> void:
 		gearmap.set_cell(tile, gearmap.tile_set.get_source_id(0), ATLAS_COORDS[BASIC_GEAR])
 		var visual := GearVisual.create_basic()
 		visual.global_position = gearmap.to_global(gearmap.map_to_local(tile))
-		visual.reparent.call_deferred(gears)
+		var build_perms := terrainmap.get_cell_tile_data(tile).get_custom_data(BuildPermsName) as BuildPerms
+		visual.reparent.call_deferred(underground_gears if build_perms == BuildPerms.Gears else gears)
 		tile_to_visual[tile] = visual
 		
 		match neighbour_sets.size():
@@ -406,6 +425,11 @@ func place_tower(tile: Vector2i) -> void:
 		return
 	
 	if tile_to_tower.has(tile):
+		return
+	
+	var perms := terrainmap.get_cell_tile_data(tile).get_custom_data(BuildPermsName) as BuildPerms
+	if perms == BuildPerms.Gears:
+		print("Cannot build a tower on this tile")
 		return
 	
 	spend(tower_data.cost)
