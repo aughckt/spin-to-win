@@ -1,7 +1,7 @@
 class_name Bullet
 extends Area2D
 
-const speed: float = 500
+const speed: float = 900
 const life_time: float = 5.0
 var time_left: float
 var damage: int
