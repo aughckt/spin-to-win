@@ -48,3 +48,11 @@ static func create() -> Bullet:
 
 func remove() -> void:
 	_get_pool().pool(self)
+
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if area is Trooper:
+		var trooper: Trooper = area as Trooper
+		trooper.take_damage(Bullet.damage)
+		remove()
