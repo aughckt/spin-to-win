@@ -67,8 +67,6 @@ func reach_end() -> void:
 	LevelManager.INST.take_damage(1)
 	pool_self()
 
-
-
 func take_damage(amount: int) -> void:
 	hp -= amount
 	#youre not tweening it, right? this just shrinks the clown as it takes damage?

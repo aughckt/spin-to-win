@@ -10,3 +10,4 @@ func shoot() -> void:
 	bullet.reparent.call_deferred(Env.INST.bullets)
 	bullet.dir = (Vector2.UP).rotated(rotation)
 	bullet.global_position = global_position
+	bullet.damage = data.damage

@@ -165,13 +165,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_klfgw"]
-radius = 32.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qjkh3"]
+size = Vector2(32, 18)
 
 [node name="Player" type="CharacterBody2D" unique_id=1382910038]
 z_index = 30
 collision_layer = 4
-collision_mask = 0
 script = ExtResource("1_qjkh3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1304193456]
@@ -179,12 +178,14 @@ unique_name_in_owner = true
 modulate = Color(0.33, 0.33, 0.33, 1)
 texture_filter = 1
 material = SubResource("ShaderMaterial_g6k8r")
+position = Vector2(0, -20)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_boad6")
 animation = &"walk_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1970736098]
-shape = SubResource("CircleShape2D_klfgw")
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_qjkh3")
 
 [node name="PlayerMovement" type="Node" parent="." unique_id=797876229]
 script = ExtResource("5_g6k8r")

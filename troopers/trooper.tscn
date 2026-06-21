@@ -170,6 +170,7 @@ shape = SubResource("CircleShape2D_idurc")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1506180497]
 texture_filter = 1
 material = SubResource("ShaderMaterial_1ous1")
+position = Vector2(0, -20)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_fbxa2")
 animation = &"walk_down"
