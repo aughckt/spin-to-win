@@ -54,10 +54,6 @@ animations = [{
 [node name="AOETower" unique_id=304654658 instance=ExtResource("1_w825s")]
 script = ExtResource("2_0draq")
 
-[node name="Icon" parent="." index="0" unique_id=881709853]
-visible = false
-self_modulate = Color(5.7756904e-07, 0.6231592, 0.53181416, 1)
-
 [node name="Area2D" type="Area2D" parent="." index="1" unique_id=1368491010]
 unique_name_in_owner = true
 collision_layer = 0
