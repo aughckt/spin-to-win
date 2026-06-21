@@ -4,7 +4,13 @@ extends GenericTower
 var aoe_damage: int = 20
 @onready var aoe_area: Area2D = %Area2D
 @onready var sprite: Sprite2D = $AreaIcon
+@onready var megaphone_sprite: AnimatedSprite2D = %AnimatedMegaphone
 
+func _process(_delta: float) -> void:
+	if is_powered:
+		megaphone_sprite.play()
+	elif not is_powered:
+		megaphone_sprite.stop()
 
 func shoot() -> void:
 	sprite.rotate(PI / 4)

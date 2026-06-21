@@ -8,9 +8,11 @@ var shoot_timer: float = 0.0
 var data: TowerData
 
 func _physics_process(delta: float) -> void:
+	is_powered = Env.INST.is_position_powered(global_position)
+	
 	if shoot_timer > 0:
 		shoot_timer -= delta
-	elif Env.INST.is_position_powered(global_position):
+	elif is_powered:
 		shoot_timer = data.shot_delay_sec
 		shoot()
 
