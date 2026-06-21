@@ -2,11 +2,156 @@
 
 [ext_resource type="Script" uid="uid://xmyvhrr2x5i2" path="res://towers/gun_tower/gun_tower.gd" id="1_08lh3"]
 [ext_resource type="Texture2D" uid="uid://btm4vlsmnxvyw" path="res://icon.svg" id="2_57u53"]
+[ext_resource type="Texture2D" uid="uid://cpk431m5728hm" path="res://towers/gun_tower/TieShooter.png" id="3_57u53"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_57u53"]
+atlas = ExtResource("3_57u53")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d033u"]
+atlas = ExtResource("3_57u53")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kk4bv"]
+atlas = ExtResource("3_57u53")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwc2n"]
+atlas = ExtResource("3_57u53")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0e52r"]
+atlas = ExtResource("3_57u53")
+region = Rect2(0, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfwk4"]
+atlas = ExtResource("3_57u53")
+region = Rect2(48, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8yg81"]
+atlas = ExtResource("3_57u53")
+region = Rect2(96, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0qve"]
+atlas = ExtResource("3_57u53")
+region = Rect2(144, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sv8j"]
+atlas = ExtResource("3_57u53")
+region = Rect2(0, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f72i4"]
+atlas = ExtResource("3_57u53")
+region = Rect2(48, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8n8w"]
+atlas = ExtResource("3_57u53")
+region = Rect2(96, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_clb8l"]
+atlas = ExtResource("3_57u53")
+region = Rect2(144, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j724k"]
+atlas = ExtResource("3_57u53")
+region = Rect2(0, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gs8rq"]
+atlas = ExtResource("3_57u53")
+region = Rect2(48, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nq27"]
+atlas = ExtResource("3_57u53")
+region = Rect2(96, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e2ehd"]
+atlas = ExtResource("3_57u53")
+region = Rect2(144, 240, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_klfgw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_57u53")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d033u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kk4bv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwc2n")
+}],
+"loop": 0,
+"name": &"shoot_down",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0e52r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfwk4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8yg81")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0qve")
+}],
+"loop": 0,
+"name": &"shoot_left",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sv8j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f72i4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8n8w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_clb8l")
+}],
+"loop": 0,
+"name": &"shoot_right",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j724k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gs8rq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7nq27")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e2ehd")
+}],
+"loop": 0,
+"name": &"shoot_up",
+"speed": 10.0
+}]
 
 [node name="Tower" type="Node2D" unique_id=304654658]
 script = ExtResource("1_08lh3")
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=881709853]
+visible = false
 self_modulate = Color(1, 0, 0, 1)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("2_57u53")
+
+[node name="AnimatedShooter" type="AnimatedSprite2D" parent="." unique_id=485128468]
+unique_name_in_owner = true
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_klfgw")
+animation = &"shoot_up"
+frame = 3
+frame_progress = 1.0

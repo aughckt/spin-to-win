@@ -3,14 +3,59 @@
 [ext_resource type="PackedScene" uid="uid://qyhxr7brjwsw" path="res://towers/gun_tower/gun_tower.tscn" id="1_w825s"]
 [ext_resource type="Script" uid="uid://b3i1ttqlnn1bq" path="res://towers/aoe_tower/aoe_tower.gd" id="2_0draq"]
 [ext_resource type="Texture2D" uid="uid://btm4vlsmnxvyw" path="res://icon.svg" id="3_0draq"]
+[ext_resource type="Texture2D" uid="uid://gi3ahjl6xcn5" path="res://towers/aoe_tower/Megaphone.png" id="4_pvsoq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_klfgw"]
 radius = 115.01739
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igpsn"]
+atlas = ExtResource("4_pvsoq")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_be8kh"]
+atlas = ExtResource("4_pvsoq")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uoev6"]
+atlas = ExtResource("4_pvsoq")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e60pw"]
+atlas = ExtResource("4_pvsoq")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e82du"]
+atlas = ExtResource("4_pvsoq")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_klfgw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igpsn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_be8kh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uoev6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e60pw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e82du")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 10.0
+}]
 
 [node name="AOETower" unique_id=304654658 instance=ExtResource("1_w825s")]
 script = ExtResource("2_0draq")
 
 [node name="Icon" parent="." index="0" unique_id=881709853]
+visible = false
 self_modulate = Color(5.7756904e-07, 0.6231592, 0.53181416, 1)
 
 [node name="Area2D" type="Area2D" parent="." index="1" unique_id=1368491010]
@@ -23,6 +68,11 @@ monitorable = false
 shape = SubResource("CircleShape2D_klfgw")
 
 [node name="AreaIcon" type="Sprite2D" parent="." index="2" unique_id=2131660126]
-modulate = Color(1, 1, 1, 0.29411766)
+modulate = Color(1, 1, 1, 0.09803922)
 scale = Vector2(1.8320575, 1.8320575)
 texture = ExtResource("3_0draq")
+
+[node name="AnimatedMegaphone" type="AnimatedSprite2D" parent="." index="3" unique_id=1168137784]
+unique_name_in_owner = true
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_klfgw")
