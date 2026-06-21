@@ -8,13 +8,15 @@ extends Area2D
 
 var target_pos: Vector2
 var walk_normal: Vector2
-var hp: int = 100
-@onready var sprite: Sprite2D = $Sprite2D
+const MAX_HP: int = 100
+var hp: int = MAX_HP
+@export var sprite: Sprite2D
 
 
 func _ready() -> void:
 	target_pos = global_position
 	walk_normal = Vector2.ZERO
+	area_entered.connect(_on_area_entered)
 
 
 func _physics_process(delta: float) -> void:
@@ -42,23 +44,32 @@ func _physics_process(delta: float) -> void:
 
 func reach_end() -> void:
 	LevelManager.INST.take_damage(1)
-	TrooperSpawner.INST.pool_trooper(self)
+	pool_self()
 
 
-func die() -> void:
-	print("%s: Oof owchie I have died" % name)
-	Env.INST.budget += 1
-
-# On bullet entered trooper
-func _on_body_entered(body: Node2D) -> void:
-	# Check what type of thing hit
-	if body is Bullet:
-		take_damage(50)
-		body.queue_free()
+func _on_area_entered(area: Area2D) -> void:
+	if area is Bullet:
+		take_damage(Bullet.damage)
+		(area as Bullet).remove()
+		print("%s: Haha oww! %s" % [name, area.name])
 
 
 func take_damage(amount: int) -> void:
 	hp -= amount
 	sprite.scale = Vector2(hp/100.0,hp/100.0)
 	if hp <= 0:
-		queue_free()
+		Env.INST.budget += 1
+		pool_self()
+
+
+func pool_self() -> void:
+	TrooperSpawner.INST.pool_trooper(self)
+	set_deferred("monitorable", false)
+	set_deferred("monitoring", false)
+
+
+func setup() -> void:
+	sprite.scale = Vector2(1,1)
+	set_deferred("monitorable", true)
+	set_deferred("monitoring", true)
+	hp = MAX_HP

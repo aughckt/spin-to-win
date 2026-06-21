@@ -7,7 +7,7 @@ var aoe_damage: int = 20
 
 
 func shoot() -> void:
-	sprite.rotate(PI/4)
+	sprite.rotate(PI / 4)
 	var troopers: Array[Area2D] = aoe_area.get_overlapping_areas()
 	for area: Area2D in troopers:
 		if area is Trooper:

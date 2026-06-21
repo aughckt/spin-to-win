@@ -2,9 +2,11 @@ class_name GenericTower
 extends Node2D
 
 
+@export var cost: int = 5 
 @export var shoot_timer_max: float = 1.0
 var is_powered: bool = false
 var shoot_timer: float
+
 
 func _ready() -> void:
 	shoot_timer = shoot_timer_max

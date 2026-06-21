@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b04sr3oh5d0f3"]
 
-[ext_resource type="Script" uid="uid://c0nyrmno1wcfb" path="res://level/level.gd" id="1_7lnir"]
+[ext_resource type="Script" uid="uid://c0nyrmno1wcfb" path="res://structure/level.gd" id="1_7lnir"]
 [ext_resource type="PackedScene" uid="uid://cji2yg5dqgn0q" path="res://environment/environment.tscn" id="2_hiaeh"]
 
 [sub_resource type="Curve" id="Curve_ugjw3"]

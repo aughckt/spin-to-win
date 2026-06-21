@@ -6,14 +6,12 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_idurc"]
 radius = 59.07622
 
-[node name="Trooper" type="Area2D" unique_id=200306663]
-collision_layer = 2
+[node name="Trooper" type="Area2D" unique_id=182051846 node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_mba6l")
+sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1260975531]
 texture = ExtResource("1_iolom")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=807592597]
 shape = SubResource("CircleShape2D_idurc")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]

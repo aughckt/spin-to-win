@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cyeody7hgvmcf"]
 
-[ext_resource type="PackedScene" uid="uid://qyhxr7brjwsw" path="res://tower/tower.tscn" id="1_w825s"]
-[ext_resource type="Script" uid="uid://b3i1ttqlnn1bq" path="res://tower/aoe_tower.gd" id="2_0draq"]
+[ext_resource type="PackedScene" uid="uid://qyhxr7brjwsw" path="res://towers/gun_tower/gun_tower.tscn" id="1_w825s"]
+[ext_resource type="Script" uid="uid://b3i1ttqlnn1bq" path="res://towers/aoe_tower/aoe_tower.gd" id="2_0draq"]
 [ext_resource type="Texture2D" uid="uid://btm4vlsmnxvyw" path="res://icon.svg" id="3_0draq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_klfgw"]

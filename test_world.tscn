@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://5qqtrfrpq3x4"]
 
 [ext_resource type="PackedScene" uid="uid://cji2yg5dqgn0q" path="res://environment/environment.tscn" id="1_dxppu"]
-[ext_resource type="PackedScene" uid="uid://kh3rixkt6b3s" path="res://environment/marker.tscn" id="2_dsnr4"]
+[ext_resource type="PackedScene" uid="uid://qyhxr7brjwsw" path="res://towers/gun_tower/gun_tower.tscn" id="2_dsnr4"]
 [ext_resource type="PackedScene" uid="uid://cmrgjdrggd1x0" path="res://troopers/trooper.tscn" id="2_gy3sr"]
-[ext_resource type="Script" uid="uid://b55436prbbuts" path="res://environment/towers/tower_data.gd" id="3_lf0gk"]
+[ext_resource type="Script" uid="uid://b55436prbbuts" path="res://towers/tower_data.gd" id="3_lf0gk"]
 
 [sub_resource type="Resource" id="Resource_gy3sr"]
 script = ExtResource("3_lf0gk")
