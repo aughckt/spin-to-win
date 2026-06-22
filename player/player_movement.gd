@@ -18,24 +18,31 @@ func _physics_process(_delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	if not can_move:
-		sprite.pause()
+		sprite.stop()
 		return
 	
+	
+	
 	if player.velocity.length() == 0 and sprite.is_playing():
-		sprite.pause()
+		sprite.stop()
 	elif player.velocity.length() != 0 and not sprite.is_playing():
 		sprite.play()
 	
-	if player.velocity.y < 0:
-		sprite.animation = "walk_up"
-		sprite.flip_h = false
-	elif player.velocity.y > 0:
-		sprite.animation = "walk_down"
-		sprite.flip_h = false
-	elif player.velocity.x < 0:
-		sprite.animation = "walk_right"
-		sprite.flip_h = true
-	elif player.velocity.x > 0:
-		sprite.animation = "walk_right"
-		sprite.flip_h = false
-		
+	var move_dir: Vector2 = Vector2(Input.get_axis("left","right"), Input.get_axis("up","down"))
+	match move_dir:
+		Vector2.UP:
+			sprite.animation = "walk_up"
+		Vector2.LEFT:
+			sprite.animation = "walk_left"
+		Vector2.DOWN:
+			sprite.animation = "walk_down"
+		Vector2.RIGHT:
+			sprite.animation = "walk_right"
+		Vector2(1, -1):
+			sprite.animation = "walk_ne"
+		Vector2(1, 1):
+			sprite.animation = "walk_se"
+		Vector2(-1, -1):
+			sprite.animation = "walk_nw"
+		Vector2(-1, 1):
+			sprite.animation = "walk_sw"
