@@ -27,9 +27,9 @@ func shoot() -> void:
 
 func _on_rotate_area_input(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("scroll_up"):
-		rotate_gun(PI/2)
-	elif event.is_action_pressed("scroll_down"):
 		rotate_gun(-PI/2)
+	elif event.is_action_pressed("scroll_down"):
+		rotate_gun(PI/2)
 
 
 func rotate_gun(amount: float) -> void:
