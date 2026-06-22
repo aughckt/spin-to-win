@@ -11,6 +11,8 @@ extends Control
 @export var start_wave_button: Button
 @export var pause_button: Button
 
+signal data_selected (data: TowerData)
+
 func _ready() -> void:
 	LevelManager.INST.wave_finished.connect(_on_wave_finished)
 	start_wave_button.pressed.connect(_on_start_wave_button_pressed)
@@ -41,8 +43,7 @@ func add_tower_data(data: TowerData) -> void:
 	tower_panels.add_child(panel)
 
 func _on_panel_selected(data: TowerData) -> void:
-	Env.INST.tower_data = data
-	print("Selected tower %s" % data.name)
+	data_selected.emit(data)
 
 func _on_start_wave_button_pressed() -> void:
 	start_wave_button.hide()

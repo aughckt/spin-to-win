@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://ds63alic0g0b8"]
+
+[ext_resource type="Script" uid="uid://csu5cj7u6ohex" path="res://ui/build_visual.gd" id="1_ecnu7"]
+[ext_resource type="Shader" uid="uid://84jyfueyie5h" path="res://ui/build_visual.gdshader" id="2_5dvg5"]
+[ext_resource type="PackedScene" uid="uid://djqifncx2qi6u" path="res://environment/gears/gear_visual.tscn" id="3_mhavr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ecnu7"]
+shader = ExtResource("2_5dvg5")
+shader_parameter/color = Color(0, 0, 0, 1)
+
+[node name="BuildVisual" type="Node2D" unique_id=371529839 node_paths=PackedStringArray("child", "gear_visual")]
+script = ExtResource("1_ecnu7")
+child = NodePath("Child")
+mat = SubResource("ShaderMaterial_ecnu7")
+gear_visual = NodePath("GearVisual")
+clear_color = Color(0.6, 0.7607843, 0.85882354, 1)
+obstructed_color = Color(0.9607843, 0.30980393, 0.30980393, 1)
+
+[node name="GearVisual" parent="." unique_id=16609391 instance=ExtResource("3_mhavr")]
+
+[node name="Child" type="Node2D" parent="." unique_id=1007000327]

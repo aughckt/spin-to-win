@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://u80uaujktp7f" path="res://ui/hud.tscn" id="6_ehb6n"]
 [ext_resource type="Resource" uid="uid://bvmp6r3hgihgj" path="res://towers/tower_data/gun_tower_data.tres" id="6_vh8kr"]
 [ext_resource type="Resource" uid="uid://cu1kljx46m1sk" path="res://towers/tower_data/aoe_tower_data.tres" id="7_nmo3v"]
+[ext_resource type="PackedScene" uid="uid://ds63alic0g0b8" path="res://ui/build_visual.tscn" id="9_6qvha"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7b2gm"]
 texture = ExtResource("2_7uceq")
@@ -178,7 +179,7 @@ physics_layer_0/collision_layer = 8
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_7uceq")
 
-[node name="Environment" type="Node2D" unique_id=123182581 node_paths=PackedStringArray("terrainmap", "tilemap", "gearmap", "gears", "underground_gears", "bullets", "towers", "troopers", "coords_label", "budget_label")]
+[node name="Environment" type="Node2D" unique_id=123182581 node_paths=PackedStringArray("terrainmap", "tilemap", "gearmap", "gears", "underground_gears", "bullets", "towers", "troopers", "coords_label", "budget_label", "hud", "build_visual")]
 script = ExtResource("1_wjl7u")
 terrainmap = NodePath("Terrain")
 tilemap = NodePath("ArrowTiles")
@@ -190,6 +191,8 @@ towers = NodePath("Towers")
 troopers = NodePath("Troopers")
 coords_label = NodePath("DebugHUD/CoordsLabel")
 budget_label = NodePath("DebugHUD/BudgetLabel")
+hud = NodePath("HUD/HUD")
+build_visual = NodePath("BuildVisual")
 
 [node name="ArrowTiles" type="TileMapLayer" parent="." unique_id=108710037]
 tile_set = SubResource("TileSet_wetts")
@@ -233,3 +236,5 @@ offset_bottom = 151.0
 
 [node name="HUD" parent="HUD" unique_id=1114338 instance=ExtResource("6_ehb6n")]
 towers = Array[ExtResource("3_ehb6n")]([ExtResource("6_vh8kr"), ExtResource("7_nmo3v")])
+
+[node name="BuildVisual" parent="." unique_id=371529839 instance=ExtResource("9_6qvha")]

@@ -9,9 +9,9 @@ radius = 30.016663
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1ous1"]
 shader = ExtResource("2_kbjsr")
-shader_parameter/progress = 0.999999977648
+shader_parameter/progress = 0.0
 shader_parameter/strength = 0.0
-shader_parameter/y_threshold = 0.0
+shader_parameter/y_threshold = 0.3850000182875
 shader_parameter/grey = Color(0.12591079, 0.12591085, 0.12591082, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hlcmw"]
@@ -165,6 +165,7 @@ script = ExtResource("1_mba6l")
 sprite = NodePath("AnimatedSprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=807592597]
+visible = false
 shape = SubResource("CircleShape2D_idurc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1506180497]

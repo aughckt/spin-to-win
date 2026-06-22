@@ -16,6 +16,9 @@ static var INST: Env
 @export var budget_label: Label
 @export var budget: int = 20
 
+@export var hud: Hud
+@export var build_visual: BuildVisual
+
 var tower_data: TowerData = null
 
 const GEAR_COST := 2
@@ -52,6 +55,8 @@ var is_build_phase: bool = true
 #signal OriGearPowerSet(tile: Vector2i, new_status: bool)
 
 func _ready() -> void:
+	hud.data_selected.connect(_on_data_selected)
+	
 	assert(INST == null)
 	INST = self
 	spend(0) #update budget display
@@ -114,9 +119,10 @@ func _unhandled_input(event: InputEvent) -> void:
 				return
 			
 			if tile_to_gear_set.get(tile) == null:
-				place_gear(tile)
-			else:
-				place_tower(tile)
+				print(place_gear(tile))
+			
+			if tower_data != null:
+				print(place_tower(tile))
 		
 		MouseButton.MOUSE_BUTTON_RIGHT:
 			if tile_to_tower.has(tile):
@@ -150,21 +156,23 @@ func move_target_from_global(global_pos: Vector2) -> Vector2:
 	return tilemap.to_global(tilemap.map_to_local(tile + directions[idx]))
 
 
-func place_gear(tile: Vector2i) -> void:
+##an empty string means no error occured
+func place_gear(tile: Vector2i, test_only: bool = false) -> String:
 		if gearmap.get_cell_source_id(tile) != -1:
-			return
+			return "Tile is already occupied"
 		
-		var terrain_data := terrainmap.get_cell_tile_data(tile)
-		if terrain_data != null:
-			var perms := terrain_data.get_custom_data(BuildPermsName) as BuildPerms
-			if perms == BuildPerms.Nothing:
-				print("Cannot build on this tile")
-				return
+		#var terrain_data := terrainmap.get_cell_tile_data(tile)
+		#if terrain_data != null:
+			#var perms := get_perms(tile) #terrain_data.get_custom_data(BuildPermsName) as BuildPerms
+			#if perms == BuildPerms.Nothing:
+				#return "Cannot build on this tile"
+		
+		if get_perms(tile) == BuildPerms.Nothing:
+			return "Cannot build on this tile"
 		
 		#only place if you have enough money
 		if budget < GEAR_COST:
-			print("Not enough money to place gear")
-			return
+			return "Cannot build on this tile"
 
 
 		# none of the neighbours are allowed to be in the same set
@@ -178,13 +186,11 @@ func place_gear(tile: Vector2i) -> void:
 			var gset: GearSet = tile_to_gear_set.get(candidate)
 			if gset != null:
 				if neighbour_sets.has(gset):
-					print("Cannot place gear because it would create a loop")
-					return
+					return "Cannot place gear because it would create a loop"
 
 				if gset.has_ori_gear:
 						if has_powered_neighbour:
-							print("Cannot place gear because it would connect 2 powered sets")
-							return
+							return "Cannot place gear because it would connect 2 powered sets"
 						else:
 							has_powered_neighbour = true
 							neighbour_ori = gset.ori_gear_tile
@@ -194,16 +200,18 @@ func place_gear(tile: Vector2i) -> void:
 			else:
 				if gear_kind_at(candidate) == ORIGIN_GEAR:
 					if has_powered_neighbour:
-						print("Cannot place gear because it would connect 2 powered sets (directly next to ori)")
-						return
+						return "Cannot place gear because it would connect 2 powered sets (directly next to origin gear)"
 
 					has_powered_neighbour = true
 					neighbour_ori = candidate
-
+		
+		if test_only:
+			return ""
+		
 		gearmap.set_cell(tile, gearmap.tile_set.get_source_id(0), ATLAS_COORDS[BASIC_GEAR])
 		var visual := GearVisual.create_basic()
 		visual.global_position = gearmap.to_global(gearmap.map_to_local(tile))
-		var build_perms := terrainmap.get_cell_tile_data(tile).get_custom_data(BuildPermsName) as BuildPerms
+		var build_perms := get_perms(tile) #terrainmap.get_cell_tile_data(tile).get_custom_data(BuildPermsName) as BuildPerms
 		visual.reparent.call_deferred(underground_gears if build_perms == BuildPerms.Gears else gears)
 		tile_to_visual[tile] = visual
 		
@@ -253,6 +261,7 @@ func place_gear(tile: Vector2i) -> void:
 		spend(GEAR_COST)
 
 		assert(log_set_count())
+		return ""
 
 func remove_gear(tile: Vector2i) -> void:
 	#only gear in set -> erase (i think this is implicit due to gc)
@@ -346,6 +355,9 @@ func build_set_recursive(tile: Vector2i, previous_tile: Vector2i, gset: GearSet)
 			ORIGIN_GEAR:
 				gset.set_ori_gear(candidate)
 
+## -1 = None
+##  0 = Basic gear
+##  1 = Origin gear
 func gear_kind_at(tile: Vector2i) -> int:
 	var atlas_coords := gearmap.get_cell_atlas_coords(tile)
 	match atlas_coords:
@@ -417,20 +429,33 @@ func spend(credits: int) -> void:
 	budget = max(budget, 0)
 	budget_label.text = str(budget)
 
-func place_tower(tile: Vector2i) -> void:
-	if tower_data == null || tower_data.cost > budget:
-		return
-	
-	if gear_kind_at(tile) != BASIC_GEAR:
-		return
+func place_tower(tile: Vector2i, test_only: bool = false) -> String:
+	match gear_kind_at(tile):
+		BASIC_GEAR:
+			pass
+		ORIGIN_GEAR:
+			return "Cannot build towers on origin gears"
+		-1:
+			return "Can only build towers on gears"
+		_:
+			assert(false)
+		
 	
 	if tile_to_tower.has(tile):
-		return
+		return "There is already a tower on this tile"
 	
-	var perms := terrainmap.get_cell_tile_data(tile).get_custom_data(BuildPermsName) as BuildPerms
-	if perms == BuildPerms.Gears:
-		print("Cannot build a tower on this tile")
-		return
+	if tower_data == null:
+		return "Select a tower from the menu"
+	
+	if tower_data.cost > budget:
+		return "This isn't a charity"
+	
+	#var perms := terrainmap.get_cell_tile_data(tile).get_custom_data(BuildPermsName) as BuildPerms
+	if get_perms(tile) == BuildPerms.Gears:
+		return "Cannot build a tower on this tile"
+	
+	if test_only:
+		return ""
 	
 	spend(tower_data.cost)
 	
@@ -440,6 +465,7 @@ func place_tower(tile: Vector2i) -> void:
 	tower.data = tower_data
 	
 	tile_to_tower[tile] = tower
+	return ""
 
 func remove_tower(tile: Vector2i) -> void:
 	var tower: GenericTower = tile_to_tower.get(tile)
@@ -453,3 +479,18 @@ func remove_tower(tile: Vector2i) -> void:
 	
 	tile_to_tower.erase(tile)
 	tower.queue_free()
+
+func get_perms(tile: Vector2i) -> BuildPerms:
+	var data := terrainmap.get_cell_tile_data(tile)
+	if data == null:
+		return BuildPerms.Nothing
+	return data.get_custom_data(BuildPermsName) as BuildPerms
+
+func _on_data_selected(data: TowerData) -> void:
+	if data == tower_data:
+		tower_data = null
+	else:
+		tower_data = data
+	
+	print("Selected tower %s" % ("none" if tower_data == null else tower_data.name))
+	build_visual.set_data(tower_data)
