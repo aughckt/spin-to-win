@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://c0nyrmno1wcfb" path="res://structure/level.gd" id="1_7lnir"]
 [ext_resource type="PackedScene" uid="uid://cji2yg5dqgn0q" path="res://environment/environment.tscn" id="2_hiaeh"]
-[ext_resource type="PackedScene" uid="uid://df7g5g3wu15n1" path="res://player/player.tscn" id="3_16nsi"]
 
 [sub_resource type="Curve" id="Curve_ugjw3"]
 _limits = [0.0, 5.0, 0.0, 30.0]
@@ -29,8 +28,5 @@ unique_name_in_owner = true
 
 [node name="ArrowTiles" parent="Environment" index="0" unique_id=108710037]
 z_index = 10
-
-[node name="Player" parent="." unique_id=1382910038 instance=ExtResource("3_16nsi")]
-position = Vector2(160, 96)
 
 [editable path="Environment"]

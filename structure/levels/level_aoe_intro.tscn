@@ -20,7 +20,4 @@ tile_map_data = PackedByteArray("AAAEAAgAAAAFAAEAAAAMAAQAAAAGAAEAAAAAAAAAAAAHAAA
 [node name="GearMap" parent="Environment" parent_id_path=PackedInt32Array(123182581) index="4" unique_id=916456414]
 tile_map_data = PackedByteArray("AAAJAAcAAAABAAAAAAA=")
 
-[node name="Player" parent="." index="2" unique_id=1382910038]
-position = Vector2(685, 457)
-
 [editable path="Environment"]

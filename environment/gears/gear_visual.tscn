@@ -74,6 +74,7 @@ animations = [{
 }]
 
 [node name="GearVisual" type="Node2D" unique_id=16609391 node_paths=PackedStringArray("anim")]
+y_sort_enabled = true
 script = ExtResource("1_yhgds")
 anim = NodePath("AnimatedSprite2D")
 
