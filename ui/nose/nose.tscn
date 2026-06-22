@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://ch03rit60obld"]
+
+[ext_resource type="Texture2D" uid="uid://daf10bu2v4pfp" path="res://ui/nose/nose.png" id="1_ym5jm"]
+[ext_resource type="Script" uid="uid://bq2ykur37cr3c" path="res://ui/nose/nose.gd" id="2_5xfc3"]
+[ext_resource type="Script" uid="uid://ce8myo2y6rl0p" path="res://audio/sound.gd" id="3_ehdac"]
+[ext_resource type="AudioStream" uid="uid://declsg2r3ox00" path="res://ui/nose/clownnose.wav" id="4_7vwqx"]
+
+[sub_resource type="Resource" id="Resource_mpyug"]
+script = ExtResource("3_ehdac")
+stream = ExtResource("4_7vwqx")
+volume_linear = 0.4
+max_polyphony = 4
+metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
+
+[node name="Nose" type="Sprite2D" unique_id=2019483926]
+scale = Vector2(2, 2)
+texture = ExtResource("1_ym5jm")
+script = ExtResource("2_5xfc3")
+sound = SubResource("Resource_mpyug")

@@ -29,6 +29,9 @@ static func _get_pool() -> Pool:
 	return pool
 
 func _on_area_entered(area: Area2D) -> void:
+	if area.get_parent() == GeneralPool:
+		return
+	
 	if area is Trooper:
 		(area as Trooper).take_damage(damage)
 	

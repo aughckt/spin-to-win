@@ -180,7 +180,7 @@ physics_layer_0/collision_layer = 8
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_7uceq")
 
-[node name="Environment" type="Node2D" unique_id=123182581 node_paths=PackedStringArray("terrainmap", "tilemap", "gearmap", "gears", "underground_gears", "bullets", "towers", "troopers", "coords_label", "hud", "build_visual")]
+[node name="Environment" type="Node2D" unique_id=123182581 node_paths=PackedStringArray("terrainmap", "tilemap", "gearmap", "gears", "underground_gears", "bullets", "towers", "troopers", "coords_label", "hud", "build_visual", "hud_layer")]
 y_sort_enabled = true
 script = ExtResource("1_wjl7u")
 terrainmap = NodePath("Terrain")
@@ -194,6 +194,7 @@ troopers = NodePath("Troopers")
 coords_label = NodePath("DebugHUD/CoordsLabel")
 hud = NodePath("HUD/HUD")
 build_visual = NodePath("BuildVisual")
+hud_layer = NodePath("HUD")
 
 [node name="ArrowTiles" type="TileMapLayer" parent="." unique_id=108710037]
 tile_set = SubResource("TileSet_wetts")

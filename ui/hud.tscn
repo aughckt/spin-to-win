@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cveavlf4sypju" path="res://ui/hud.gd" id="1_en2x2"]
 [ext_resource type="PackedScene" uid="uid://deeabsnpj3v05" path="res://ui/tower_panel.tscn" id="1_rbyyf"]
-[ext_resource type="Texture2D" uid="uid://wuck5ik5v4v2" path="res://ui/temp_coin.png" id="2_7ihmi"]
 [ext_resource type="Theme" uid="uid://ofehi657nfwc" path="res://ui/theme.tres" id="2_276te"]
+[ext_resource type="Texture2D" uid="uid://daf10bu2v4pfp" path="res://ui/nose/nose.png" id="3_en2x2"]
 [ext_resource type="Texture2D" uid="uid://kv40wvt1fi4w" path="res://ui/temp_health.png" id="4_en2x2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ihmi"]
@@ -18,7 +18,7 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[node name="HUD" type="Control" unique_id=1114338 node_paths=PackedStringArray("tower_panels", "health_label", "money_label", "start_wave_button", "pause_button")]
+[node name="HUD" type="Control" unique_id=1114338 node_paths=PackedStringArray("tower_panels", "health_label", "money_label", "start_wave_button", "pause_button", "nose_target")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,6 +33,7 @@ health_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndM
 money_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Money/HBoxContainer/Label")
 start_wave_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/StartWaveButton")
 pause_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/PauseButton")
+nose_target = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Money/HBoxContainer/TextureRect")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=518244129]
 layout_mode = 1
@@ -105,7 +106,7 @@ theme_override_constants/separation = 0
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 0
-texture = ExtResource("2_7ihmi")
+texture = ExtResource("3_en2x2")
 
 [node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Money/HBoxContainer" unique_id=2116232395]
 layout_mode = 2
