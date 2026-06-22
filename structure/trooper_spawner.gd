@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 	elapsed_wave_time += delta
 	spawn_timer -= delta
 	
-	if elapsed_wave_time > current_wave.max_domain:
+	if elapsed_wave_time > current_wave.max_domain and Env.INST.troopers.get_children().is_empty():
 		LevelManager.INST.end_wave()
 		return
 	
