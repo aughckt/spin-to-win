@@ -18,7 +18,6 @@ func shoot() -> void:
 	var bullet: Bullet = Bullet.create()
 	bullet.reparent.call_deferred(Env.INST.bullets)
 	bullet.dir = (Vector2.RIGHT).rotated(-gun_rotation)
-	print(bullet.dir)
 	bullet.global_position = global_position
 	bullet.damage = data.damage
 	
@@ -37,8 +36,6 @@ func rotate_gun(amount: float) -> void:
 	gun_rotation = wrapf(gun_rotation + amount + PI, 0.0, TAU) - PI
 	if gun_rotation == -PI:
 		gun_rotation = PI
-	
-	print(gun_rotation)
 	
 	if gun_rotation == PI:
 		shooter_sprite.animation = "shoot_left"
