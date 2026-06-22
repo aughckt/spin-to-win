@@ -147,6 +147,9 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_idurc"]
+size = Vector2(48, 106)
+
 [node name="Tower" type="Node2D" unique_id=304654658]
 script = ExtResource("1_08lh3")
 shoot_sound = SubResource("Resource_kbmgr")
@@ -156,3 +159,11 @@ unique_name_in_owner = true
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_klfgw")
 animation = &"shoot_up"
+
+[node name="RotateArea" type="Area2D" parent="." unique_id=1492347135]
+unique_name_in_owner = true
+collision_layer = 32768
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RotateArea" unique_id=1449625502]
+shape = SubResource("RectangleShape2D_idurc")
