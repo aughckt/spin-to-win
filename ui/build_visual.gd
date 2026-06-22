@@ -9,9 +9,11 @@ extends Node2D
 @export var clear_color: Color
 @export var obstructed_color: Color
 
-@export var gun_data: TowerData
+@export var gear_clear_color: Color
+@export var gear_obstructed_color: Color
 
 var data: TowerData
+var tower: GenericTower
 
 func _ready() -> void:
 	child.process_mode = Node.PROCESS_MODE_DISABLED
@@ -25,7 +27,7 @@ func set_data(tdata: TowerData) -> void:
 	if data == null:
 		return
 	
-	var tower := data.scene.instantiate() as GenericTower
+	tower = data.scene.instantiate() as GenericTower
 	child.add_child(tower)
 	for n in child.get_children():
 		_update_nodes(n)
@@ -48,28 +50,33 @@ func _update_nodes(node: Node) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	#really dont like this
-	if data != gun_data:
+	if tower == null || tower is not GunTower:
 		return
+	
+	var gun_tower := tower as GunTower
 	
 	#TODO
 	if event is InputEventKey:
 		var key := (event as InputEventKey).keycode
 		match key:
-			KEY_UP:
-				pass
-			KEY_LEFT:
-				pass
-			KEY_DOWN:
-				pass
 			KEY_RIGHT:
-				pass
+				gun_tower.set_gun_rotation(0)
+			KEY_UP:
+				gun_tower.set_gun_rotation(PI/2)
+			KEY_LEFT:
+				gun_tower.set_gun_rotation(PI)
+			KEY_DOWN:
+				gun_tower.set_gun_rotation(-PI/2)
+			
 	elif event is InputEventMouseButton:
 		var button := (event as InputEventMouseButton).button_index
 		match button:
-			MouseButton.MOUSE_BUTTON_WHEEL_DOWN:
-				pass
 			MouseButton.MOUSE_BUTTON_WHEEL_UP:
-				pass
+				gun_tower.rotate_gun(-PI/4)
+			MouseButton.MOUSE_BUTTON_WHEEL_DOWN:
+				gun_tower.rotate_gun(PI/4)
+	
+	Env.INST.tower_rotation = gun_tower.gun_rotation
 
 func _process(_delta: float) -> void:
 	var map := Env.INST.gearmap
@@ -86,10 +93,10 @@ func _process(_delta: float) -> void:
 	if child.visible && gear_visual.visible:
 		var total_cost := Env.GEAR_COST + data.cost
 		if total_cost > Env.INST.budget:
-			(gear_visual.anim.material as ShaderMaterial).set_shader_parameter("color", clear_color if can_place_gear else obstructed_color)
+			(gear_visual.anim.material as ShaderMaterial).set_shader_parameter("color", gear_clear_color if can_place_gear else gear_obstructed_color)
 			mat.set_shader_parameter("color", obstructed_color)
 			return
 	
-	var col: Color = clear_color if can_place_gear || can_place_tower else obstructed_color
-	mat.set_shader_parameter("color", col)
-	(gear_visual.anim.material as ShaderMaterial).set_shader_parameter("color", col)
+	#var col: Color = clear_color if can_place_gear || can_place_tower else obstructed_color
+	mat.set_shader_parameter("color", clear_color if can_place_gear || can_place_tower else obstructed_color)
+	(gear_visual.anim.material as ShaderMaterial).set_shader_parameter("color", gear_clear_color if can_place_gear || can_place_tower else gear_obstructed_color)

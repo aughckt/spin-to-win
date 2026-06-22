@@ -14,7 +14,9 @@ child = NodePath("Child")
 mat = SubResource("ShaderMaterial_ecnu7")
 gear_visual = NodePath("GearVisual")
 clear_color = Color(0.6, 0.7607843, 0.85882354, 1)
-obstructed_color = Color(0.9607843, 0.30980393, 0.30980393, 1)
+obstructed_color = Color(1, 0.5294118, 0.4, 1)
+gear_clear_color = Color(0.3647059, 0.54509807, 0.7019608, 1)
+gear_obstructed_color = Color(0.9607843, 0.30980393, 0.30980393, 1)
 
 [node name="GearVisual" parent="." unique_id=16609391 instance=ExtResource("3_mhavr")]
 
