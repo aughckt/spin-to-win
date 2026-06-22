@@ -91,7 +91,7 @@ func start_wave() -> void:
 	if current_wave_index >= current_wave_list.size():
 		return
 	print("%s: Wave %s started!" % [name, current_wave_index])
-	TrooperSpawner.INST.set_waves(current_wave_list.slice(current_wave_index, current_wave_index + 2))
+	TrooperSpawner.INST.set_waves(current_wave_list.slice(current_wave_index, current_wave_index + current_level.lane_amount))
 	wave_started.emit()
 
 

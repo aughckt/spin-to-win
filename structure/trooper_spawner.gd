@@ -58,7 +58,6 @@ func pool_trooper(trooper: Trooper) -> void:
 
 
 func set_waves(curves: Array[Curve]) -> void:
-	print(curves.size())
 	current_waves = curves
 	if not current_waves.is_empty():
 		spawn_timers = []

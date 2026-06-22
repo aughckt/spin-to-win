@@ -12,7 +12,7 @@ _limits = [0.0, 3.0, 0.0, 30.0]
 _data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(7.9710155, 1.7191012), 0.0, 0.0, 0, 0, Vector2(15.652174, 0.9775281), 0.0, 0.0, 0, 0, Vector2(21.014494, 1.0786517), 0.0, 0.0, 0, 0, Vector2(26.231886, 3), 0.0, 0.0, 0, 0, Vector2(30, 3), 0.0, 0.0, 0, 0]
 point_count = 6
 
-[node name="TemplateLevel" unique_id=251983101 instance=ExtResource("1_5bju1")]
+[node name="LevelGunturn" unique_id=251983101 instance=ExtResource("1_5bju1")]
 wave_list = Array[Curve]([SubResource("Curve_kbjsr"), SubResource("Curve_5bju1")])
 
 [node name="Point1" parent="SpawnPoints" parent_id_path=PackedInt32Array(1156764314) index="0" unique_id=1971849226]
