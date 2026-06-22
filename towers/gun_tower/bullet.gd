@@ -34,13 +34,9 @@ func _on_area_entered(area: Area2D) -> void:
 	
 	if area is Trooper:
 		(area as Trooper).take_damage(damage)
-	
 	remove()
 
 func _on_body_entered(_body: Node2D) -> void:
-	if area.get_parent() == GeneralPool:
-		return
-	
 	remove()
 
 

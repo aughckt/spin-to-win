@@ -7,7 +7,6 @@ static var INST: LevelManager
 var level_array: Array[PackedScene] = [
 	preload("res://structure/levels/level_gunturn.tscn"),
 	preload("res://structure/levels/level_aoe_intro.tscn"),
-	preload("res://structure/levels/level_gunturn.tscn"),
 	preload("res://structure/levels/level_multilane.tscn")]
 var current_level: Level = null
 var current_hp: int = 20

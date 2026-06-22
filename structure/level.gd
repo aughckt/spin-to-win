@@ -14,19 +14,26 @@ extends Node2D
 func _ready() -> void:
 	spawn_marker()
 	LevelManager.INST.wave_finished.connect(_on_wave_finished)
+	assert(wave_list.size() % lane_amount == 0)
+
 
 func spawn_marker() -> void:
-	var marker := WaveMarker.create()
-	marker.reparent.call_deferred(spawn_point)
-	marker.end_reached.connect(_on_marker_end_reached)
-	marker.global_position = spawn_point.global_position
-	marker.target_pos = marker.global_position
+	var point_array: Array[Node] = spawn_points.get_children()
+	for index: int in range(lane_amount):
+		var child: Node = point_array[index]
+		if not child is Node2D:
+			continue
+		var spawn_point: Node2D = child as Node2D
+		var marker := WaveMarker.create()
+		marker.reparent.call_deferred(spawn_point)
+		marker.end_reached.connect(_on_marker_end_reached)
+		marker.global_position = spawn_point.global_position
+		marker.target_pos = marker.global_position
 
-func _ready() -> void:
-	assert(wave_list.size() % lane_amount == 0)
 
 func set_build_phase(value: bool) -> void:
 	env.is_build_phase = value
+
 
 func _on_marker_end_reached(marker: WaveMarker) -> void:
 	marker.end_reached.disconnect(_on_marker_end_reached)
@@ -34,6 +41,7 @@ func _on_marker_end_reached(marker: WaveMarker) -> void:
 	
 	if LevelManager.INST.is_build_phase:
 		spawn_marker()
+
 
 func _on_wave_finished() -> void:
 	spawn_marker()
