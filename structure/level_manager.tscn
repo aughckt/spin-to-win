@@ -6,5 +6,89 @@
 [node name="LevelManager" type="Node2D" unique_id=1089132439]
 script = ExtResource("1_x4ns8")
 
+[node name="Timers" type="Node" parent="." unique_id=94644071]
+
+[node name="LevelLostTimer" type="Timer" parent="Timers" unique_id=1153024502]
+unique_name_in_owner = true
+wait_time = 2.0
+one_shot = true
+
+[node name="LevelWonTimer" type="Timer" parent="Timers" unique_id=1385202632]
+unique_name_in_owner = true
+wait_time = 2.0
+one_shot = true
+
+[node name="PhaseTransitionTimer" type="Timer" parent="Timers" unique_id=49423221]
+unique_name_in_owner = true
+wait_time = 2.0
+one_shot = true
+
 [node name="TrooperSpawner" type="Node2D" parent="." unique_id=1178417419]
 script = ExtResource("2_yi5s1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=594104111]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=108229389]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="WavePhaseLabel" type="Label" parent="CanvasLayer/Control" unique_id=597914961]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 54
+text = "Wave phase start!"
+
+[node name="BuildPhaseLabel" type="Label" parent="CanvasLayer/Control" unique_id=1685314872]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 54
+text = "Build phase start!"
+
+[node name="LevelWonLabel" type="Label" parent="CanvasLayer/Control" unique_id=2096423026]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 54
+text = "Level won!"
+
+[node name="LevelLostLabel" type="Label" parent="CanvasLayer/Control" unique_id=1792928686]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 54
+text = "Level Lost!"

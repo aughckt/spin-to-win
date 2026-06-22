@@ -13,6 +13,16 @@ var is_build_phase: bool = true
 var current_wave_list: Array[Curve]
 var current_wave_index: int = 0
 
+@onready var level_won_timer: Timer = %LevelWonTimer
+@onready var level_lost_timer: Timer = %LevelLostTimer
+@onready var level_lost_banner: Control = %LevelLostLabel
+@onready var level_won_banner: Control = %LevelWonLabel
+@onready var phase_transition_timer: Timer = %PhaseTransitionTimer
+@onready var wave_banner: Control = %WavePhaseLabel
+@onready var build_banner: Control = %BuildPhaseLabel
+
+
+
 signal wave_finished
 
 func _ready() -> void:
@@ -21,6 +31,10 @@ func _ready() -> void:
 	
 	if current_level == null:
 		load_level()
+	
+	phase_transition_timer.timeout.connect(_on_phase_transition_timeout)
+	level_won_timer.timeout.connect(_on_won_timer_timeout)
+	level_lost_timer.timeout.connect(_on_lost_timer_timeout)
 
 
 func _input(event: InputEvent) -> void:
@@ -34,19 +48,23 @@ func _input(event: InputEvent) -> void:
 
 func win_level() -> void:
 	print("%s: Level %s won" % [name, current_level_index])
-	current_level.queue_free()
 	current_level_index += 1
-	load_level()
+	level_won_timer.start()
+	level_won_banner.visible = true
+	
 
 
 func lose_level() -> void:
 	TrooperSpawner.INST.set_wave(null)
 	print("%s: Level %s lost" % [name, current_level_index])
-	current_level.queue_free()
-	load_level()
+	level_lost_timer.start()
+	level_lost_banner.visible = true
 
 
 func load_level() -> void:
+	if current_level:
+		current_level.queue_free()
+	
 	if Env.INST:
 		Env.INST.delete()
 	
@@ -64,6 +82,8 @@ func load_level() -> void:
 
 func start_wave() -> void:
 	set_build_phase(false)
+	if current_wave_index >= current_wave_list.size():
+		return
 	print("%s: Wave %s started!" % [name, current_wave_index])
 	TrooperSpawner.INST.set_wave(current_wave_list[current_wave_index])
 
@@ -82,6 +102,9 @@ func end_wave() -> void:
 func set_build_phase(value: bool) -> void:
 	is_build_phase = value
 	TrooperSpawner.INST.clear_troopers()
+	wave_banner.visible = not value
+	build_banner.visible = value
+	phase_transition_timer.start()
 	if current_level:
 		current_level.set_build_phase(value)
 
@@ -93,3 +116,18 @@ func take_damage(amount: int) -> void:
 	print("%s: hp is now %s" % [name, current_hp])
 	if current_hp <= 0:
 		lose_level()
+
+
+func _on_phase_transition_timeout() -> void:
+	wave_banner.visible = false
+	build_banner.visible = false
+
+
+func _on_lost_timer_timeout() -> void:
+	load_level()
+	level_lost_banner.visible = false
+
+
+func _on_won_timer_timeout() -> void:
+	load_level()
+	level_won_banner.visible = false

@@ -179,7 +179,7 @@ physics_layer_0/collision_layer = 8
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_7uceq")
 
-[node name="Environment" type="Node2D" unique_id=123182581 node_paths=PackedStringArray("terrainmap", "tilemap", "gearmap", "gears", "underground_gears", "bullets", "towers", "troopers", "coords_label", "budget_label", "hud", "build_visual")]
+[node name="Environment" type="Node2D" unique_id=123182581 node_paths=PackedStringArray("terrainmap", "tilemap", "gearmap", "gears", "underground_gears", "bullets", "towers", "troopers", "coords_label", "hud", "build_visual")]
 script = ExtResource("1_wjl7u")
 terrainmap = NodePath("Terrain")
 tilemap = NodePath("ArrowTiles")
@@ -190,7 +190,6 @@ bullets = NodePath("Bullets")
 towers = NodePath("Towers")
 troopers = NodePath("Troopers")
 coords_label = NodePath("DebugHUD/CoordsLabel")
-budget_label = NodePath("DebugHUD/BudgetLabel")
 hud = NodePath("HUD/HUD")
 build_visual = NodePath("BuildVisual")
 
@@ -226,11 +225,6 @@ y_sort_enabled = true
 [node name="CoordsLabel" type="Label" parent="DebugHUD" unique_id=1591894278]
 offset_right = 40.0
 offset_bottom = 23.0
-
-[node name="BudgetLabel" type="Label" parent="DebugHUD" unique_id=1520008432]
-offset_top = 128.0
-offset_right = 40.0
-offset_bottom = 151.0
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1083079759]
 

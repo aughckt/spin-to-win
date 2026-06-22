@@ -18,7 +18,6 @@ func shoot() -> void:
 	var bullet: Bullet = Bullet.create()
 	bullet.reparent.call_deferred(Env.INST.bullets)
 	bullet.dir = (Vector2.RIGHT).rotated(-gun_rotation)
-	print(bullet.dir)
 	bullet.global_position = global_position
 	bullet.damage = data.damage
 	
