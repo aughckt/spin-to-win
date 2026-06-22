@@ -13,7 +13,6 @@ static var INST: Env
 @export var towers: Node2D
 @export var troopers: Node2D
 @export var coords_label: Label
-@export var budget_label: Label
 @export var budget: int = 20
 
 @export var hud: Hud
@@ -427,7 +426,6 @@ func is_position_powered(pos: Vector2) -> bool:
 func spend(credits: int) -> void:
 	budget -= credits
 	budget = max(budget, 0)
-	budget_label.text = str(budget)
 
 func place_tower(tile: Vector2i, test_only: bool = false) -> String:
 	match gear_kind_at(tile):
