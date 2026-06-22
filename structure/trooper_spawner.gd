@@ -38,6 +38,7 @@ func spawn_trooper() -> void:
 	trooper.reparent.call_deferred(Env.INST.troopers)
 	trooper.global_position = spawn_point
 	trooper.target_pos = trooper.global_position 
+	trooper.hp = Trooper.MAX_HP
 	trooper.setup()
 
 
