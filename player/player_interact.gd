@@ -22,7 +22,7 @@ func _input(event: InputEvent) -> void:
 			for gear: Vector2i in ori_gears:
 				var distance: float = (player.global_position - Vector2(gear)*64).length()
 				if distance < min_distance:
-					min_distance = min_distance
+					min_distance = distance
 					closest_gear = gear
 			current_ori_gear = closest_gear
 			Env.INST.set_ori_on(current_ori_gear)

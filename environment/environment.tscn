@@ -37,14 +37,13 @@ texture = ExtResource("5_vh8kr")
 1:0/0 = 0
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:0/0 = 0
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0/custom_data_0 = 2
 3:0/0 = 0
-3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:0/0 = 0
-4:0/0/custom_data_0 = 2
 5:0/0 = 0
 6:0/0 = 0
 7:0/0 = 0
+7:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:1/0 = 0
 0:1/0/terrain_set = 0
 0:1/0/terrain = 0
@@ -156,6 +155,8 @@ texture = ExtResource("5_vh8kr")
 4:3/0/terrains_peering_bit/left_side = 0
 4:3/0/terrains_peering_bit/top_left_corner = 0
 4:3/0/terrains_peering_bit/top_side = 0
+5:2/0 = 0
+6:2/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_klfgw"]
 physics_layer_0/collision_layer = 1

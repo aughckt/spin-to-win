@@ -7,8 +7,8 @@ static var INST: LevelManager
 var level_array: Array[PackedScene] = [
 	preload("res://structure/levels/level_gunturn.tscn"),
 	preload("res://structure/levels/level_aoe_intro.tscn"),
-	preload("res://structure/levels/template_level.tscn"),
-	preload("res://structure/levels/level_snake.tscn")]
+	preload("res://structure/levels/level_gunturn.tscn"),
+	preload("res://structure/levels/level_multilane.tscn")]
 var current_level: Level = null
 var current_hp: int = 20
 var is_build_phase: bool = true
@@ -39,13 +39,12 @@ func _ready() -> void:
 	level_lost_timer.timeout.connect(_on_lost_timer_timeout)
 
 
-#func _input(event: InputEvent) -> void:
-	### Debug. Press space to start or end a wave
-	#if event.is_action_pressed("toggle_wave"):
-		#if is_build_phase:
-			#start_wave()
-		#else:
-			#end_wave()
+func _input(event: InputEvent) -> void:
+	## Debug. Press space to skip level
+	if event.is_action_pressed("toggle_wave"):
+		current_level_index += 1
+		load_level()
+		set_build_phase(true)
 
 
 func win_level() -> void:
@@ -57,7 +56,7 @@ func win_level() -> void:
 
 
 func lose_level() -> void:
-	TrooperSpawner.INST.set_wave(null)
+	TrooperSpawner.INST.set_waves([])
 	print("%s: Level %s lost" % [name, current_level_index])
 	level_lost_timer.start()
 	level_lost_banner.visible = true
@@ -79,7 +78,12 @@ func load_level() -> void:
 	current_hp = current_level.level_hp
 	current_wave_list = current_level.wave_list
 	current_wave_index = 0
-	TrooperSpawner.INST.spawn_point = current_level.get_spawn_point()
+	var spawn_children: Array[Node] = current_level.spawn_points.get_children() as Array[Node]
+	var spawn_points: Array[Node2D] = []
+	for child: Node in spawn_children:
+		if child is Node2D:
+			spawn_points.append(child as Node2D)
+	TrooperSpawner.INST.spawn_points = spawn_points
 
 
 func start_wave() -> void:
@@ -87,15 +91,15 @@ func start_wave() -> void:
 	if current_wave_index >= current_wave_list.size():
 		return
 	print("%s: Wave %s started!" % [name, current_wave_index])
-	TrooperSpawner.INST.set_wave(current_wave_list[current_wave_index])
+	TrooperSpawner.INST.set_waves(current_wave_list.slice(current_wave_index, current_wave_index + current_level.lane_amount))
 	wave_started.emit()
 
 
 func end_wave() -> void:
 	print("%s: Wave %s ended!" % [name, current_wave_index])
 	set_build_phase(true)
-	current_wave_index += 1
-	TrooperSpawner.INST.set_wave(null)
+	current_wave_index += current_level.lane_amount
+	TrooperSpawner.INST.set_waves([])
 	wave_finished.emit()
 	if current_wave_index >= current_wave_list.size():
 		win_level()

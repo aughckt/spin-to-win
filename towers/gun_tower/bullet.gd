@@ -38,6 +38,9 @@ func _on_area_entered(area: Area2D) -> void:
 	remove()
 
 func _on_body_entered(_body: Node2D) -> void:
+	if area.get_parent() == GeneralPool:
+		return
+	
 	remove()
 
 
@@ -46,7 +49,6 @@ static func create() -> Bullet:
 	
 	bullet.time_left = life_time
 	bullet.dir = Vector2.ZERO
-	
 	return bullet
 
 func remove() -> void:
