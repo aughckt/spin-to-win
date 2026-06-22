@@ -18,6 +18,9 @@ var tower: GenericTower
 func _ready() -> void:
 	child.process_mode = Node.PROCESS_MODE_DISABLED
 	gear_visual.anim.material = mat.duplicate()
+	
+	LevelManager.INST.wave_started.connect(hide)
+	LevelManager.INST.wave_finished.connect(show)
 
 func set_data(tdata: TowerData) -> void:
 	for n in child.get_children():

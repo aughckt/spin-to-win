@@ -5,6 +5,7 @@ static var INST: LevelManager
 
 @export var current_level_index: int = 0
 var level_array: Array[PackedScene] = [
+	preload("res://structure/levels/level_aoe_intro.tscn"),
 	preload("res://structure/levels/template_level.tscn"),
 	preload("res://structure/levels/level_snake.tscn")]
 var current_level: Level = null
@@ -13,6 +14,7 @@ var is_build_phase: bool = true
 var current_wave_list: Array[Curve]
 var current_wave_index: int = 0
 
+signal wave_started
 signal wave_finished
 
 func _ready() -> void:
@@ -23,13 +25,13 @@ func _ready() -> void:
 		load_level()
 
 
-func _input(event: InputEvent) -> void:
-	## Debug. Press space to start or end a wave
-	if event.is_action_pressed("toggle_wave"):
-		if is_build_phase:
-			start_wave()
-		else:
-			end_wave()
+#func _input(event: InputEvent) -> void:
+	### Debug. Press space to start or end a wave
+	#if event.is_action_pressed("toggle_wave"):
+		#if is_build_phase:
+			#start_wave()
+		#else:
+			#end_wave()
 
 
 func win_level() -> void:
@@ -66,6 +68,7 @@ func start_wave() -> void:
 	set_build_phase(false)
 	print("%s: Wave %s started!" % [name, current_wave_index])
 	TrooperSpawner.INST.set_wave(current_wave_list[current_wave_index])
+	wave_started.emit()
 
 
 func end_wave() -> void:

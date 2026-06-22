@@ -132,12 +132,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			else:
 				remove_gear(tile) #check for empty happens in remove_gear
 		
-		MouseButton.MOUSE_BUTTON_MIDDLE:
-			var gset: GearSet = tile_to_gear_set.get(tile)
-			if gset != null:
-				print("Gear power: %s" % is_gear_set_powered(gset))
-			elif ori_gear_state.has(tile):
-				toggle_ori(tile)
+		#MouseButton.MOUSE_BUTTON_MIDDLE:
+			#var gset: GearSet = tile_to_gear_set.get(tile)
+			#if gset != null:
+				#print("Gear power: %s" % is_gear_set_powered(gset))
+			#elif ori_gear_state.has(tile):
+				#toggle_ori(tile)
 
 ##returns the new target position in global or the given position if its an end tile
 func move_target_from_global(global_pos: Vector2) -> Vector2:

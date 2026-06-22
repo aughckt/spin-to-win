@@ -235,6 +235,7 @@ offset_bottom = 151.0
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1083079759]
 
 [node name="HUD" parent="HUD" unique_id=1114338 instance=ExtResource("6_ehb6n")]
+visible = false
 towers = Array[ExtResource("3_ehb6n")]([ExtResource("6_vh8kr"), ExtResource("7_nmo3v")])
 
 [node name="BuildVisual" parent="." unique_id=371529839 instance=ExtResource("9_6qvha")]

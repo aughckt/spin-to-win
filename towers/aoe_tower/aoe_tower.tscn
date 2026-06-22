@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://gi3ahjl6xcn5" path="res://towers/aoe_tower/Megaphone.png" id="4_pvsoq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_klfgw"]
-radius = 115.01739
+radius = 140.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_igpsn"]
 atlas = ExtResource("4_pvsoq")
@@ -64,6 +64,7 @@ monitorable = false
 shape = SubResource("CircleShape2D_klfgw")
 
 [node name="AreaIcon" type="Sprite2D" parent="." index="2" unique_id=2131660126]
+visible = false
 modulate = Color(1, 1, 1, 0.09803922)
 scale = Vector2(1.8320575, 1.8320575)
 texture = ExtResource("3_0draq")

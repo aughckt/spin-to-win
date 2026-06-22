@@ -14,6 +14,7 @@ extends Control
 signal data_selected (data: TowerData)
 
 func _ready() -> void:
+	show()
 	LevelManager.INST.wave_finished.connect(_on_wave_finished)
 	start_wave_button.pressed.connect(_on_start_wave_button_pressed)
 	

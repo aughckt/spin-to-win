@@ -1,7 +1,6 @@
 class_name AOETower
 extends GenericTower
 
-var aoe_damage: int = 20
 @onready var aoe_area: Area2D = %Area2D
 @onready var sprite: Sprite2D = $AreaIcon
 @onready var megaphone_sprite: AnimatedSprite2D = %AnimatedMegaphone
@@ -17,5 +16,6 @@ func shoot() -> void:
 	var troopers: Array[Area2D] = aoe_area.get_overlapping_areas()
 	for area: Area2D in troopers:
 		if area is Trooper:
+			print("AOE DAMAGE")
 			var trooper: Trooper = area
-			trooper.take_damage(aoe_damage)
+			trooper.take_damage(data.damage)
