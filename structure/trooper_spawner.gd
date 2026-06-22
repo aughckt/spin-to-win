@@ -21,7 +21,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if current_waves.is_empty(): 
 		return
-	
 	elapsed_wave_time += delta
 	for timer: float in spawn_timers:
 		timer -= delta
@@ -29,9 +28,11 @@ func _physics_process(delta: float) -> void:
 	var wave_domains: Array[float] = []
 	for wave in current_waves:
 		wave_domains.append(wave.max_domain)
-	if elapsed_wave_time > wave_domains.max() and Env.INST.troopers.get_children().is_empty():
-		LevelManager.INST.end_wave()
+	if elapsed_wave_time > wave_domains.max():
+		if Env.INST.troopers.get_children().is_empty():
+			LevelManager.INST.end_wave()
 		return
+		
 	for i: int in len(spawn_timers):
 		spawn_timers[i] -= delta
 		if spawn_timers[i] <= 0:
