@@ -9,8 +9,8 @@ var bullet_scene: PackedScene = preload("res://towers/gun_tower/bullet.tscn")
 var gun_rotation: float = PI/2
 
 
-func _ready() -> void:
-	rotate_area.input_event.connect(_on_rotate_area_input)
+#func _ready() -> void:
+	#rotate_area.input_event.connect(_on_rotate_area_input)
 
 
 func shoot() -> void:
@@ -25,20 +25,18 @@ func shoot() -> void:
 	SoundBus.play_sound(shoot_sound)
 
 
-func _on_rotate_area_input(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if event.is_action_pressed("scroll_up"):
-		rotate_gun(-PI/2)
-	elif event.is_action_pressed("scroll_down"):
-		rotate_gun(PI/2)
+#func _on_rotate_area_input(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	#if event.is_action_pressed("scroll_up"):
+		#rotate_gun(-PI/2)
+	#elif event.is_action_pressed("scroll_down"):
+		#rotate_gun(PI/2)
 
-
-func rotate_gun(amount: float) -> void:
-	shooter_sprite.stop()
-	gun_rotation = wrapf(gun_rotation + amount + PI, 0.0, TAU) - PI
+func set_gun_rotation(rad: float) -> void:
+	gun_rotation = wrapf(rad + PI, 0.0, TAU) - PI
 	if gun_rotation == -PI:
 		gun_rotation = PI
 	
-	print(gun_rotation)
+	shooter_sprite.stop()
 	
 	if gun_rotation == PI:
 		shooter_sprite.animation = "shoot_left"
@@ -48,3 +46,6 @@ func rotate_gun(amount: float) -> void:
 		shooter_sprite.animation = "shoot_right"
 	elif gun_rotation == -PI/2:
 		shooter_sprite.animation = "shoot_down"
+
+func rotate_gun(amount: float) -> void:
+	set_gun_rotation(gun_rotation + amount)

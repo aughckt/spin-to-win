@@ -36,6 +36,8 @@ var tile_to_tower: Dictionary[Vector2i, Node2D] = {}
 ##true if powered
 var ori_gear_state: Dictionary[Vector2i, bool] = {}
 
+var tower_rotation: float = 0
+
 const directions: Array[Vector2i] = [Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT, Vector2i.UP]
 const end_tile_type := 4
 
@@ -161,12 +163,6 @@ func place_gear(tile: Vector2i, test_only: bool = false) -> String:
 		if gearmap.get_cell_source_id(tile) != -1:
 			return "Tile is already occupied"
 		
-		#var terrain_data := terrainmap.get_cell_tile_data(tile)
-		#if terrain_data != null:
-			#var perms := get_perms(tile) #terrain_data.get_custom_data(BuildPermsName) as BuildPerms
-			#if perms == BuildPerms.Nothing:
-				#return "Cannot build on this tile"
-		
 		if get_perms(tile) == BuildPerms.Nothing:
 			return "Cannot build on this tile"
 		
@@ -211,7 +207,7 @@ func place_gear(tile: Vector2i, test_only: bool = false) -> String:
 		gearmap.set_cell(tile, gearmap.tile_set.get_source_id(0), ATLAS_COORDS[BASIC_GEAR])
 		var visual := GearVisual.create_basic()
 		visual.global_position = gearmap.to_global(gearmap.map_to_local(tile))
-		var build_perms := get_perms(tile) #terrainmap.get_cell_tile_data(tile).get_custom_data(BuildPermsName) as BuildPerms
+		var build_perms := get_perms(tile)
 		visual.reparent.call_deferred(underground_gears if build_perms == BuildPerms.Gears else gears)
 		tile_to_visual[tile] = visual
 		
@@ -450,7 +446,6 @@ func place_tower(tile: Vector2i, test_only: bool = false) -> String:
 	if tower_data.cost > budget:
 		return "This isn't a charity"
 	
-	#var perms := terrainmap.get_cell_tile_data(tile).get_custom_data(BuildPermsName) as BuildPerms
 	if get_perms(tile) == BuildPerms.Gears:
 		return "Cannot build a tower on this tile"
 	
@@ -463,6 +458,9 @@ func place_tower(tile: Vector2i, test_only: bool = false) -> String:
 	towers.add_child(tower)
 	tower.global_position = gearmap.to_global(gearmap.map_to_local(tile))
 	tower.data = tower_data
+	
+	if tower is GunTower:
+		(tower as GunTower).set_gun_rotation(tower_rotation)
 	
 	tile_to_tower[tile] = tower
 	return ""
