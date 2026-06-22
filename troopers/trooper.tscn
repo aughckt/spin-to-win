@@ -165,7 +165,6 @@ script = ExtResource("1_mba6l")
 sprite = NodePath("AnimatedSprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=807592597]
-visible = false
 shape = SubResource("CircleShape2D_idurc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1506180497]

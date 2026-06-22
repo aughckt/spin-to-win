@@ -490,3 +490,19 @@ func _on_data_selected(data: TowerData) -> void:
 	
 	print("Selected tower %s" % ("none" if tower_data == null else tower_data.name))
 	build_visual.set_data(tower_data)
+
+
+const INITIAL_NOSE_VEL: Vector2 = Vector2(30, 90)
+const SPREAD_DEGRESS: float = 15
+@export var hud_layer: CanvasLayer
+func spawn_money(amount: int, at: Vector2) -> void:
+	for _i in range(amount):
+		var nose := Nose.create()
+		nose.reparent.call_deferred(hud_layer)
+		nose.global_position = at
+		nose.target_point = hud.nose_target.global_position
+		
+		var speed := randf_range(INITIAL_NOSE_VEL.x, INITIAL_NOSE_VEL.y)
+		var angle := deg_to_rad(randf_range(-SPREAD_DEGRESS, SPREAD_DEGRESS))
+		
+		nose.vel = (-nose.global_position.direction_to(nose.target_point)).rotated(angle) * speed

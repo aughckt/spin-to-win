@@ -5,7 +5,6 @@ const speed: float = 900
 const life_time: float = 5.0
 var time_left: float
 var damage: int
-var can_damage: bool = false
 
 var dir: Vector2
  
@@ -30,7 +29,7 @@ static func _get_pool() -> Pool:
 	return pool
 
 func _on_area_entered(area: Area2D) -> void:
-	if not can_damage:
+	if area.get_parent() == GeneralPool:
 		return
 	
 	if area is Trooper:
@@ -39,7 +38,7 @@ func _on_area_entered(area: Area2D) -> void:
 	remove()
 
 func _on_body_entered(_body: Node2D) -> void:
-	if not can_damage:
+	if area.get_parent() == GeneralPool:
 		return
 	
 	remove()
@@ -50,10 +49,7 @@ static func create() -> Bullet:
 	
 	bullet.time_left = life_time
 	bullet.dir = Vector2.ZERO
-	bullet.can_damage = true
-	
 	return bullet
 
 func remove() -> void:
-	can_damage = false
 	_get_pool().pool(self)

@@ -12,6 +12,8 @@ const MAX_HP: int = 100
 var hp: int = MAX_HP
 @export var sprite: AnimatedSprite2D
 
+const BOUNTY: int = 1
+
 func _ready() -> void:
 	target_pos = global_position
 	walk_normal = Vector2.ZERO
@@ -75,7 +77,7 @@ func take_damage(amount: int) -> void:
 	
 	
 	if hp <= 0:
-		Env.INST.budget += 1
+		Env.INST.spawn_money(BOUNTY, global_position)
 		pool_self()
 
 
