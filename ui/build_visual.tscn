@@ -9,6 +9,7 @@ shader = ExtResource("2_5dvg5")
 shader_parameter/color = Color(0, 0, 0, 1)
 
 [node name="BuildVisual" type="Node2D" unique_id=371529839 node_paths=PackedStringArray("child", "gear_visual")]
+z_index = 20
 script = ExtResource("1_ecnu7")
 child = NodePath("Child")
 mat = SubResource("ShaderMaterial_ecnu7")
