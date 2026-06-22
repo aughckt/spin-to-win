@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://bvmp6r3hgihgj" path="res://towers/tower_data/gun_tower_data.tres" id="6_vh8kr"]
 [ext_resource type="Resource" uid="uid://cu1kljx46m1sk" path="res://towers/tower_data/aoe_tower_data.tres" id="7_nmo3v"]
 [ext_resource type="PackedScene" uid="uid://ds63alic0g0b8" path="res://ui/build_visual.tscn" id="9_6qvha"]
+[ext_resource type="PackedScene" uid="uid://df7g5g3wu15n1" path="res://player/player.tscn" id="10_te1ty"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7b2gm"]
 texture = ExtResource("2_7uceq")
@@ -180,6 +181,7 @@ physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_7uceq")
 
 [node name="Environment" type="Node2D" unique_id=123182581 node_paths=PackedStringArray("terrainmap", "tilemap", "gearmap", "gears", "underground_gears", "bullets", "towers", "troopers", "coords_label", "hud", "build_visual")]
+y_sort_enabled = true
 script = ExtResource("1_wjl7u")
 terrainmap = NodePath("Terrain")
 tilemap = NodePath("ArrowTiles")
@@ -204,21 +206,29 @@ scale = Vector2(4, 4)
 tile_set = SubResource("TileSet_klfgw")
 
 [node name="FadeTiles" type="TileMapLayer" parent="." unique_id=817108041]
+z_index = 5
 scale = Vector2(4, 4)
 tile_set = SubResource("TileSet_klfgw")
 
 [node name="GearMap" type="TileMapLayer" parent="." unique_id=916456414]
+z_index = 10
 tile_set = SubResource("TileSet_fbxa2")
 
 [node name="Gears" type="Node2D" parent="." unique_id=2031837137]
+z_index = 10
+y_sort_enabled = true
 
 [node name="Bullets" type="Node2D" parent="." unique_id=243162880]
+z_index = 10
+y_sort_enabled = true
 
 [node name="Troopers" type="Node2D" parent="." unique_id=861065965]
-z_index = 20
+z_index = 10
 y_sort_enabled = true
 
 [node name="Towers" type="Node2D" parent="." unique_id=1601212248]
+z_index = 10
+y_sort_enabled = true
 
 [node name="DebugHUD" type="CanvasLayer" parent="." unique_id=1436650702]
 
@@ -232,3 +242,8 @@ offset_bottom = 23.0
 towers = Array[ExtResource("3_ehb6n")]([ExtResource("6_vh8kr"), ExtResource("7_nmo3v")])
 
 [node name="BuildVisual" parent="." unique_id=371529839 instance=ExtResource("9_6qvha")]
+
+[node name="Player" parent="." unique_id=1382910038 instance=ExtResource("10_te1ty")]
+z_index = 10
+y_sort_enabled = true
+position = Vector2(160, 96)
