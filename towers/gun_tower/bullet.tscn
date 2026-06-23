@@ -1,20 +1,20 @@
 [gd_scene format=3 uid="uid://clfhqev8mp6xc"]
 
-[ext_resource type="Texture2D" uid="uid://btm4vlsmnxvyw" path="res://icon.svg" id="1_j3grx"]
 [ext_resource type="Script" uid="uid://fj7l6fedtag4" path="res://towers/gun_tower/bullet.gd" id="1_wwakr"]
+[ext_resource type="Texture2D" uid="uid://042qp425i7v" path="res://ui/tie.png" id="2_nnk04"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_idurc"]
-radius = 24.092964
+radius = 11.401754
 
-[node name="Bullet" type="Area2D" unique_id=1233644382]
+[node name="Bullet" type="Area2D" unique_id=1233644382 node_paths=PackedStringArray("sprite")]
 collision_layer = 0
 collision_mask = 3
 script = ExtResource("1_wwakr")
+sprite = NodePath("Icon")
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=1605290369]
-modulate = Color(0, 0, 0, 1)
-scale = Vector2(0.3797398, 0.3797398)
-texture = ExtResource("1_j3grx")
+scale = Vector2(4, 4)
+texture = ExtResource("2_nnk04")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=312063557]
 shape = SubResource("CircleShape2D_idurc")

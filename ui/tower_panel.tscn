@@ -3,18 +3,14 @@
 [ext_resource type="Script" uid="uid://0m2njoouexwx" path="res://ui/tower_panel.gd" id="1_4fi7c"]
 [ext_resource type="Texture2D" uid="uid://df8fpi67rq44p" path="res://environment/gears/gear.png" id="1_i6c17"]
 [ext_resource type="Theme" uid="uid://ofehi657nfwc" path="res://ui/theme.tres" id="1_p4yss"]
+[ext_resource type="Texture2D" uid="uid://dcokr0aj4yibe" path="res://ui/ui_test.png" id="2_3fj1x"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p4yss"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(2.7675182e-07, 0.38560495, 0.24480677, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rynoa"]
+texture = ExtResource("2_3fj1x")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4fi7c"]
 content_margin_left = 4.0
@@ -65,7 +61,7 @@ theme_override_constants/margin_bottom = 15
 [node name="Button" type="Button" parent="PanelContainer/MarginContainer" unique_id=1770499033]
 layout_mode = 2
 focus_behavior_recursive = 1
-theme_override_styles/normal = SubResource("StyleBoxFlat_p4yss")
+theme_override_styles/normal = SubResource("StyleBoxTexture_rynoa")
 theme_override_styles/hover = SubResource("StyleBoxFlat_4fi7c")
 
 [node name="DisplayElements" type="MarginContainer" parent="PanelContainer/MarginContainer" unique_id=2127666886]

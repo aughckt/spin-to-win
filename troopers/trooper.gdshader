@@ -7,8 +7,31 @@ uniform float y_threshold: hint_range(0.0, 1.0, 0.001);
 
 uniform vec3 grey: source_color;
 
+uniform float border: hint_range(0.0, 1.0, 0.1);
+
+vec4 get_col(vec2 uv, vec2 pixel_size) {
+	//if (int(trunc(pixel_size.y * 18.)) == 0) {
+	//	return vec4(0., 0., 1., 1.);
+	//}
+	
+	vec2 pixel = uv * (1. / pixel_size);
+	float border_y = border * (1. / (1./18.));//pixel_size.x);
+	
+	vec4 col = vec4(0.);
+	
+	if (int(pixel.y) == 9) {//int(border_y)) {
+		col.r = 1.;
+		col.a = 1.;
+	}
+	
+	return col;
+}
+
 void fragment() {
 	vec3 col = COLOR.rgb;
+	
+	
+	
 	
 	//vec3 evil = vec3(1) - col;
 	//col -= evil * progress * strength;
@@ -40,5 +63,8 @@ void fragment() {
 		COLOR.a = 1.;
 	}
 	
+	//col = get_col(UV, TEXTURE_PIXEL_SIZE);
+	
 	COLOR.rgb = col;
+	//COLOR = get_col(UV, TEXTURE_PIXEL_SIZE);
 }

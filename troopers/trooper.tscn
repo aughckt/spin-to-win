@@ -13,6 +13,7 @@ shader_parameter/progress = 0.0
 shader_parameter/strength = 0.0
 shader_parameter/y_threshold = 0.3850000182875
 shader_parameter/grey = Color(0.12591079, 0.12591085, 0.12591082, 1)
+shader_parameter/border = 0.5000000074506
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hlcmw"]
 atlas = ExtResource("3_kbjsr")

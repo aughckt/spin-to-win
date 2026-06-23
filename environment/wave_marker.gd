@@ -8,9 +8,12 @@ extends Node2D
 #minimum distance towards target
 @export var min_dist_to_target: float = 0.1
 
+@export var particles: GPUParticles2D
+
 var target_pos: Vector2
 var walk_normal: Vector2
 
+var spawn_point: SpawnPoint
 signal end_reached(marker: WaveMarker)
 
 static var pool: Pool
@@ -19,7 +22,6 @@ const scene: PackedScene = preload("res://environment/wave_marker.tscn")
 func _ready() -> void:
 	target_pos = global_position
 	walk_normal = Vector2.ZERO
-
 
 func _physics_process(delta: float) -> void:
 	if not Env.INST:
@@ -55,6 +57,7 @@ static func create() -> WaveMarker:
 	var marker := _get_pool().get_inst() as WaveMarker
 	marker.target_pos = marker.global_position
 	marker.walk_normal = Vector2.ZERO
+	marker.spawn_point = null
 	return marker
 
 func remove() -> void:

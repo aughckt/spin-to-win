@@ -21,6 +21,14 @@ func shoot() -> void:
 	bullet.global_position = global_position
 	bullet.damage = data.damage
 	
+	var dir := bullet.dir as Vector2i #if you dont change it to ints you get -0, i love floating point precision errors
+	if abs(dir.x) > abs(dir.y):
+		bullet.sprite.rotation_degrees = 90
+		bullet.sprite.flip_v = dir.x < 0
+	else:
+		bullet.sprite.rotation_degrees = 0
+		bullet.sprite.flip_v = dir.y > 0
+	
 	SoundBus.play_sound(shoot_sound)
 
 

@@ -22,14 +22,17 @@ func _ready() -> void:
 	
 	spawn_marker()
 
+func spawn_marker_at(spawn_point: SpawnPoint) -> void:
+	var marker := WaveMarker.create()
+	marker.reparent.call_deferred(spawn_point)
+	marker.end_reached.connect(_on_marker_end_reached)
+	marker.global_position = spawn_point.global_position
+	marker.target_pos = marker.global_position
+	marker.spawn_point = spawn_point
 
 func spawn_marker() -> void:
 	for spawn_point: SpawnPoint in spawn_points:
-		var marker := WaveMarker.create()
-		marker.reparent.call_deferred(spawn_point)
-		marker.end_reached.connect(_on_marker_end_reached)
-		marker.global_position = spawn_point.global_position
-		marker.target_pos = marker.global_position
+		spawn_marker_at(spawn_point)
 
 
 func set_build_phase(value: bool) -> void:
@@ -41,7 +44,7 @@ func _on_marker_end_reached(marker: WaveMarker) -> void:
 	marker.remove()
 	
 	if LevelManager.INST.is_build_phase:
-		spawn_marker()
+		spawn_marker_at(marker.spawn_point)
 
 
 func _on_wave_finished() -> void:

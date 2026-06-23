@@ -70,6 +70,9 @@ func reach_end() -> void:
 	pool_self()
 
 func take_damage(amount: int) -> void:
+	if hp <= 0:
+		return
+	
 	hp -= amount
 	#youre not tweening it, right? this just shrinks the clown as it takes damage?
 	#sprite.scale = Vector2(hp/100.0,hp/100.0)

@@ -22,7 +22,6 @@ curve = SubResource("Curve_e7v72")
 particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 10.0
-inherit_velocity_ratio = 0.1
 direction = Vector3(0, -1, 0)
 spread = 20.0
 initial_velocity_min = 15.0
@@ -30,10 +29,11 @@ initial_velocity_max = 25.0
 gravity = Vector3(0, 0, 0)
 damping_curve = SubResource("CurveTexture_3c1eq")
 
-[node name="WaveMarker" type="Node2D" unique_id=944576945]
+[node name="WaveMarker" type="Node2D" unique_id=944576945 node_paths=PackedStringArray("particles")]
 z_index = 100
 script = ExtResource("1_e7v72")
 move_speed = 250.0
+particles = NodePath("GPUParticles2D")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1522238229]
 amount = 32

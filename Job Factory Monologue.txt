@@ -1,0 +1,43 @@
+Job Factory Monologue
+(everything is lower case without proper grammatical symbols to emphasize that they dont care at all)
+
+
+TUTORIALS:
+//movement/intro
+and youre the new guy
+basically youll have a bunch of lunatics coming down the lanes here and its your job to turn them into employables
+got it?
+also about the rc robot thing
+the best i have is that it adds another degree to any technically illegal activity you might have to do on behalf of the company
+tried to ask legal but they wouldnt tell me
+said it would "make me complicit"
+anyway you know wasd right?
+//maybe extra dialogue if the player stands still for a while but thats even past the polish stage
+//wait for movement to advance dialogue
+//gears/building
+ok good
+you see that orange gear thing over there?
+if you go next to it and hold space youll start spinning it
+we call these "origin gears"
+//unlock building now
+also you can use the mouse to place other stuff
+if you connect some gears to the origin theyll start spinning too
+(please understand, we have to deal with some less than bright hires in this department)
+//wait until the player gets a gear to spin
+//unlock ability to select towers from the menu
+now if you select a tower from the menu you can place it on any gear
+just be mindful, the gear needs to be spinning for the tower to be active
+//wait until a tower shoots
+ok i think thats everything
+press the start wave button when youre ready and we'll unleash the horde
+good luck
+
+
+
+JUMBO INTRO:
+btw I think theres some jumbos coming up next wave
+now this is not a very interesting job when you try to ignore the ethics of it but these guys still keep me up at night
+//i still dont know what they are
+is it a couple guys in a costume?
+is it some unholy clown fusion?
+could just be a big guy for all i know

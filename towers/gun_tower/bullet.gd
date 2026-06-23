@@ -11,6 +11,8 @@ var dir: Vector2
 static var pool: Pool
 const scene: PackedScene = preload("res://towers/gun_tower/bullet.tscn")
 
+@export var sprite: Sprite2D
+
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	body_entered.connect(_on_body_entered)

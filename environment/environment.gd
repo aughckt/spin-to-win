@@ -496,13 +496,14 @@ const INITIAL_NOSE_VEL: Vector2 = Vector2(30, 90)
 const SPREAD_DEGRESS: float = 15
 @export var hud_layer: CanvasLayer
 func spawn_money(amount: int, at: Vector2) -> void:
+	var target :=  hud.nose_target.global_position + hud.nose_target.size / 2
 	for _i in range(amount):
 		var nose := Nose.create()
 		nose.reparent.call_deferred(hud_layer)
 		nose.global_position = at
-		nose.target_point = hud.nose_target.global_position
+		nose.target_point = target
 		
 		var speed := randf_range(INITIAL_NOSE_VEL.x, INITIAL_NOSE_VEL.y)
 		var angle := deg_to_rad(randf_range(-SPREAD_DEGRESS, SPREAD_DEGRESS))
 		
-		nose.vel = (-nose.global_position.direction_to(nose.target_point)).rotated(angle) * speed
+		nose.vel = (-nose.global_position.direction_to(target)).rotated(angle) * speed
