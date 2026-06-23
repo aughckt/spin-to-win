@@ -2,13 +2,17 @@ class_name GunTower
 extends GenericTower
 
 const SHOOT_FORCE: float = 100.0
-var bullet_scene: PackedScene = preload("res://towers/gun_tower/bullet.tscn")
+@export var bullet_sprite: Texture2D
 @onready var shooter_sprite: AnimatedSprite2D = %AnimatedShooter
 @export var shoot_sound: Sound
 @onready var rotate_area: Area2D = %RotateArea
 var gun_rotation: float = PI/2
 
+
+
 @export var piercing: int = 0
+
+
 
 #func _ready() -> void:
 	#rotate_area.input_event.connect(_on_rotate_area_input)
@@ -22,6 +26,7 @@ func shoot() -> void:
 	bullet.global_position = global_position
 	bullet.damage = data.damage
 	bullet.piercing = piercing
+	bullet.sprite.texture = bullet_sprite
 	
 	var dir := bullet.dir as Vector2i #if you dont cast it to ints you get -0, i love floating point precision errors
 	if abs(dir.x) > abs(dir.y):

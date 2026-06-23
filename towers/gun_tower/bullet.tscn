@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://clfhqev8mp6xc"]
 
 [ext_resource type="Script" uid="uid://fj7l6fedtag4" path="res://towers/gun_tower/bullet.gd" id="1_wwakr"]
-[ext_resource type="Texture2D" uid="uid://042qp425i7v" path="res://ui/tie.png" id="2_nnk04"]
+[ext_resource type="Texture2D" uid="uid://042qp425i7v" path="res://towers/gun_tower/tie.png" id="2_nnk04"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_idurc"]
 radius = 11.401754

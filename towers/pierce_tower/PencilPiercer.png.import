@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://042qp425i7v"
-path="res://.godot/imported/tie.png-f537b31f2b3c82ccc10b132725ca026c.ctex"
+uid="uid://dme4gxa51ujyy"
+path="res://.godot/imported/PencilPiercer.png-232e169adb9e8328c72db7f9055caadf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/tie.png"
-dest_files=["res://.godot/imported/tie.png-f537b31f2b3c82ccc10b132725ca026c.ctex"]
+source_file="res://towers/pierce_tower/PencilPiercer.png"
+dest_files=["res://.godot/imported/PencilPiercer.png-232e169adb9e8328c72db7f9055caadf.ctex"]
 
 [params]
 

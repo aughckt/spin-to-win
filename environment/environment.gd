@@ -459,9 +459,9 @@ func place_tower(tile: Vector2i, test_only: bool = false) -> String:
 	spend(tower_data.cost)
 	
 	var tower: GenericTower = tower_data.scene.instantiate()
-	towers.add_child(tower)
 	tower.global_position = gearmap.to_global(gearmap.map_to_local(tile))
 	tower.data = tower_data
+	towers.add_child(tower) #after setting the position so that the ready logic for the trap works correctly
 	
 	if tower is GunTower:
 		(tower as GunTower).set_gun_rotation(tower_rotation)

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TowerData" format=3 uid="uid://bijgk52a2m82k"]
+
+[ext_resource type="PackedScene" uid="uid://d1aburwymhkcn" path="res://towers/pierce_tower/pierce_tower.tscn" id="1_ir7sx"]
+[ext_resource type="Script" uid="uid://b55436prbbuts" path="res://towers/tower_data.gd" id="1_rb85v"]
+
+[resource]
+script = ExtResource("1_rb85v")
+cost = 8
+scene = ExtResource("1_ir7sx")
+name = "Pierce"
+shot_delay_sec = 1.0
+damage = 100
+metadata/_custom_type_script = "uid://b55436prbbuts"

@@ -8,7 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://u80uaujktp7f" path="res://ui/hud.tscn" id="6_ehb6n"]
 [ext_resource type="Resource" uid="uid://bvmp6r3hgihgj" path="res://towers/tower_data/gun_tower_data.tres" id="6_vh8kr"]
 [ext_resource type="Resource" uid="uid://cu1kljx46m1sk" path="res://towers/tower_data/aoe_tower_data.tres" id="7_nmo3v"]
+[ext_resource type="Resource" uid="uid://bijgk52a2m82k" path="res://towers/tower_data/pierce_tower.tres" id="9_3g2c1"]
 [ext_resource type="PackedScene" uid="uid://ds63alic0g0b8" path="res://ui/build_visual.tscn" id="9_6qvha"]
+[ext_resource type="Resource" uid="uid://d1jl6epjci7s5" path="res://towers/tower_data/trap_tower.tres" id="10_h6u84"]
 [ext_resource type="PackedScene" uid="uid://df7g5g3wu15n1" path="res://player/player.tscn" id="10_te1ty"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nmo3v"]
@@ -251,7 +253,7 @@ offset_bottom = 23.0
 
 [node name="HUD" parent="HUD" unique_id=1114338 instance=ExtResource("6_ehb6n")]
 visible = false
-towers = Array[ExtResource("3_ehb6n")]([ExtResource("6_vh8kr"), ExtResource("7_nmo3v")])
+towers = Array[ExtResource("3_ehb6n")]([ExtResource("6_vh8kr"), ExtResource("7_nmo3v"), ExtResource("9_3g2c1"), ExtResource("10_h6u84")])
 
 [node name="BuildVisual" parent="." unique_id=371529839 instance=ExtResource("9_6qvha")]
 

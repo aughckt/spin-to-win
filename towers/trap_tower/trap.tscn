@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dimgm6hfo2fot"]
+
+[ext_resource type="Script" uid="uid://bnrpoiaxrlnpq" path="res://towers/trap_tower/trap.gd" id="1_f8g6h"]
+[ext_resource type="Texture2D" uid="uid://btm4vlsmnxvyw" path="res://icon.svg" id="1_hibab"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fbxa2"]
+
+[node name="Trap" type="Area2D" unique_id=1568653871]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_f8g6h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1879159455]
+shape = SubResource("CircleShape2D_fbxa2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=804667390]
+self_modulate = Color(1, 0, 0, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_hibab")

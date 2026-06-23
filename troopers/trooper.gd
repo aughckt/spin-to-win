@@ -14,13 +14,19 @@ var hp: int = MAX_HP
 
 const BOUNTY: int = 1
 
+var stun_time_s: float = 0
+
 func _ready() -> void:
 	target_pos = global_position
 	walk_normal = Vector2.ZERO
 
 
 func _physics_process(delta: float) -> void:
-	if not Env.INST:
+	if Env.INST == null:
+		return
+	
+	if stun_time_s > 0:
+		stun_time_s = maxf(stun_time_s - delta, 0)
 		return
 	
 	var new_pos := global_position + walk_normal * move_speed * delta
@@ -95,3 +101,4 @@ func setup() -> void:
 	set_deferred("monitorable", true)
 	set_deferred("monitoring", true)
 	hp = MAX_HP
+	stun_time_s = 0

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://qyhxr7brjwsw"]
 
 [ext_resource type="Script" uid="uid://xmyvhrr2x5i2" path="res://towers/gun_tower/gun_tower.gd" id="1_08lh3"]
+[ext_resource type="Texture2D" uid="uid://042qp425i7v" path="res://towers/gun_tower/tie.png" id="2_gs8rq"]
 [ext_resource type="Script" uid="uid://ce8myo2y6rl0p" path="res://audio/sound.gd" id="2_j724k"]
 [ext_resource type="AudioStream" uid="uid://dhvugso7yr35f" path="res://towers/gun_tower/tiecannonfinalfornow.ogg" id="3_gs8rq"]
 [ext_resource type="Texture2D" uid="uid://cpk431m5728hm" path="res://towers/gun_tower/TieShooter.png" id="5_gs8rq"]
@@ -152,6 +153,7 @@ size = Vector2(48, 106)
 
 [node name="Tower" type="Node2D" unique_id=304654658]
 script = ExtResource("1_08lh3")
+bullet_sprite = ExtResource("2_gs8rq")
 shoot_sound = SubResource("Resource_kbmgr")
 
 [node name="AnimatedShooter" type="AnimatedSprite2D" parent="." unique_id=595558922]

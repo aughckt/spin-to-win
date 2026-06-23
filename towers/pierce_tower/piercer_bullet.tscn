@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cht4306sb266b"]
+
+[ext_resource type="PackedScene" uid="uid://clfhqev8mp6xc" path="res://towers/gun_tower/bullet.tscn" id="1_cxcrg"]
+[ext_resource type="Texture2D" uid="uid://ck64wukxa372k" path="res://towers/pierce_tower/PencilPiercer_Projectile.png" id="2_13iav"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_71mwt"]
+radius = 14.77
+
+[node name="Bullet" unique_id=1233644382 instance=ExtResource("1_cxcrg")]
+
+[node name="Icon" parent="." index="0" unique_id=1605290369]
+texture = ExtResource("2_13iav")
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=312063557]
+shape = SubResource("CircleShape2D_71mwt")
