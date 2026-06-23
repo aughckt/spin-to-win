@@ -506,10 +506,11 @@ func spawn_money(amount: int, at: Vector2) -> void:
 	for _i in range(amount):
 		var nose := Nose.create()
 		nose.reparent.call_deferred(hud_layer)
+		
 		nose.global_position = at
 		nose.target_point = target
 		
 		var speed := randf_range(INITIAL_NOSE_VEL.x, INITIAL_NOSE_VEL.y)
 		var angle := deg_to_rad(randf_range(-SPREAD_DEGRESS, SPREAD_DEGRESS))
 		
-		nose.vel = (-nose.global_position.direction_to(target)).rotated(angle) * speed
+		nose.vel = (-at.direction_to(target)).rotated(angle) * speed

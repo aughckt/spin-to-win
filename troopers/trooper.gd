@@ -80,7 +80,7 @@ func take_damage(amount: int) -> void:
 	
 	
 	if hp <= 0:
-		Env.INST.spawn_money(BOUNTY, global_position)
+		Env.INST.spawn_money(BOUNTY, get_screen_transform().origin)
 		pool_self()
 
 

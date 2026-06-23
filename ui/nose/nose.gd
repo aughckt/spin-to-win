@@ -4,7 +4,7 @@ extends Sprite2D
 const TURN_RATE: float = 5
 const ACCEL: float = 10
 const TARGET_SPEED: float = 600
-const MIN_TARGET_DIST: float = 5
+const MIN_TARGET_DIST: float = 10
 ##just a failsafe
 const LIFE_TIME: float = 5 
 
@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 		SoundBus.play_sound(sound)
 		remove()
 		return
-	
+
 	var to_target := target_point - global_position
 	
 	var angle := vel.angle()

@@ -1,42 +1,15 @@
 [gd_scene format=3 uid="uid://cji2yg5dqgn0q"]
 
 [ext_resource type="Script" uid="uid://y5y80yr7ysjw" path="res://environment/environment.gd" id="1_wjl7u"]
-[ext_resource type="Texture2D" uid="uid://gl622atrk15j" path="res://environment/placeholder_tiles.png" id="2_7uceq"]
 [ext_resource type="Script" uid="uid://b55436prbbuts" path="res://towers/tower_data.gd" id="3_ehb6n"]
 [ext_resource type="Texture2D" uid="uid://cfh0tlhb5mhf2" path="res://environment/gears/gear_map.png" id="3_wjl7u"]
+[ext_resource type="Texture2D" uid="uid://cqy5ciq03741n" path="res://environment/arrows.png" id="5_3g2c1"]
 [ext_resource type="Texture2D" uid="uid://bhh7jlosrnks0" path="res://environment/tiles.png" id="5_vh8kr"]
 [ext_resource type="PackedScene" uid="uid://u80uaujktp7f" path="res://ui/hud.tscn" id="6_ehb6n"]
 [ext_resource type="Resource" uid="uid://bvmp6r3hgihgj" path="res://towers/tower_data/gun_tower_data.tres" id="6_vh8kr"]
 [ext_resource type="Resource" uid="uid://cu1kljx46m1sk" path="res://towers/tower_data/aoe_tower_data.tres" id="7_nmo3v"]
 [ext_resource type="PackedScene" uid="uid://ds63alic0g0b8" path="res://ui/build_visual.tscn" id="9_6qvha"]
 [ext_resource type="PackedScene" uid="uid://df7g5g3wu15n1" path="res://player/player.tscn" id="10_te1ty"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7b2gm"]
-texture = ExtResource("2_7uceq")
-texture_region_size = Vector2i(100, 100)
-0:0/0 = 0
-1:0/0 = 0
-1:0/0/custom_data_0 = 1
-2:0/0 = 0
-2:0/0/custom_data_0 = 4
-1:1/0 = 0
-1:1/0/custom_data_0 = 3
-0:1/0 = 0
-0:1/0/custom_data_0 = 2
-0:2/0 = 0
-0:2/0/custom_data_0 = 6
-1:2/0 = 0
-1:2/0/custom_data_0 = 7
-2:2/0 = 0
-2:2/0/custom_data_0 = 8
-2:1/0 = 0
-2:1/0/custom_data_0 = 5
-
-[sub_resource type="TileSet" id="TileSet_wetts"]
-tile_size = Vector2i(64, 64)
-custom_data_layer_0/name = "Type"
-custom_data_layer_0/type = 2
-sources/0 = SubResource("TileSetAtlasSource_7b2gm")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nmo3v"]
 texture = ExtResource("5_vh8kr")
@@ -189,6 +162,31 @@ physics_layer_0/collision_layer = 8
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_7uceq")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h6u84"]
+texture = ExtResource("5_3g2c1")
+0:0/0 = 0
+1:0/0 = 0
+1:0/0/custom_data_0 = 1
+2:0/0 = 0
+2:0/0/custom_data_0 = 4
+2:1/0 = 0
+2:1/0/custom_data_0 = 5
+1:1/0 = 0
+1:1/0/custom_data_0 = 3
+0:1/0 = 0
+0:1/0/custom_data_0 = 2
+0:2/0 = 0
+0:2/0/custom_data_0 = 6
+1:2/0 = 0
+1:2/0/custom_data_0 = 7
+2:2/0 = 0
+2:2/0/custom_data_0 = 8
+
+[sub_resource type="TileSet" id="TileSet_wetts"]
+custom_data_layer_0/name = "Type"
+custom_data_layer_0/type = 2
+sources/1 = SubResource("TileSetAtlasSource_h6u84")
+
 [node name="Environment" type="Node2D" unique_id=123182581 node_paths=PackedStringArray("terrainmap", "tilemap", "gearmap", "gears", "underground_gears", "bullets", "towers", "troopers", "coords_label", "hud", "build_visual", "hud_layer")]
 y_sort_enabled = true
 script = ExtResource("1_wjl7u")
@@ -205,10 +203,6 @@ hud = NodePath("HUD/HUD")
 build_visual = NodePath("BuildVisual")
 hud_layer = NodePath("HUD")
 
-[node name="ArrowTiles" type="TileMapLayer" parent="." unique_id=108710037]
-tile_set = SubResource("TileSet_wetts")
-rendering_quadrant_size = 100
-
 [node name="UndergroundGears" type="Node2D" parent="." unique_id=146573048]
 
 [node name="Terrain" type="TileMapLayer" parent="." unique_id=1643969889]
@@ -216,7 +210,7 @@ scale = Vector2(4, 4)
 tile_set = SubResource("TileSet_klfgw")
 
 [node name="FadeTiles" type="TileMapLayer" parent="." unique_id=817108041]
-z_index = 5
+z_index = 200
 scale = Vector2(4, 4)
 tile_set = SubResource("TileSet_klfgw")
 
@@ -239,6 +233,13 @@ y_sort_enabled = true
 [node name="Towers" type="Node2D" parent="." unique_id=1601212248]
 z_index = 10
 y_sort_enabled = true
+
+[node name="ArrowTiles" type="TileMapLayer" parent="." unique_id=108710037]
+top_level = true
+z_index = 2001
+scale = Vector2(4, 4)
+tile_set = SubResource("TileSet_wetts")
+rendering_quadrant_size = 100
 
 [node name="DebugHUD" type="CanvasLayer" parent="." unique_id=1436650702]
 
