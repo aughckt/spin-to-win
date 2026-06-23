@@ -77,12 +77,7 @@ func load_level() -> void:
 	current_hp = current_level.level_hp
 	current_wave_list = current_level.wave_list
 	current_wave_index = 0
-	var spawn_children: Array[Node] = current_level.spawn_points.get_children() as Array[Node]
-	var spawn_points: Array[Node2D] = []
-	for child: Node in spawn_children:
-		if child is Node2D:
-			spawn_points.append(child as Node2D)
-	TrooperSpawner.INST.spawn_points = spawn_points
+	TrooperSpawner.INST.spawn_points = current_level.spawn_points
 
 
 func start_wave() -> void:
@@ -90,14 +85,19 @@ func start_wave() -> void:
 	if current_wave_index >= current_wave_list.size():
 		return
 	print("%s: Wave %s started!" % [name, current_wave_index])
-	TrooperSpawner.INST.set_waves(current_wave_list.slice(current_wave_index, current_wave_index + current_level.lane_amount))
+	var current_waves: Array[Curve] = []
+	for spawn_point: SpawnPoint in current_level.spawn_points:
+		if spawn_point.wave_list.size() <= current_wave_index:
+			continue
+		current_waves.append(spawn_point.wave_list[current_wave_index])
+	TrooperSpawner.INST.set_waves(current_waves)
 	wave_started.emit()
 
 
 func end_wave() -> void:
 	print("%s: Wave %s ended!" % [name, current_wave_index])
 	set_build_phase(true)
-	current_wave_index += current_level.lane_amount
+	current_wave_index += 1
 	TrooperSpawner.INST.set_waves([])
 	wave_finished.emit()
 	if current_wave_index >= current_wave_list.size():

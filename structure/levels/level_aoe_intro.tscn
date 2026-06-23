@@ -4,7 +4,7 @@
 
 [node name="TemplateLevel" unique_id=251983101 instance=ExtResource("1_siism")]
 
-[node name="Point1" parent="SpawnPoints" parent_id_path=PackedInt32Array(1156764314) index="0" unique_id=1971849226]
+[node name="SpawnPoint1" parent="SpawnPointContainer" parent_id_path=PackedInt32Array(1156764314) index="0" unique_id=1971849226]
 position = Vector2(288, 608)
 
 [node name="ArrowTiles" parent="Environment" parent_id_path=PackedInt32Array(123182581) index="0" unique_id=108710037]

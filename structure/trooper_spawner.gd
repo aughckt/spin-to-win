@@ -8,7 +8,7 @@ var spawn_timers: Array[float] = []
 var trooper_pool: Pool
 var current_waves: Array[Curve] = []
 var current_lane_amount: int = 1
-var spawn_points: Array[Node2D] = []
+var spawn_points: Array[SpawnPoint] = []
 @onready var trooper_scene: PackedScene = preload("res://troopers/trooper.tscn")
 
 

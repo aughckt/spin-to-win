@@ -3,27 +3,28 @@ extends Node2D
 
 @export_category("Fixed variables")
 @export var env: Env
-@export var spawn_points: Node2D
+@export var spawn_point_container: Node2D
 
 @export_category("Custom stuff")
 @export var level_hp: int = 20
 @export var wave_list: Array[Curve]
 @export var starting_budget: int = 10
-@export var lane_amount: int = 1
+
+var spawn_points: Array[SpawnPoint] = []
+
 
 func _ready() -> void:
-	spawn_marker()
 	LevelManager.INST.wave_finished.connect(_on_wave_finished)
-	assert(wave_list.size() % lane_amount == 0)
+	for child: Node in spawn_point_container.get_children():
+		if not child is SpawnPoint:
+			continue
+		spawn_points.append(child as SpawnPoint)
+	
+	spawn_marker()
 
 
 func spawn_marker() -> void:
-	var point_array: Array[Node] = spawn_points.get_children()
-	for index: int in range(lane_amount):
-		var child: Node = point_array[index]
-		if not child is Node2D:
-			continue
-		var spawn_point: Node2D = child as Node2D
+	for spawn_point: SpawnPoint in spawn_points:
 		var marker := WaveMarker.create()
 		marker.reparent.call_deferred(spawn_point)
 		marker.end_reached.connect(_on_marker_end_reached)
