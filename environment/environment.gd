@@ -149,12 +149,18 @@ func move_target_from_global(global_pos: Vector2) -> Vector2:
 		return global_pos
 	var idx: int = tile_data.get_custom_data(name_type)
 
+	var mul := 1
+	# > and not >= because end_tile exists
+	if idx > directions.size():
+		idx -= directions.size() + 1
+		mul = 2
+
 	if idx == end_tile_type:
 		return global_pos
 
 	#could walk the path until you reach a tile with a different direction so that the trooper doesnt have to check all the time.
 	#also trust that the tiles are set up correctly but that should be super obvious during development because the map would consistently crash
-	return tilemap.to_global(tilemap.map_to_local(tile + directions[idx]))
+	return tilemap.to_global(tilemap.map_to_local(tile + directions[idx] * mul))
 
 
 ##an empty string means no error occured
