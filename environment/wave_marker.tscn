@@ -38,4 +38,5 @@ particles = NodePath("GPUParticles2D")
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1522238229]
 amount = 32
 texture = SubResource("GradientTexture2D_wjifc")
+visibility_rect = Rect2(0, 0, 0, 0)
 process_material = SubResource("ParticleProcessMaterial_fbxa2")

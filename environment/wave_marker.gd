@@ -58,6 +58,10 @@ static func create() -> WaveMarker:
 	marker.target_pos = marker.global_position
 	marker.walk_normal = Vector2.ZERO
 	marker.spawn_point = null
+	
+	#probably not optimal but 100 times better than particles randomly disappearing
+	marker.particles.visibility_rect = Env.INST.get_viewport_rect()
+	
 	return marker
 
 func remove() -> void:
