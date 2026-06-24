@@ -5,6 +5,9 @@
 [ext_resource type="Theme" uid="uid://ofehi657nfwc" path="res://ui/theme.tres" id="2_276te"]
 [ext_resource type="Texture2D" uid="uid://daf10bu2v4pfp" path="res://ui/nose/nose.png" id="3_en2x2"]
 [ext_resource type="Texture2D" uid="uid://kv40wvt1fi4w" path="res://ui/temp_health.png" id="4_en2x2"]
+[ext_resource type="Texture2D" uid="uid://dj0x68bdvuxei" path="res://ui/UI_HealthBar_Empty.png" id="6_srpbi"]
+[ext_resource type="Texture2D" uid="uid://rcardjl4llmq" path="res://ui/UI_HealthBar_Full.png" id="7_spcu4"]
+[ext_resource type="PackedScene" uid="uid://bgj5p7ryl1wl8" path="res://ui/health_chunk.tscn" id="8_srpbi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ihmi"]
 content_margin_left = 0.0
@@ -18,7 +21,7 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[node name="HUD" type="Control" unique_id=1114338 node_paths=PackedStringArray("tower_panels", "health_label", "money_label", "start_wave_button", "pause_button", "nose_target")]
+[node name="HUD" type="Control" unique_id=1114338 node_paths=PackedStringArray("tower_panels", "health_label", "money_label", "start_wave_button", "pause_button", "nose_target", "health_chunk_parent")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,6 +37,7 @@ money_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndMo
 start_wave_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/StartWaveButton")
 pause_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/PauseButton")
 nose_target = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Money/HBoxContainer/TextureRect")
+health_chunk_parent = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Health/HealthChunks")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=518244129]
 layout_mode = 1
@@ -125,6 +129,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Health" unique_id=1315566167]
+visible = false
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -155,6 +160,39 @@ layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("2_276te")
 text = "good"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Health" unique_id=1357211269]
+visible = false
+custom_minimum_size = Vector2(80, 8)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -4.0
+offset_right = 20.5
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 10.0
+value = 5.0
+texture_under = ExtResource("6_srpbi")
+texture_progress = ExtResource("7_spcu4")
+
+[node name="HealthChunks" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Health" unique_id=1649537053]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect2" parent="PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Health/HealthChunks" unique_id=49117742 instance=ExtResource("8_srpbi")]
+layout_mode = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1253500517]
 visible = false

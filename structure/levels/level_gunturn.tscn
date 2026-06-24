@@ -13,7 +13,7 @@ point_count = 2
 [sub_resource type="Resource" id="Resource_halu2"]
 script = ExtResource("2_halu2")
 credit_curve = SubResource("Curve_jgr2m")
-total_credits = 4
+total_credits = 7
 metadata/_custom_type_script = "uid://lglt8bhkbaeb"
 
 [node name="LevelGunturn" unique_id=251983101 instance=ExtResource("1_5bju1")]

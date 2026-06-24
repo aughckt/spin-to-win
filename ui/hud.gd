@@ -15,10 +15,25 @@ extends Control
 
 signal data_selected (data: TowerData)
 
+@export var health_chunk_parent: HBoxContainer
+var health_chunk_scene: PackedScene = preload("res://ui/health_chunk.tscn")
+var health_chunk_empty: Texture = preload("res://ui/UI_HealthChunk_Empty.png")
+var curr_health: int
+
 func _ready() -> void:
 	show()
 	LevelManager.INST.wave_finished.connect(_on_wave_finished)
 	start_wave_button.pressed.connect(_on_start_wave_button_pressed)
+	
+	for node in health_chunk_parent.get_children():
+		node.queue_free()
+	curr_health = LevelManager.INST.current_hp
+	assert(curr_health <= 10)
+	for i in range(10):
+		var hc: TextureRect = health_chunk_scene.instantiate()
+		if i >= curr_health:
+			hc.texture = health_chunk_empty
+		health_chunk_parent.add_child(hc)
 	
 	pause_button.pressed.connect(_on_pause_button_pressed)
 	pause_button.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -32,6 +47,13 @@ func _ready() -> void:
 		add_tower_data(tower)
 
 func _process(_delta: float) -> void:
+	var new_hp := LevelManager.INST.current_hp
+	if new_hp != curr_health && new_hp >= 0:
+		while new_hp < curr_health:
+			curr_health -= 1
+			var trect: TextureRect = health_chunk_parent.get_child(curr_health)
+			trect.texture = health_chunk_empty
+	
 	health_label.text = str(LevelManager.INST.current_hp)
 	money_label.text = str(Env.INST.budget)
 

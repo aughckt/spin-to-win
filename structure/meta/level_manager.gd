@@ -10,7 +10,7 @@ var level_array: Array[PackedScene] = [
 	load("res://structure/levels/level_aoe_intro.tscn"),
 	load("res://structure/levels/level_multilane.tscn")]
 var current_level: Level = null
-var current_hp: int = 20
+var current_hp: int = 10
 var is_build_phase: bool = true
 
 ##array of array of WaveData
@@ -77,10 +77,11 @@ func load_level() -> void:
 	if level_array.size() <= current_level_index:
 		print("You won the game!")
 		return
+	
 	current_level = level_array[current_level_index].instantiate()
+	current_hp = current_level.level_hp
 	set_build_phase(true)
 	add_child(current_level)
-	current_hp = current_level.level_hp
 	current_wave_list = current_level.waves
 	for wave in current_wave_list:
 		for x: Variant in wave:
