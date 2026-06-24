@@ -20,6 +20,7 @@ static var INST: Env
 
 @export var gear_turn_sound: Sound
 @export var place_sound: Sound
+@export var remove_sound: Sound
 
 var tower_data: TowerData = null
 
@@ -276,6 +277,7 @@ func remove_gear(tile: Vector2i) -> void:
 		return
 	tile_to_visual[tile].remove()
 	tile_to_visual.erase(tile)
+	SoundBus.play_sound(remove_sound)
 	
 	if old_set.gears.size() == 1:
 		#refund budget
@@ -480,6 +482,7 @@ func place_tower(tile: Vector2i, test_only: bool = false) -> String:
 
 func remove_tower(tile: Vector2i) -> void:
 	var tower: GenericTower = tile_to_tower.get(tile)
+	SoundBus.play_sound(remove_sound)
 	if tile == null:
 		return
 	

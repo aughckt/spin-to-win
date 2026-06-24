@@ -19,11 +19,19 @@
 [sub_resource type="Resource" id="Resource_g6k8r"]
 script = ExtResource("2_gewoo")
 stream = ExtResource("3_ypa7m")
+volume_linear = 0.5
 metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
 
 [sub_resource type="Resource" id="Resource_gewoo"]
 script = ExtResource("2_gewoo")
 stream = ExtResource("3_nsn85")
+metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
+
+[sub_resource type="Resource" id="Resource_nsn85"]
+script = ExtResource("2_gewoo")
+stream = ExtResource("3_nsn85")
+volume_linear = 0.5
+pitch_scale = 0.5
 metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nmo3v"]
@@ -218,6 +226,7 @@ hud = NodePath("HUD/HUD")
 build_visual = NodePath("BuildVisual")
 gear_turn_sound = SubResource("Resource_g6k8r")
 place_sound = SubResource("Resource_gewoo")
+remove_sound = SubResource("Resource_nsn85")
 hud_layer = NodePath("HUD")
 
 [node name="UndergroundGears" type="Node2D" parent="." unique_id=146573048]
