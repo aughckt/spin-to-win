@@ -12,6 +12,17 @@ var walk_normal: Vector2
 var hp: int = max_hp
 @export var sprite: AnimatedSprite2D
 
+@export_category("Sounds")
+@export var walk_sound: Sound
+@export var hit_sound: Sound
+@export var death_sound: Sound
+@export var random_sound: Sound
+
+@onready var random_sound_timer: Timer = %RandomSoundTimer
+@onready var walk_sound_timer: Timer = %WalkSoundTimer
+
+
+
 const BOUNTY: int = 1
 
 var stun_time_s: float = 0
@@ -19,6 +30,9 @@ var stun_time_s: float = 0
 func _ready() -> void:
 	target_pos = global_position
 	walk_normal = Vector2.ZERO
+	
+	random_sound_timer.timeout.connect(_on_random_sound_timer_timeout)
+	walk_sound_timer.timeout.connect(_on_walk_sound_timer_timeout)
 
 
 func _physics_process(delta: float) -> void:
@@ -80,8 +94,8 @@ func take_damage(amount: int) -> void:
 		return
 	
 	hp -= amount
-	#youre not tweening it, right? this just shrinks the clown as it takes damage?
-	#sprite.scale = Vector2(hp/100.0,hp/100.0)
+	
+	SoundBus.play_sound(hit_sound)
 	
 	if hp <= 0:
 		Env.INST.spawn_money(BOUNTY, get_screen_transform().origin)
@@ -107,3 +121,15 @@ func setup() -> void:
 	hp = max_hp
 	stun_time_s = 0
 	update_shader()
+
+
+func _on_random_sound_timer_timeout() -> void:
+	if not get_parent() == GeneralPool:
+		SoundBus.play_sound(random_sound)
+	random_sound_timer.wait_time = randf() * 5
+	random_sound_timer.start()
+
+
+func _on_walk_sound_timer_timeout() -> void:
+	if not get_parent() == GeneralPool:
+		SoundBus.play_sound(walk_sound)
