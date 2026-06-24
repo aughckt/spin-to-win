@@ -12,6 +12,8 @@ extends Node2D
 @export var gear_clear_color: Color
 @export var gear_obstructed_color: Color
 
+@export var rotate_sound: Sound
+
 var data: TowerData
 var tower: GenericTower
 
@@ -64,20 +66,26 @@ func _unhandled_input(event: InputEvent) -> void:
 		match key:
 			KEY_RIGHT:
 				gun_tower.set_gun_rotation(0)
+				SoundBus.play_sound(rotate_sound)
 			KEY_UP:
 				gun_tower.set_gun_rotation(PI/2)
+				SoundBus.play_sound(rotate_sound)
 			KEY_LEFT:
 				gun_tower.set_gun_rotation(PI)
+				SoundBus.play_sound(rotate_sound)
 			KEY_DOWN:
 				gun_tower.set_gun_rotation(-PI/2)
+				SoundBus.play_sound(rotate_sound)
 			
 	elif event is InputEventMouseButton:
 		var button := (event as InputEventMouseButton).button_index
 		match button:
 			MouseButton.MOUSE_BUTTON_WHEEL_UP:
 				gun_tower.rotate_gun(-PI/4)
+				SoundBus.play_sound(rotate_sound)
 			MouseButton.MOUSE_BUTTON_WHEEL_DOWN:
 				gun_tower.rotate_gun(PI/4)
+				SoundBus.play_sound(rotate_sound)
 	
 	Env.INST.tower_rotation = gun_tower.gun_rotation
 
