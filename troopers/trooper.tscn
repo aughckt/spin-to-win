@@ -54,6 +54,7 @@ radius = 30.016663
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1ous1"]
 resource_local_to_scene = true
 shader = ExtResource("2_kbjsr")
+shader_parameter/frames_y = 3
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hlcmw"]
 atlas = ExtResource("3_kbjsr")
@@ -203,7 +204,6 @@ animations = [{
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_mba6l")
-move_speed = 300.0
 sprite = NodePath("AnimatedSprite2D")
 walk_sound = SubResource("Resource_kbjsr")
 hit_sound = SubResource("Resource_hlcmw")

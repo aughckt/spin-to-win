@@ -1,7 +1,6 @@
 [gd_scene format=4 uid="uid://b04sr3oh5d0f3"]
 
 [ext_resource type="Script" uid="uid://c0nyrmno1wcfb" path="res://structure/meta/level.gd" id="1_7lnir"]
-[ext_resource type="Script" uid="uid://dy1xq2uadaf4c" path="res://structure/levels/spawn_point.gd" id="2_16nsi"]
 [ext_resource type="PackedScene" uid="uid://cji2yg5dqgn0q" path="res://environment/environment.tscn" id="2_hiaeh"]
 
 [node name="TemplateLevel" type="Node2D" unique_id=251983101 node_paths=PackedStringArray("env", "spawn_point_container")]
@@ -11,9 +10,7 @@ spawn_point_container = NodePath("SpawnPointContainer")
 level_hp = 3
 
 [node name="SpawnPointContainer" type="Node2D" parent="." unique_id=1156764314]
-
-[node name="SpawnPoint1" type="Node2D" parent="SpawnPointContainer" unique_id=1971849226]
-script = ExtResource("2_16nsi")
+z_index = 50
 
 [node name="Environment" parent="." unique_id=123182581 instance=ExtResource("2_hiaeh")]
 unique_name_in_owner = true

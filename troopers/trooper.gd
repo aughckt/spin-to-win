@@ -79,10 +79,10 @@ func _physics_process(delta: float) -> void:
 			1:
 				animation = "walk_down"
 			2:
-				animation = "walk_right"
+				animation = "walk_right" if !_has_left_anim() else "walk_left"
 			3:
 				animation = "walk_right"
-		sprite.flip_h = best_idx == 2
+		sprite.flip_h = best_idx == 2 && !_has_left_anim()
 		sprite.play(animation)
 		
 		new_pos = global_position + walk_normal * move_speed * delta
@@ -152,3 +152,6 @@ func remove() -> void:
 static func cost() -> int:
 	#THIS MUST BE 1, THATS WHAT THE LOGIC IN THE TROOPER SPAWNER IS DESIGNED FOR
 	return 1
+
+func _has_left_anim() -> bool:
+	return false

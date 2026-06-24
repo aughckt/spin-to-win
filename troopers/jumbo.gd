@@ -21,3 +21,6 @@ func remove() -> void:
 
 static func cost() -> int:
 	return 4
+
+func _has_left_anim() -> bool:
+	return true

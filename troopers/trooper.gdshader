@@ -1,10 +1,12 @@
 shader_type canvas_item;
 
+uniform int frames_y;
+
 instance
 uniform float y_threshold: hint_range(0.0, 1.0, 0.001) = 1.;
 
 int[2] get_size_pixels(vec2 texture_pixel_size) {
-	vec2 pixels = trunc((1. / texture_pixel_size) / 3.);
+	vec2 pixels = trunc((1. / texture_pixel_size) / float(frames_y));
 	return int[] (int(pixels.x), int(pixels.y));
 }
 
@@ -18,7 +20,7 @@ void fragment() {
 	vec3 col = COLOR.rgb;
 	
 	float yt = y_threshold;
-	vec2 uv = UV * 3.; 
+	vec2 uv = UV * float(frames_y); 
 	uv = fract(uv);
 	if (get_pixel_y(uv.y, TEXTURE_PIXEL_SIZE) >= get_pixel_y(yt, TEXTURE_PIXEL_SIZE)) {
 		vec3 mono = vec3(col.g);
