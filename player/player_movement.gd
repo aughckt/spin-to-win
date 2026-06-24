@@ -18,9 +18,7 @@ func _physics_process(_delta: float) -> void:
 	
 	if move_dir == Vector2.ZERO:
 		SoundBus.stop_sound(player_move_sound)
-		print("NO")
 	else:
-		print("YES")
 		SoundBus.play_sound(player_move_sound)
 	
 	player.velocity = move_dir * MOVE_SPEED
