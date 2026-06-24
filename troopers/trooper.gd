@@ -1,6 +1,7 @@
 class_name Trooper
 extends Area2D
 
+
 @export var move_speed: float = 100.0
 
 #minimum distance towards target
@@ -12,9 +13,15 @@ var walk_normal: Vector2
 var hp: int = max_hp
 @export var sprite: AnimatedSprite2D
 
-const BOUNTY: int = 1
-
 var stun_time_s: float = 0
+
+static var pool: Pool
+
+const scene_trooper: PackedScene = preload("res://troopers/trooper.tscn")
+
+var lane_idx: int = -1
+
+signal removed(trooper: Trooper)
 
 func _ready() -> void:
 	target_pos = global_position
@@ -73,7 +80,7 @@ func _physics_process(delta: float) -> void:
 
 func reach_end() -> void:
 	LevelManager.INST.take_damage(1)
-	pool_self()
+	remove()
 
 func take_damage(amount: int) -> void:
 	if hp <= 0:
@@ -84,8 +91,8 @@ func take_damage(amount: int) -> void:
 	#sprite.scale = Vector2(hp/100.0,hp/100.0)
 	
 	if hp <= 0:
-		Env.INST.spawn_money(BOUNTY, get_screen_transform().origin)
-		pool_self()
+		Env.INST.spawn_money(cost(), get_screen_transform().origin)
+		remove()
 	else:
 		update_shader()
 
@@ -93,17 +100,30 @@ func update_shader() -> void:
 	var t := clampf(hp as float / max_hp, 0, 1)
 	sprite.set_instance_shader_parameter("y_threshold", t)
 
+static func _get_pool() -> Pool:
+	if pool == null:
+		pool = Pool.create(scene_trooper)
+	return pool
 
-func pool_self() -> void:
-	TrooperSpawner.INST.pool_trooper(self)
-	set_deferred("monitorable", false)
-	set_deferred("monitoring", false)
-
+static func create() -> Trooper:
+	var trooper: Trooper = _get_pool().get_inst()
+	trooper.setup()
+	return trooper
 
 func setup() -> void:
-	#sprite.scale = Vector2(1,1)
 	set_deferred("monitorable", true)
 	set_deferred("monitoring", true)
 	hp = max_hp
 	stun_time_s = 0
+	lane_idx = -1
 	update_shader()
+
+func remove() -> void:
+	removed.emit(self)
+	_get_pool().pool(self)
+	set_deferred("monitorable", false)
+	set_deferred("monitoring", false)
+
+static func cost() -> int:
+	#THIS MUST BE 1, THATS WHAT THE LOGIC IN THE TROOPER SPAWNER IS DESIGNED FOR
+	return 1
