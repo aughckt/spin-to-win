@@ -5,10 +5,10 @@ static var INST: LevelManager
 
 @export var current_level_index: int = 0
 var level_array: Array[PackedScene] = [
-	#preload("res://structure/levels/loop.tscn"),
-	preload("res://structure/levels/level_gunturn.tscn"),
-	preload("res://structure/levels/level_aoe_intro.tscn"),
-	preload("res://structure/levels/level_multilane.tscn")]
+	#load("res://structure/levels/loop.tscn"),
+	load("res://structure/levels/level_gunturn.tscn"),
+	load("res://structure/levels/level_aoe_intro.tscn"),
+	load("res://structure/levels/level_multilane.tscn")]
 var current_level: Level = null
 var current_hp: int = 20
 var is_build_phase: bool = true
@@ -56,11 +56,11 @@ func win_level() -> void:
 	current_level_index += 1
 	level_won_timer.start()
 	level_won_banner.visible = true
-	
+	TrooperSpawner.INST.disable()
 
 
 func lose_level() -> void:
-	TrooperSpawner.INST.set_waves([])
+	TrooperSpawner.INST.disable()
 	print("%s: Level %s lost" % [name, current_level_index])
 	level_lost_timer.start()
 	level_lost_banner.visible = true
@@ -138,7 +138,7 @@ func set_build_phase(value: bool) -> void:
 	is_build_phase = value
 	
 	TrooperSpawner.INST.clear_troopers()
-	TrooperSpawner.INST.active = !value
+	#TrooperSpawner.INST.active = !value
 	
 	wave_banner.visible = not value
 	build_banner.visible = value

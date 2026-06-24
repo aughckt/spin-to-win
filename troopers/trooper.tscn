@@ -203,6 +203,7 @@ animations = [{
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_mba6l")
+move_speed = 300.0
 sprite = NodePath("AnimatedSprite2D")
 walk_sound = SubResource("Resource_kbjsr")
 hit_sound = SubResource("Resource_hlcmw")

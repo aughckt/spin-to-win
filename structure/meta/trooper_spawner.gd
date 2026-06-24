@@ -97,6 +97,7 @@ func spawn_trooper(index: int) -> void:
 		trooper = Trooper.create()
 	spend_credits(trooper.cost(), index)
 	trooper.removed.connect(_on_trooper_removed)
+	trooper.lane_idx = index
 	
 	trooper.reparent.call_deferred(Env.INST.troopers)
 	trooper.global_position = spawn_points[index].global_position
@@ -107,6 +108,9 @@ func spend_credits(count: int, idx: int) -> void:
 	wave_credits_left[idx] -= count
 
 func _on_trooper_removed(trooper: Trooper) -> void:
+	if !active:
+		return
+	
 	wave_credits_active[trooper.lane_idx] -= trooper.cost()
 	trooper.removed.disconnect(_on_trooper_removed)
 	
@@ -138,3 +142,4 @@ func enable() -> void:
 
 func disable() -> void:
 	active = false
+	set_waves([])
