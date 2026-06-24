@@ -18,4 +18,12 @@ func play_sound(sound: Sound) -> void:
 		add_child(player)
 	
 	player.volume_linear = sound.volume_linear
+	player.pitch_scale = sound.pitch_scale
 	player.play()
+
+
+func stop_sound(sound: Sound) -> void:
+	if stream_to_player.has(sound.stream):
+		var player: AudioStreamPlayer = stream_to_player.get(sound.stream)
+		if player:
+			player.stop()
