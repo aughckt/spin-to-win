@@ -1,20 +1,22 @@
 [gd_scene format=4 uid="uid://bvf7xxrxq3de8"]
 
 [ext_resource type="PackedScene" uid="uid://b04sr3oh5d0f3" path="res://structure/levels/template_level.tscn" id="1_5bju1"]
+[ext_resource type="Script" uid="uid://lglt8bhkbaeb" path="res://structure/meta/wave_data.gd" id="2_halu2"]
+[ext_resource type="Resource" uid="uid://d1d1i0v27fv7e" path="res://structure/levels/wave_data_test.tres" id="3_jgr2m"]
 
-[sub_resource type="Curve" id="Curve_kbjsr"]
-_limits = [0.0, 3.0, 0.0, 20.0]
-_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(9.082125, 2.2921348), 0.0, 0.0, 0, 0, Vector2(12.463767, 1.3820226), 0.0, 0.0, 0, 0, Vector2(15.555554, 1.280899), 0.0, 0.0, 0, 0, Vector2(17.004831, 3), 0.0, 0.0, 0, 0, Vector2(20, 3), 0.0, 0.0, 0, 0]
-point_count = 6
+[sub_resource type="Curve" id="Curve_jgr2m"]
+_limits = [0.0, 5.0, 0.0, 15.0]
+_data = [Vector2(0, 5), 0.0, 0.0, 0, 0, Vector2(15, 5), 0.0, 0.0, 0, 0]
+point_count = 2
 
-[sub_resource type="Curve" id="Curve_5bju1"]
-_limits = [0.0, 3.0, 0.0, 30.0]
-_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(7.9710155, 1.7191012), 0.0, 0.0, 0, 0, Vector2(15.652174, 0.9775281), 0.0, 0.0, 0, 0, Vector2(21.014494, 1.0786517), 0.0, 0.0, 0, 0, Vector2(26.231886, 3), 0.0, 0.0, 0, 0, Vector2(30, 3), 0.0, 0.0, 0, 0]
-point_count = 6
+[sub_resource type="Resource" id="Resource_halu2"]
+script = ExtResource("2_halu2")
+credit_curve = SubResource("Curve_jgr2m")
+total_credits = 5
+metadata/_custom_type_script = "uid://lglt8bhkbaeb"
 
 [node name="LevelGunturn" unique_id=251983101 instance=ExtResource("1_5bju1")]
-wave_list = Array[Curve]([SubResource("Curve_kbjsr"), SubResource("Curve_5bju1")])
-starting_budget = null
+waves = Array[Array]([[SubResource("Resource_halu2"), ExtResource("3_jgr2m")]])
 
 [node name="SpawnPoint1" parent="SpawnPointContainer" parent_id_path=PackedInt32Array(1156764314) index="0" unique_id=1971849226]
 position = Vector2(224, 480)
@@ -29,7 +31,7 @@ tile_map_data = PackedByteArray("AAADAAIAAAADAAAAAAAEAAIAAAADAAAAAAAFAAIAAAADAAA
 tile_map_data = PackedByteArray("AAAKAAgAAAABAAAAAAA=")
 
 [node name="ArrowTiles" parent="Environment" parent_id_path=PackedInt32Array(123182581) index="8" unique_id=108710037]
-tile_map_data = PackedByteArray("AAAIAAUAAQABAAEAAAADAAcAAQAAAAAAAAAEAAcAAQAAAAAAAAAFAAcAAQAAAAAAAAAGAAcAAQAAAAAAAAAHAAcAAQABAAEAAAAIAAYAAQABAAEAAAAIAAQAAQABAAEAAAAIAAMAAQACAAAAAAAHAAYAAQAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAIAAUAAAABAAEAAAADAAcAAAAAAAAAAAAEAAcAAAAAAAAAAAAFAAcAAAAAAAAAAAAGAAcAAAAAAAAAAAAHAAcAAAABAAEAAAAIAAYAAAABAAEAAAAIAAQAAAABAAEAAAAIAAMAAAACAAAAAAAHAAYAAAAAAAAAAAA=")
 
 [node name="Player" parent="Environment" parent_id_path=PackedInt32Array(123182581) index="12" unique_id=1382910038]
 position = Vector2(672, 480)

@@ -12,7 +12,11 @@ var level_array: Array[PackedScene] = [
 var current_level: Level = null
 var current_hp: int = 20
 var is_build_phase: bool = true
-var current_wave_list: Array[Curve]
+
+##array of array of WaveData
+var current_wave_list: Array[Array]
+## This is the amount of waves, maximum of all wave-lists in the level.
+var current_wave_max: int = 0
 var current_wave_index: int = 0
 
 signal wave_started
@@ -63,8 +67,9 @@ func lose_level() -> void:
 
 
 func load_level() -> void:
-	if current_level:
+	if current_level != null:
 		current_level.queue_free()
+		TrooperSpawner.INST.finished.disconnect(end_wave)
 	
 	if Env.INST:
 		Env.INST.delete()
@@ -76,39 +81,65 @@ func load_level() -> void:
 	set_build_phase(true)
 	add_child(current_level)
 	current_hp = current_level.level_hp
-	current_wave_list = current_level.wave_list
+	current_wave_list = current_level.waves
+	for wave in current_wave_list:
+		for x: Variant in wave:
+			assert(x is WaveData)
+			var w := (x as WaveData).credit_curve
+			assert(w.sample(w.max_domain) as int >= 1, "The end of a curve should be >= 1 so that the credits can always be spent completely")
+	
+	current_wave_max = 0
+	for wave: Array in current_wave_list:
+		if wave.size() > current_wave_max:
+			current_wave_max = wave.size()
+	
 	current_wave_index = 0
 	TrooperSpawner.INST.spawn_points = current_level.spawn_points
+	TrooperSpawner.INST.finished.connect(end_wave)
 
 
 func start_wave() -> void:
 	set_build_phase(false)
-	if current_wave_index >= current_wave_list.size():
+	if current_wave_index >= current_wave_max:
 		return
 	print("%s: Wave %s started!" % [name, current_wave_index])
-	var current_waves: Array[Curve] = []
-	for spawn_point: SpawnPoint in current_level.spawn_points:
-		if spawn_point.wave_list.size() <= current_wave_index:
-			continue
-		current_waves.append(spawn_point.wave_list[current_wave_index])
+	var current_waves: Array[WaveData] = []
+	for spawn_idx in range(current_wave_list.size()):
+		#this being null is fine because the spawner ignores it
+		var wave: WaveData = current_wave_list[spawn_idx].get(current_wave_index)
+		current_waves.push_back(wave)
+	
+	if current_waves.all(func(x: WaveData) -> bool: return x == null):
+		win_level()
+		return
+	
+	#for spawn_point: SpawnPoint in current_level.spawn_points:
+		#if spawn_point.wave_list.size() <= current_wave_index:
+			#continue
+		#current_waves.append(spawn_point.wave_list[current_wave_index])
+	TrooperSpawner.INST.enable()
 	TrooperSpawner.INST.set_waves(current_waves)
 	wave_started.emit()
 
 
 func end_wave() -> void:
 	print("%s: Wave %s ended!" % [name, current_wave_index])
-	set_build_phase(true)
 	current_wave_index += 1
-	TrooperSpawner.INST.set_waves([])
+	TrooperSpawner.INST.disable()
 	wave_finished.emit()
-	if current_wave_index >= current_wave_list.size():
+	
+	if current_wave_index >= current_wave_max:
 		win_level()
 		return
+	set_build_phase(true)
 
 
 func set_build_phase(value: bool) -> void:
 	is_build_phase = value
+	
 	TrooperSpawner.INST.clear_troopers()
+	TrooperSpawner.INST.active = !value
+	
 	wave_banner.visible = not value
 	build_banner.visible = value
 	phase_transition_timer.start()
