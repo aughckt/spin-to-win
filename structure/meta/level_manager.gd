@@ -15,7 +15,8 @@ var is_build_phase: bool = true
 
 ##array of array of WaveData
 var current_wave_list: Array[Array]
-
+## This is the amount of waves, maximum of all wave-lists in the level.
+var current_wave_max: int = 0
 var current_wave_index: int = 0
 
 signal wave_started
@@ -86,6 +87,12 @@ func load_level() -> void:
 			assert(x is WaveData)
 			var w := (x as WaveData).credit_curve
 			assert(w.sample(w.max_domain) as int >= 1, "The end of a curve should be >= 1 so that the credits can always be spent completely")
+	
+	current_wave_max = 0
+	for wave: Array in current_wave_list:
+		if wave.size() > current_wave_max:
+			current_wave_max = wave.size()
+	
 	current_wave_index = 0
 	TrooperSpawner.INST.spawn_points = current_level.spawn_points
 	TrooperSpawner.INST.finished.connect(end_wave)
@@ -93,7 +100,7 @@ func load_level() -> void:
 
 func start_wave() -> void:
 	set_build_phase(false)
-	if current_wave_index >= current_wave_list.size():
+	if current_wave_index >= current_wave_max:
 		return
 	print("%s: Wave %s started!" % [name, current_wave_index])
 	var current_waves: Array[WaveData] = []
@@ -121,7 +128,8 @@ func end_wave() -> void:
 	current_wave_index += 1
 	TrooperSpawner.INST.disable()
 	wave_finished.emit()
-	if current_wave_index >= current_wave_list.size():
+	
+	if current_wave_index >= current_wave_max:
 		win_level()
 		return
 

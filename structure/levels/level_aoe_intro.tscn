@@ -1,8 +1,10 @@
 [gd_scene format=4 uid="uid://da6rifdr4iwji"]
 
 [ext_resource type="PackedScene" uid="uid://b04sr3oh5d0f3" path="res://structure/levels/template_level.tscn" id="1_siism"]
+[ext_resource type="Resource" uid="uid://d1d1i0v27fv7e" path="res://structure/levels/wave_data_test.tres" id="2_5qrxn"]
 
 [node name="TemplateLevel" unique_id=251983101 instance=ExtResource("1_siism")]
+waves = Array[Array]([[ExtResource("2_5qrxn")], [ExtResource("2_5qrxn")]])
 
 [node name="SpawnPoint1" parent="SpawnPointContainer" parent_id_path=PackedInt32Array(1156764314) index="0" unique_id=1971849226]
 position = Vector2(288, 608)
