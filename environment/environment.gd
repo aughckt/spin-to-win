@@ -18,9 +18,9 @@ static var INST: Env
 @export var hud: Hud
 @export var build_visual: BuildVisual
 
-@export var gear_turn_sound: Sound
-@export var place_sound: Sound
-@export var remove_sound: Sound
+@export var remove_gear_sound: Sound
+@export var gear_place_sound: Sound
+@export var ori_gear_sound: Sound
 
 var tower_data: TowerData = null
 
@@ -219,7 +219,7 @@ func place_gear(tile: Vector2i, test_only: bool = false) -> String:
 		var build_perms := get_perms(tile)
 		visual.reparent.call_deferred(underground_gears if build_perms == BuildPerms.Gears else gears)
 		tile_to_visual[tile] = visual
-		SoundBus.play_sound(place_sound)
+		SoundBus.play_sound(gear_place_sound)
 		
 		match neighbour_sets.size():
 			0:
@@ -277,7 +277,7 @@ func remove_gear(tile: Vector2i) -> void:
 		return
 	tile_to_visual[tile].remove()
 	tile_to_visual.erase(tile)
-	SoundBus.play_sound(remove_sound)
+	SoundBus.play_sound(remove_gear_sound)
 	
 	if old_set.gears.size() == 1:
 		#refund budget
@@ -396,14 +396,14 @@ func set_ori_on(tile: Vector2i) -> void:
 	ori_gear_state[tile] = true
 
 	tile_to_visual[tile].unfreeze()
-	SoundBus.play_sound(gear_turn_sound)
+	SoundBus.play_sound(ori_gear_sound)
 	
 	
 func set_ori_off(tile: Vector2i) -> void:
 	assert(ori_gear_state.has(tile))
 	ori_gear_state[tile] = false
 	tile_to_visual[tile].freeze()
-	SoundBus.stop_sound(gear_turn_sound)
+	SoundBus.stop_sound(ori_gear_sound)
 
 
 func toggle_ori(tile: Vector2i) -> void:
@@ -472,7 +472,7 @@ func place_tower(tile: Vector2i, test_only: bool = false) -> String:
 	tower.global_position = gearmap.to_global(gearmap.map_to_local(tile))
 	tower.data = tower_data
 	towers.add_child(tower) #after setting the position so that the ready logic for the trap works correctly
-	SoundBus.play_sound(place_sound)
+	SoundBus.play_sound(gear_place_sound)
 	
 	if tower is GunTower:
 		(tower as GunTower).set_gun_rotation(tower_rotation)
@@ -482,7 +482,7 @@ func place_tower(tile: Vector2i, test_only: bool = false) -> String:
 
 func remove_tower(tile: Vector2i) -> void:
 	var tower: GenericTower = tile_to_tower.get(tile)
-	SoundBus.play_sound(remove_sound)
+	SoundBus.play_sound(remove_gear_sound)
 	if tile == null:
 		return
 	

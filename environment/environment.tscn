@@ -16,22 +16,20 @@
 [ext_resource type="Resource" uid="uid://d1jl6epjci7s5" path="res://towers/tower_data/trap_tower.tres" id="10_h6u84"]
 [ext_resource type="PackedScene" uid="uid://df7g5g3wu15n1" path="res://player/player.tscn" id="10_te1ty"]
 
-[sub_resource type="Resource" id="Resource_g6k8r"]
+[sub_resource type="Resource" id="Resource_a0onh"]
 script = ExtResource("2_gewoo")
-stream = ExtResource("3_ypa7m")
-volume_linear = 0.5
+stream = ExtResource("3_nsn85")
+pitch_scale = 0.5
+metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
+
+[sub_resource type="Resource" id="Resource_ypa7m"]
+script = ExtResource("2_gewoo")
+stream = ExtResource("3_nsn85")
 metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
 
 [sub_resource type="Resource" id="Resource_gewoo"]
 script = ExtResource("2_gewoo")
-stream = ExtResource("3_nsn85")
-metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
-
-[sub_resource type="Resource" id="Resource_nsn85"]
-script = ExtResource("2_gewoo")
-stream = ExtResource("3_nsn85")
-volume_linear = 0.5
-pitch_scale = 0.5
+stream = ExtResource("3_ypa7m")
 metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nmo3v"]
@@ -224,9 +222,9 @@ troopers = NodePath("Troopers")
 coords_label = NodePath("DebugHUD/CoordsLabel")
 hud = NodePath("HUD/HUD")
 build_visual = NodePath("BuildVisual")
-gear_turn_sound = SubResource("Resource_g6k8r")
-place_sound = SubResource("Resource_gewoo")
-remove_sound = SubResource("Resource_nsn85")
+remove_gear_sound = SubResource("Resource_a0onh")
+gear_place_sound = SubResource("Resource_ypa7m")
+ori_gear_sound = SubResource("Resource_gewoo")
 hud_layer = NodePath("HUD")
 
 [node name="UndergroundGears" type="Node2D" parent="." unique_id=146573048]
