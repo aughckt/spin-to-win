@@ -30,18 +30,18 @@ stream = SubResource("AudioStreamRandomizer_yyerm")
 metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_u8vmv"]
+random_pitch = 1.2599211
 streams_count = 1
+stream_0/stream = ExtResource("5_hpwyk")
 
 [sub_resource type="Resource" id="Resource_b2cam"]
 script = ExtResource("2_hlcmw")
 stream = SubResource("AudioStreamRandomizer_u8vmv")
+volume_linear = 0.3
 metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hpwyk"]
 random_pitch = 1.122462
-streams_count = 2
-stream_0/stream = ExtResource("5_hpwyk")
-stream_1/stream = ExtResource("3_b2cam")
 
 [sub_resource type="Resource" id="Resource_yyerm"]
 script = ExtResource("2_hlcmw")

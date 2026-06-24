@@ -100,6 +100,7 @@ func take_damage(amount: int) -> void:
 	if hp <= 0:
 		Env.INST.spawn_money(BOUNTY, get_screen_transform().origin)
 		pool_self()
+		SoundBus.play_sound(death_sound)
 	else:
 		update_shader()
 
@@ -126,7 +127,7 @@ func setup() -> void:
 func _on_random_sound_timer_timeout() -> void:
 	if not get_parent() == GeneralPool:
 		SoundBus.play_sound(random_sound)
-	random_sound_timer.wait_time = randf() * 5
+	random_sound_timer.wait_time = randf() * 1
 	random_sound_timer.start()
 
 
