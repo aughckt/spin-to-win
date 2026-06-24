@@ -124,7 +124,6 @@ func start_wave() -> void:
 
 func end_wave() -> void:
 	print("%s: Wave %s ended!" % [name, current_wave_index])
-	set_build_phase(true)
 	current_wave_index += 1
 	TrooperSpawner.INST.disable()
 	wave_finished.emit()
@@ -132,6 +131,7 @@ func end_wave() -> void:
 	if current_wave_index >= current_wave_max:
 		win_level()
 		return
+	set_build_phase(true)
 
 
 func set_build_phase(value: bool) -> void:
