@@ -9,4 +9,5 @@ cost = 5
 scene = ExtResource("1_f24ow")
 name = "Trap"
 shot_delay_sec = 2.0
+damage = 30
 metadata/_custom_type_script = "uid://b55436prbbuts"

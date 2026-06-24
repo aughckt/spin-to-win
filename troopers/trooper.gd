@@ -8,8 +8,8 @@ extends Area2D
 
 var target_pos: Vector2
 var walk_normal: Vector2
-const MAX_HP: int = 100
-var hp: int = MAX_HP
+@export var max_hp: int = 100
+var hp: int = max_hp
 @export var sprite: AnimatedSprite2D
 
 const BOUNTY: int = 1
@@ -83,11 +83,15 @@ func take_damage(amount: int) -> void:
 	#youre not tweening it, right? this just shrinks the clown as it takes damage?
 	#sprite.scale = Vector2(hp/100.0,hp/100.0)
 	
-	
-	
 	if hp <= 0:
 		Env.INST.spawn_money(BOUNTY, get_screen_transform().origin)
 		pool_self()
+	else:
+		update_shader()
+
+func update_shader() -> void:
+	var t := clampf(hp as float / max_hp, 0, 1)
+	sprite.set_instance_shader_parameter("y_threshold", t)
 
 
 func pool_self() -> void:
@@ -100,5 +104,6 @@ func setup() -> void:
 	#sprite.scale = Vector2(1,1)
 	set_deferred("monitorable", true)
 	set_deferred("monitoring", true)
-	hp = MAX_HP
+	hp = max_hp
 	stun_time_s = 0
+	update_shader()

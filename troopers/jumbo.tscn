@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b0rn5fufhcqtu"]
+
+[ext_resource type="PackedScene" uid="uid://cmrgjdrggd1x0" path="res://troopers/trooper.tscn" id="1_11td1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_11td1"]
+radius = 35.0
+
+[node name="Jumbo" unique_id=182051846 instance=ExtResource("1_11td1")]
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=807592597]
+shape = SubResource("CircleShape2D_11td1")

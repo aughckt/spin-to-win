@@ -7,13 +7,15 @@
 [ext_resource type="Script" uid="uid://djccx6ei5fjrw" path="res://player/cam.gd" id="6_boad6"]
 [ext_resource type="Script" uid="uid://cjavn501l5d66" path="res://player/player_interact.gd" id="6_g6k8r"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qjkh3"]
+size = Vector2(32, 18)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_klfgw"]
+radius = 44.011364
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g6k8r"]
 shader = ExtResource("1_g1dw6")
-shader_parameter/progress = 0.999999977648
-shader_parameter/strength = 0.0
-shader_parameter/y_threshold = 0.0
-shader_parameter/grey = Color(0.12591079, 0.12591085, 0.12591082, 1)
-shader_parameter/border = 0.0
+shader_parameter/y_threshold = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g6k8r"]
 atlas = ExtResource("3_qjkh3")
@@ -282,24 +284,9 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qjkh3"]
-size = Vector2(32, 18)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_klfgw"]
-radius = 44.011364
-
 [node name="Player" type="CharacterBody2D" unique_id=1382910038]
 collision_layer = 4
 script = ExtResource("1_qjkh3")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1304193456]
-unique_name_in_owner = true
-texture_filter = 1
-material = SubResource("ShaderMaterial_g6k8r")
-position = Vector2(0, -20)
-scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_g6k8r")
-animation = &"walk_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1970736098]
 position = Vector2(0, -1)
@@ -325,3 +312,12 @@ shape = SubResource("CircleShape2D_klfgw")
 zoom = Vector2(0.5, 0.5)
 script = ExtResource("6_boad6")
 player = NodePath("..")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1304193456]
+unique_name_in_owner = true
+texture_filter = 1
+material = SubResource("ShaderMaterial_g6k8r")
+position = Vector2(0, -20)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_g6k8r")
+animation = &"walk_down"
