@@ -11,10 +11,17 @@ var ori: Vector2
 const SPEED: float = 500
 const TARGET_DIST: float = 3000
 
-#add object pooling later?
+static var pool: Pool
+
+static func _get_pool() -> Pool:
+	if pool == null:
+		pool = Pool.create(scene)
+	return pool
+
 static func create() -> DeathVisual:
-	var dv: DeathVisual = scene.instantiate()
+	var dv: DeathVisual = _get_pool().get_inst()
 	dv.sprite.play("default")
+	dv.ori_set = false
 	return dv
 
 func _process(delta: float) -> void:
@@ -25,4 +32,4 @@ func _process(delta: float) -> void:
 	global_position.y -= SPEED * delta
 	if ori.y - global_position.y >= TARGET_DIST:
 		print("FREE THINGY")
-		queue_free()
+		_get_pool().pool(self)
