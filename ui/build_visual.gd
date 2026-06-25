@@ -60,7 +60,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	var gun_tower := tower as GunTower
 	
-	#TODO
 	if event is InputEventKey:
 		var key := (event as InputEventKey).keycode
 		match key:

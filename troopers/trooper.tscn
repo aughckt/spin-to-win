@@ -3,21 +3,9 @@
 [ext_resource type="Script" uid="uid://bl6wy11rra22g" path="res://troopers/trooper.gd" id="1_mba6l"]
 [ext_resource type="Script" uid="uid://ce8myo2y6rl0p" path="res://audio/sound.gd" id="2_hlcmw"]
 [ext_resource type="Shader" uid="uid://dbq6axlvij5a7" path="res://troopers/trooper.gdshader" id="2_kbjsr"]
-[ext_resource type="AudioStream" uid="uid://cc1e26yq8gnxf" path="res://troopers/sounds/Shoesqueak.ogg" id="3_b2cam"]
 [ext_resource type="Texture2D" uid="uid://rw3ynci3ddi2" path="res://troopers/Clown_01.png" id="3_kbjsr"]
 [ext_resource type="AudioStream" uid="uid://ctn85wkn0lldi" path="res://troopers/sounds/hit.ogg" id="4_u8vmv"]
 [ext_resource type="AudioStream" uid="uid://da7qukhi2wb1k" path="res://troopers/sounds/clownhonksad.wav" id="5_hpwyk"]
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ygs6c"]
-random_pitch = 1.122462
-streams_count = 1
-stream_0/stream = ExtResource("3_b2cam")
-
-[sub_resource type="Resource" id="Resource_kbjsr"]
-script = ExtResource("2_hlcmw")
-stream = SubResource("AudioStreamRandomizer_ygs6c")
-volume_linear = 0.05
-metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yyerm"]
 random_pitch = 1.122462
@@ -206,7 +194,6 @@ collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_mba6l")
 sprite = NodePath("AnimatedSprite2D")
-walk_sound = SubResource("Resource_kbjsr")
 hit_sound = SubResource("Resource_hlcmw")
 death_sound = SubResource("Resource_b2cam")
 random_sound = SubResource("Resource_yyerm")

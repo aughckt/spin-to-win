@@ -31,6 +31,8 @@ var lane_idx: int = -1
 
 signal removed(trooper: Trooper)
 
+const WALK_SOUND_CD_S: float = 1.5
+
 func _ready() -> void:
 	target_pos = global_position
 	walk_normal = Vector2.ZERO
@@ -135,7 +137,7 @@ func setup() -> void:
 func _on_random_sound_timer_timeout() -> void:
 	if not get_parent() == GeneralPool:
 		SoundBus.play_sound(random_sound)
-	random_sound_timer.wait_time = randf() * 1
+	random_sound_timer.wait_time = WALK_SOUND_CD_S #randf() * 1
 	random_sound_timer.start()
 
 

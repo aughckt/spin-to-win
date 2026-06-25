@@ -5,9 +5,19 @@ var stream_to_player: Dictionary[AudioStream, AudioStreamPlayer] = {}
 
 ##only one combination of settings is supported per stream.
 func play_sound(sound: Sound) -> void:
+	if sound == null:
+		return
+	
 	var stream := sound.stream
 	if stream == null:
 		return
+	
+	var curr_time_ms := Time.get_ticks_msec()
+	var last_played_ms := sound.last_played
+	var diff := curr_time_ms - last_played_ms
+	if diff < sound.min_time_between_s * 1000:
+		return
+	sound.last_played = curr_time_ms
 	
 	var player := stream_to_player.get(stream) as AudioStreamPlayer
 	if player == null:
