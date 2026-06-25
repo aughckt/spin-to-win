@@ -96,7 +96,9 @@ func spawn_trooper(index: int) -> void:
 		assert(budget >= Trooper.cost())
 		trooper = Trooper.create()
 	spend_credits(trooper.cost(), index)
-	trooper.removed.connect(_on_trooper_removed)
+	if !trooper.removed.is_connected(_on_trooper_removed):
+		#push_warning("signal already connected, shouldnt really matter")
+		trooper.removed.connect(_on_trooper_removed)
 	trooper.lane_idx = index
 	
 	trooper.reparent.call_deferred(Env.INST.troopers)

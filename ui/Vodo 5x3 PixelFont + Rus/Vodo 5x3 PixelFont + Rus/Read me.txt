@@ -1,0 +1,10 @@
+Micro Font (c) by Vodogrey 2025
+License: CC BY v4.0
+
+Defolt font size = 8
+
+.ttf - font file
+.ttf.import - godot import settings
+
+To import in Godot - copy both files. Or settup import on Font file in Godot:
+Subpixels Positioning -> Disabled

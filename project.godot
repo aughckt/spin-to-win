@@ -32,6 +32,12 @@ gdscript/warnings/static_called_on_instance=0
 
 window/stretch/mode="viewport"
 
+[gui]
+
+theme/default_font_antialiasing=0
+theme/custom="uid://ofehi657nfwc"
+theme/custom_font="uid://bntntvfpnccwb"
+
 [input]
 
 up={

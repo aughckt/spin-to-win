@@ -18,7 +18,7 @@ stream_1/weight = 0.4
 script = ExtResource("3_ehdac")
 stream = SubResource("AudioStreamRandomizer_ym5jm")
 volume_linear = 0.3
-max_polyphony = 4
+max_polyphony = 8
 metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
 
 [node name="Nose" type="Sprite2D" unique_id=2019483926]

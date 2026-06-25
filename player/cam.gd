@@ -31,3 +31,5 @@ func _process(_delta: float) -> void:
 		global_position = player.global_position
 	else:
 		global_position = pos
+	#would have to be 4 but that feels like ass
+	#global_position = global_position.snapped(Vector2(1, 1))
