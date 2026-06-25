@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://bgj5p7ryl1wl8" path="res://ui/health_chunk.tscn" id="8_srpbi"]
 [ext_resource type="Texture2D" uid="uid://dxxvj5oabfxxy" path="res://ui/UI_HealthIcon.png" id="9_ff8ar"]
 [ext_resource type="Texture2D" uid="uid://cffp71ar1hb08" path="res://ui/UI_ScreenBorder_cropped_2x.png" id="11_m0eg6"]
+[ext_resource type="Texture2D" uid="uid://bm2e8l2icmupi" path="res://ui/portrait_frame.png" id="12_b00kl"]
+[ext_resource type="PackedScene" uid="uid://bhthadoomgigl" path="res://ui/speech_bubble.tscn" id="13_so1yu"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cyw1q"]
 texture = ExtResource("3_spcu4")
@@ -35,7 +37,8 @@ texture_margin_top = 12.0
 texture_margin_right = 12.0
 texture_margin_bottom = 14.0
 
-[node name="HUD" type="Control" unique_id=1114338 node_paths=PackedStringArray("tower_panels", "health_label", "money_label", "start_wave_button", "pause_button", "nose_target", "actual_shape", "health_icon", "health_chunk_parent")]
+[node name="HUD" type="Control" unique_id=1114338 node_paths=PackedStringArray("tower_panels", "health_label", "money_label", "start_wave_button", "pause_button", "speech_bubble", "nose_target", "actual_shape", "health_icon", "health_chunk_parent")]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,6 +53,7 @@ health_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndM
 money_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Money/HBoxContainer/Label")
 start_wave_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/StartWaveButton")
 pause_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/PauseButton")
+speech_bubble = NodePath("PanelContainer/MarginContainer/VBoxContainer/Control/ScreenBorder/MarginContainer/Control/SpeechBubble")
 nose_target = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Money/HBoxContainer/TextureRect")
 actual_shape = NodePath("PanelContainer")
 health_icon = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Health/HealthChunks/HealthIcon")
@@ -261,6 +265,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="ScreenBorder" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Control" unique_id=1291061240]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -280,6 +285,23 @@ a portrait with some
 quirky text from enemies?"
 horizontal_alignment = 1
 autowrap_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/Control/ScreenBorder" unique_id=1410244612]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("12_b00kl")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Control/ScreenBorder" unique_id=941882784]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/Control/ScreenBorder/MarginContainer" unique_id=906658714]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="SpeechBubble" parent="PanelContainer/MarginContainer/VBoxContainer/Control/ScreenBorder/MarginContainer/Control" unique_id=1798231989 instance=ExtResource("13_so1yu")]
+visible = false
 
 [node name="StartWaveButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1684936538]
 layout_mode = 2

@@ -11,6 +11,8 @@ extends Control
 @export var start_wave_button: Button
 @export var pause_button: Button
 
+@export var speech_bubble: SpeechBubble
+
 @export var nose_target: Control
 
 signal data_selected (data: TowerData)
