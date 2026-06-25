@@ -9,11 +9,13 @@
 [sub_resource type="Resource" id="Resource_kk4pc"]
 script = ExtResource("2_i2teg")
 stream = ExtResource("3_xhd1a")
+volume_linear = 0.5
 metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
 
 [sub_resource type="Resource" id="Resource_6a8xh"]
 script = ExtResource("2_i2teg")
 stream = ExtResource("4_nf034")
+volume_linear = 0.5
 metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
 
 [node name="LevelManager" type="Node2D" unique_id=1089132439]

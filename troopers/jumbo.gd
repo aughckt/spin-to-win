@@ -5,7 +5,6 @@ const scene_jumbo: PackedScene = preload("res://troopers/jumbo.tscn")
 static var pool_jumbo: Pool
 
 static func _get_pool() -> Pool:
-	print("JUMBO")
 	if pool_jumbo == null:
 		pool_jumbo = Pool.create(scene_jumbo)
 	return pool_jumbo

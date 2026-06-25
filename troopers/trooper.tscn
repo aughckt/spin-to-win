@@ -26,6 +26,7 @@ stream_0/stream = ExtResource("4_u8vmv")
 [sub_resource type="Resource" id="Resource_hlcmw"]
 script = ExtResource("2_hlcmw")
 stream = SubResource("AudioStreamRandomizer_yyerm")
+volume_linear = 0.5
 metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
 
 [sub_resource type="AudioStreamWAV" id="AudioStreamWAV_yyerm"]
@@ -44,7 +45,7 @@ stream_0/stream = SubResource("AudioStreamWAV_yyerm")
 [sub_resource type="Resource" id="Resource_b2cam"]
 script = ExtResource("2_hlcmw")
 stream = SubResource("AudioStreamRandomizer_u8vmv")
-volume_linear = 0.3
+volume_linear = 0.53
 metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hpwyk"]
