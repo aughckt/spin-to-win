@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://df7g5g3wu15n1"]
 
-[ext_resource type="Shader" uid="uid://dbq6axlvij5a7" path="res://troopers/trooper.gdshader" id="1_g1dw6"]
 [ext_resource type="Script" uid="uid://5yhi25jonkhe" path="res://player/player.gd" id="1_qjkh3"]
 [ext_resource type="Texture2D" uid="uid://t84gdmsdg056" path="res://player/Player.png" id="3_qjkh3"]
 [ext_resource type="Script" uid="uid://ce8myo2y6rl0p" path="res://audio/sound.gd" id="3_rgyib"]
@@ -26,10 +25,6 @@ metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_klfgw"]
 radius = 44.011364
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g6k8r"]
-shader = ExtResource("1_g1dw6")
-shader_parameter/frames_y = 0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g6k8r"]
 atlas = ExtResource("3_qjkh3")
@@ -330,7 +325,6 @@ player = NodePath("..")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1304193456]
 unique_name_in_owner = true
 texture_filter = 1
-material = SubResource("ShaderMaterial_g6k8r")
 position = Vector2(0, -20)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_g6k8r")

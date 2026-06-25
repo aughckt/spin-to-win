@@ -2,7 +2,8 @@ shader_type canvas_item;
 
 uniform int frames_y;
 
-instance
+//instance uniforms break on the web
+//instance
 uniform float y_threshold: hint_range(0.0, 1.0, 0.001) = 1.;
 
 int[2] get_size_pixels(vec2 texture_pixel_size) {

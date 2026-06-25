@@ -283,10 +283,12 @@ autowrap_mode = 2
 [node name="StartWaveButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1684936538]
 layout_mode = 2
 size_flags_vertical = 4
+focus_behavior_recursive = 1
 text = "Start Wave"
 
 [node name="PauseButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=691115320]
 visible = false
 layout_mode = 2
 size_flags_vertical = 4
+focus_behavior_recursive = 1
 text = "Pause"

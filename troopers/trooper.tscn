@@ -55,6 +55,7 @@ radius = 30.016663
 resource_local_to_scene = true
 shader = ExtResource("2_kbjsr")
 shader_parameter/frames_y = 3
+shader_parameter/y_threshold = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hlcmw"]
 atlas = ExtResource("3_kbjsr")

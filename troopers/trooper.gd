@@ -1,7 +1,6 @@
 class_name Trooper
 extends Area2D
 
-
 @export var move_speed: float = 100.0
 
 #minimum distance towards target
@@ -111,7 +110,8 @@ func take_damage(amount: int) -> void:
 
 func update_shader() -> void:
 	var t := clampf(hp as float / max_hp, 0, 1)
-	sprite.set_instance_shader_parameter("y_threshold", t)
+	#sprite.set_instance_shader_parameter("y_threshold", t)
+	(sprite.material as ShaderMaterial).set_shader_parameter("y_threshold", t)
 
 static func _get_pool() -> Pool:
 	if pool == null:
@@ -145,6 +145,7 @@ func _on_walk_sound_timer_timeout() -> void:
 
 func remove() -> void:
 	removed.emit(self)
+	
 	_get_pool().pool(self)
 	set_deferred("monitorable", false)
 	set_deferred("monitoring", false)
