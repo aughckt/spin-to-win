@@ -106,7 +106,7 @@ func take_damage(amount: int) -> void:
 	if hp <= 0:
 		var visual := DeathVisual.create()
 		visual.global_position = global_position
-		Env.INST.bullets.add_child(visual)
+		visual.reparent.call_deferred(Env.INST.bullets)
 		
 		Env.INST.spawn_money(cost(), get_screen_transform().origin)
 		remove()

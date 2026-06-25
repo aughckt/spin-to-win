@@ -43,6 +43,8 @@ animations = [{
 }]
 
 [node name="DeathVisual" type="Node2D" unique_id=1374137288 node_paths=PackedStringArray("sprite")]
+top_level = true
+z_index = 4096
 script = ExtResource("1_2n1nx")
 sprite = NodePath("AnimatedSprite2D")
 

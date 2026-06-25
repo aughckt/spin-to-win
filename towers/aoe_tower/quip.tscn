@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://ecsctj8bg74u" path="res://towers/aoe_tower/quip.gd" id="1_fqaaj"]
 
 [node name="Quip" type="Node2D" unique_id=11048055 node_paths=PackedStringArray("label")]
+top_level = true
+z_index = 4096
 scale = Vector2(2, 2)
 script = ExtResource("1_fqaaj")
 label = NodePath("RichTextLabel")
