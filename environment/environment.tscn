@@ -208,7 +208,7 @@ custom_data_layer_0/name = "Type"
 custom_data_layer_0/type = 2
 sources/0 = SubResource("TileSetAtlasSource_h6u84")
 
-[node name="Environment" type="Node2D" unique_id=123182581 node_paths=PackedStringArray("terrainmap", "tilemap", "gearmap", "gears", "underground_gears", "bullets", "towers", "troopers", "coords_label", "hud", "build_visual", "hud_layer")]
+[node name="Environment" type="Node2D" unique_id=123182581 node_paths=PackedStringArray("terrainmap", "tilemap", "gearmap", "gears", "underground_gears", "bullets", "towers", "quips", "troopers", "coords_label", "hud", "build_visual", "hud_layer")]
 y_sort_enabled = true
 script = ExtResource("1_wjl7u")
 terrainmap = NodePath("Terrain")
@@ -218,6 +218,7 @@ gears = NodePath("Gears")
 underground_gears = NodePath("UndergroundGears")
 bullets = NodePath("Bullets")
 towers = NodePath("Towers")
+quips = NodePath("Quips")
 troopers = NodePath("Troopers")
 coords_label = NodePath("DebugHUD/CoordsLabel")
 hud = NodePath("HUD/HUD")
@@ -257,6 +258,9 @@ y_sort_enabled = true
 [node name="Towers" type="Node2D" parent="." unique_id=1601212248]
 z_index = 10
 y_sort_enabled = true
+
+[node name="Quips" type="Node2D" parent="." unique_id=2125755954]
+z_index = 11
 
 [node name="ArrowTiles" type="TileMapLayer" parent="." unique_id=108710037]
 top_level = true

@@ -31,6 +31,8 @@ var lane_idx: int = -1
 
 signal removed(trooper: Trooper)
 
+const WALK_SOUND_CD_S: float = 1.5
+
 func _ready() -> void:
 	target_pos = global_position
 	walk_normal = Vector2.ZERO
@@ -102,6 +104,10 @@ func take_damage(amount: int) -> void:
 	SoundBus.play_sound(hit_sound)
 	
 	if hp <= 0:
+		var visual := DeathVisual.create()
+		visual.global_position = global_position
+		Env.INST.bullets.add_child(visual)
+		
 		Env.INST.spawn_money(cost(), get_screen_transform().origin)
 		remove()
 		SoundBus.play_sound(death_sound)
@@ -135,7 +141,7 @@ func setup() -> void:
 func _on_random_sound_timer_timeout() -> void:
 	if not get_parent() == GeneralPool:
 		SoundBus.play_sound(random_sound)
-	random_sound_timer.wait_time = randf() * 1
+	random_sound_timer.wait_time = WALK_SOUND_CD_S #randf() * 1
 	random_sound_timer.start()
 
 

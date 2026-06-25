@@ -3,12 +3,21 @@
 [ext_resource type="PackedScene" uid="uid://cmrgjdrggd1x0" path="res://troopers/trooper.tscn" id="1_11td1"]
 [ext_resource type="Script" uid="uid://bh8s51l3cwxo" path="res://troopers/jumbo.gd" id="2_3mpbw"]
 [ext_resource type="Shader" uid="uid://dbq6axlvij5a7" path="res://troopers/trooper.gdshader" id="2_vrclx"]
+[ext_resource type="Script" uid="uid://ce8myo2y6rl0p" path="res://audio/sound.gd" id="3_0v5en"]
 [ext_resource type="Texture2D" uid="uid://buwkyi672ob7l" path="res://troopers/jumbo.png" id="4_h4ien"]
+[ext_resource type="AudioStream" uid="uid://c8gt5oa6x8j6p" path="res://troopers/sounds/stompfinalmaybe.ogg" id="4_m8tba"]
+
+[sub_resource type="Resource" id="Resource_yyerm"]
+script = ExtResource("3_0v5en")
+stream = ExtResource("4_m8tba")
+volume_linear = 0.5
+min_time_between_s = 1.5
+metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_11td1"]
 radius = 35.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_h4ien"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0v5en"]
 resource_local_to_scene = true
 shader = ExtResource("2_vrclx")
 shader_parameter/frames_y = 4
@@ -376,11 +385,12 @@ animations = [{
 [node name="Jumbo" unique_id=182051846 instance=ExtResource("1_11td1")]
 script = ExtResource("2_3mpbw")
 move_speed = 60.0
+walk_sound = SubResource("Resource_yyerm")
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=807592597]
 position = Vector2(0, -14)
 shape = SubResource("CircleShape2D_11td1")
 
 [node name="AnimatedSprite2D" parent="." index="1" unique_id=1506180497]
-material = SubResource("ShaderMaterial_h4ien")
+material = SubResource("ShaderMaterial_0v5en")
 sprite_frames = SubResource("SpriteFrames_amto4")

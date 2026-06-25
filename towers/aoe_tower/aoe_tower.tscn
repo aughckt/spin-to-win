@@ -3,7 +3,32 @@
 [ext_resource type="PackedScene" uid="uid://qyhxr7brjwsw" path="res://towers/gun_tower/gun_tower.tscn" id="1_w825s"]
 [ext_resource type="Script" uid="uid://b3i1ttqlnn1bq" path="res://towers/aoe_tower/aoe_tower.gd" id="2_0draq"]
 [ext_resource type="Texture2D" uid="uid://btm4vlsmnxvyw" path="res://icon.svg" id="3_0draq"]
+[ext_resource type="Script" uid="uid://ce8myo2y6rl0p" path="res://audio/sound.gd" id="3_y48un"]
+[ext_resource type="AudioStream" uid="uid://chxwebeaykek3" path="res://towers/aoe_tower/speaker/speakertowervoice1.ogg" id="4_jaspd"]
 [ext_resource type="Texture2D" uid="uid://gi3ahjl6xcn5" path="res://towers/aoe_tower/Megaphone.png" id="4_pvsoq"]
+[ext_resource type="AudioStream" uid="uid://w85dlupqglti" path="res://towers/aoe_tower/speaker/speakertowervoice2.ogg" id="5_41p03"]
+[ext_resource type="AudioStream" uid="uid://cviutivil4kjq" path="res://towers/aoe_tower/speaker/speakertowervoice3.ogg" id="6_mqkv7"]
+[ext_resource type="AudioStream" uid="uid://bcv07ebbesatm" path="res://towers/aoe_tower/speaker/speakertowervoice4.ogg" id="7_s8h82"]
+[ext_resource type="AudioStream" uid="uid://v1cet2snl61o" path="res://towers/aoe_tower/speaker/speakertowervoice5.ogg" id="8_exjt6"]
+[ext_resource type="AudioStream" uid="uid://ckuxwvj6gbjam" path="res://towers/aoe_tower/speaker/speakertowervoice6.ogg" id="9_lq52f"]
+[ext_resource type="AudioStream" uid="uid://d24yvgqjnokxh" path="res://towers/aoe_tower/speaker/speakertowervoice7.ogg" id="10_41p03"]
+[ext_resource type="AudioStream" uid="uid://17rds110nmnu" path="res://towers/aoe_tower/speaker/speakertowervoice8.ogg" id="11_mqkv7"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_uacea"]
+streams_count = 8
+stream_0/stream = ExtResource("4_jaspd")
+stream_1/stream = ExtResource("5_41p03")
+stream_2/stream = ExtResource("6_mqkv7")
+stream_3/stream = ExtResource("7_s8h82")
+stream_4/stream = ExtResource("8_exjt6")
+stream_5/stream = ExtResource("9_lq52f")
+stream_6/stream = ExtResource("10_41p03")
+stream_7/stream = ExtResource("11_mqkv7")
+
+[sub_resource type="Resource" id="Resource_gn13q"]
+script = ExtResource("3_y48un")
+stream = SubResource("AudioStreamRandomizer_uacea")
+metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_klfgw"]
 radius = 140.0
@@ -53,6 +78,7 @@ animations = [{
 
 [node name="AOETower" unique_id=304654658 instance=ExtResource("1_w825s")]
 script = ExtResource("2_0draq")
+sound = SubResource("Resource_gn13q")
 
 [node name="Area2D" type="Area2D" parent="." index="1" unique_id=1368491010]
 unique_name_in_owner = true

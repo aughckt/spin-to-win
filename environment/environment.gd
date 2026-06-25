@@ -11,6 +11,7 @@ static var INST: Env
 @export var underground_gears: Node2D
 @export var bullets: Node2D
 @export var towers: Node2D
+@export var quips: Node2D
 @export var troopers: Node2D
 @export var coords_label: Label
 @export var budget: int = 20
@@ -124,10 +125,10 @@ func _unhandled_input(event: InputEvent) -> void:
 				return
 			
 			if tile_to_gear_set.get(tile) == null:
-				print(place_gear(tile))
+				say(place_gear(tile))
 			
 			if tower_data != null:
-				print(place_tower(tile))
+				say(place_tower(tile))
 		
 		MouseButton.MOUSE_BUTTON_RIGHT:
 			if tile_to_tower.has(tile):
@@ -170,14 +171,14 @@ func move_target_from_global(global_pos: Vector2) -> Vector2:
 ##an empty string means no error occured
 func place_gear(tile: Vector2i, test_only: bool = false) -> String:
 		if gearmap.get_cell_source_id(tile) != -1:
-			return "Tile is already occupied"
+			return "this tile is already occupied"
 		
 		if get_perms(tile) == BuildPerms.Nothing:
-			return "Cannot build on this tile"
+			return "you cant build there"
 		
 		#only place if you have enough money
 		if budget < GEAR_COST:
-			return "Cannot build on this tile"
+			return "gears arent free"
 
 
 		# none of the neighbours are allowed to be in the same set
@@ -191,11 +192,11 @@ func place_gear(tile: Vector2i, test_only: bool = false) -> String:
 			var gset: GearSet = tile_to_gear_set.get(candidate)
 			if gset != null:
 				if neighbour_sets.has(gset):
-					return "Cannot place gear because it would create a loop"
+					return "if you put that there\nit would create a loop"
 
 				if gset.has_ori_gear:
 						if has_powered_neighbour:
-							return "Cannot place gear because it would connect 2 powered sets"
+							return "you cant connect 2 origin\ngears to each other"
 						else:
 							has_powered_neighbour = true
 							neighbour_ori = gset.ori_gear_tile
@@ -205,7 +206,7 @@ func place_gear(tile: Vector2i, test_only: bool = false) -> String:
 			else:
 				if gear_kind_at(candidate) == ORIGIN_GEAR:
 					if has_powered_neighbour:
-						return "Cannot place gear because it would connect 2 powered sets (directly next to origin gear)"
+						return "you cant connect 2 origin\ngears to each other"
 
 					has_powered_neighbour = true
 					neighbour_ori = candidate
@@ -446,28 +447,33 @@ func spend(credits: int) -> void:
 	budget = max(budget, 0)
 
 func place_tower(tile: Vector2i, test_only: bool = false) -> String:
+	#these are ordered for quality of error messages rather than efficiency
+	
+	var perms := get_perms(tile)
+	if perms == BuildPerms.Gears:
+		return "you can only put gears there"
+	if perms == BuildPerms.Nothing:
+		return "you cant build there"
+	
 	match gear_kind_at(tile):
 		BASIC_GEAR:
 			pass
 		ORIGIN_GEAR:
-			return "Cannot build towers on origin gears"
+			return "you cant build on origin gears"
 		-1:
-			return "Can only build towers on gears"
+			return "you can only build towers on gears"
 		_:
 			assert(false)
 		
 	
 	if tile_to_tower.has(tile):
-		return "There is already a tower on this tile"
+		return "theres already a tower there"
 	
 	if tower_data == null:
-		return "Select a tower from the menu"
+		return "theres already a gear there\nbut you could build a tower"
 	
 	if tower_data.cost > budget:
-		return "This isn't a charity"
-	
-	if get_perms(tile) == BuildPerms.Gears:
-		return "Cannot build a tower on this tile"
+		return "this isnt a charity"
 	
 	if test_only:
 		return ""
@@ -512,7 +518,7 @@ func _on_data_selected(data: TowerData) -> void:
 	else:
 		tower_data = data
 	
-	print("Selected tower %s" % ("gear" if tower_data == null else tower_data.name))
+	#print("Selected tower %s" % ("gear" if tower_data == null else tower_data.name))
 	build_visual.set_data(tower_data)
 
 
@@ -532,3 +538,14 @@ func spawn_money(amount: int, at: Vector2) -> void:
 		var angle := deg_to_rad(randf_range(-SPREAD_DEGRESS, SPREAD_DEGRESS))
 		
 		nose.vel = (-at.direction_to(target)).rotated(angle) * speed
+
+func say(text: String) -> void:
+	if text == "":
+		return
+	
+	hud.speech_bubble.set_text(text, 2)
+	hud.speech_bubble.show()
+
+func clear_speech_bubble() -> void:
+	hud.speech_bubble.set_text("If you can see this there is a bug")
+	hud.speech_bubble.hide()

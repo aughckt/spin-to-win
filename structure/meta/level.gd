@@ -10,8 +10,7 @@ extends Node2D
 
 var spawn_points: Array[SpawnPoint] = []
 
-##array of array of WaveData
-@export var waves: Array[Array]
+@export var lanes: Array[LaneData]
 
 func _ready() -> void:
 	LevelManager.INST.wave_finished.connect(_on_wave_finished)

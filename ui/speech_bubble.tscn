@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://bhthadoomgigl"]
+
+[ext_resource type="Script" uid="uid://dn6org0bmibng" path="res://ui/speech_bubble.gd" id="1_sofsi"]
+[ext_resource type="Texture2D" uid="uid://itj1dihckpgd" path="res://ui/UI_SpeechBubble.png" id="2_sofsi"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fbxa2"]
+texture = ExtResource("2_sofsi")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 26.0
+texture_margin_bottom = 30.0
+
+[node name="SpeechBubble" type="Node2D" unique_id=1798231989 node_paths=PackedStringArray("label")]
+script = ExtResource("1_sofsi")
+label = NodePath("PanelContainer/MarginContainer/RichTextLabel")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=837711668]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_fbxa2")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=749119902]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = -15
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer" unique_id=37448975]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0.29803923, 0.56078434, 0.50980395, 1)
+theme_override_font_sizes/normal_font_size = 24
+text = "TEXT TEXT TEXT TEXT
+TEXT TEXT TEXT TEXT"
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1
