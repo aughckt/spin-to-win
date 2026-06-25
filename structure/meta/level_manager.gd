@@ -67,6 +67,7 @@ func lose_level() -> void:
 
 
 func load_level() -> void:
+	SoundBus.stop_all_sounds()
 	if current_level != null:
 		current_level.queue_free()
 		TrooperSpawner.INST.finished.disconnect(end_wave)

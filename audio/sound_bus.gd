@@ -27,3 +27,8 @@ func stop_sound(sound: Sound) -> void:
 		var player: AudioStreamPlayer = stream_to_player.get(sound.stream)
 		if player:
 			player.stop()
+
+
+func stop_all_sounds() -> void:
+	for audio_stream: AudioStream in stream_to_player.keys():
+		stream_to_player[audio_stream].stop()
