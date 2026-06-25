@@ -13,6 +13,12 @@
 [ext_resource type="Texture2D" uid="uid://cffp71ar1hb08" path="res://ui/UI_ScreenBorder_cropped_2x.png" id="11_m0eg6"]
 [ext_resource type="Texture2D" uid="uid://bm2e8l2icmupi" path="res://ui/portrait_frame.png" id="12_b00kl"]
 [ext_resource type="PackedScene" uid="uid://bhthadoomgigl" path="res://ui/speech_bubble.tscn" id="13_so1yu"]
+[ext_resource type="Texture2D" uid="uid://sjnpc7x08nxc" path="res://ui/UI_StartButton.png" id="14_65xic"]
+[ext_resource type="Texture2D" uid="uid://cur8mu634862p" path="res://ui/UI_StartButton_Pressed.png" id="15_mp5xd"]
+[ext_resource type="Texture2D" uid="uid://c04qdbiqudtu1" path="res://ui/UI_Pause.png" id="16_xtm2r"]
+[ext_resource type="Texture2D" uid="uid://b2js6ie8ww71q" path="res://ui/UI_Pause_Pressed.png" id="17_kc1f2"]
+[ext_resource type="Texture2D" uid="uid://bfsv7rl5s6lv6" path="res://ui/UI_Continue.png" id="18_6mpex"]
+[ext_resource type="Texture2D" uid="uid://ctx8thaywbiic" path="res://ui/UI_Continue_Pressed.png" id="19_mlhsj"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cyw1q"]
 texture = ExtResource("3_spcu4")
@@ -37,7 +43,7 @@ texture_margin_top = 12.0
 texture_margin_right = 12.0
 texture_margin_bottom = 14.0
 
-[node name="HUD" type="Control" unique_id=1114338 node_paths=PackedStringArray("tower_panels", "health_label", "money_label", "start_wave_button", "pause_button", "speech_bubble", "nose_target", "actual_shape", "health_icon", "health_chunk_parent")]
+[node name="HUD" type="Control" unique_id=1114338 node_paths=PackedStringArray("tower_panels", "health_label", "money_label", "start_wave_button", "continue_wave_button", "pause_button", "speech_bubble", "nose_target", "actual_shape", "health_icon", "health_chunk_parent")]
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
@@ -52,6 +58,7 @@ tower_panel_scene = ExtResource("1_rbyyf")
 health_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Health/HBoxContainer/Label")
 money_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Money/HBoxContainer/Label")
 start_wave_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/StartWaveButton")
+continue_wave_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/ContinueButton")
 pause_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/PauseButton")
 speech_bubble = NodePath("PanelContainer/MarginContainer/VBoxContainer/Control/ScreenBorder/MarginContainer/Control/SpeechBubble")
 nose_target = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Money/HBoxContainer/TextureRect")
@@ -65,7 +72,7 @@ anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -30.0
+offset_left = -288.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_cyw1q")
@@ -303,15 +310,22 @@ size_flags_vertical = 4
 [node name="SpeechBubble" parent="PanelContainer/MarginContainer/VBoxContainer/Control/ScreenBorder/MarginContainer/Control" unique_id=1798231989 instance=ExtResource("13_so1yu")]
 visible = false
 
-[node name="StartWaveButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1684936538]
+[node name="StartWaveButton" type="TextureButton" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=2081919439]
 layout_mode = 2
-size_flags_vertical = 4
-focus_behavior_recursive = 1
-text = "Start Wave"
+texture_normal = ExtResource("14_65xic")
+texture_pressed = ExtResource("15_mp5xd")
+stretch_mode = 3
 
-[node name="PauseButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=691115320]
+[node name="PauseButton" type="TextureButton" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1389430765]
 visible = false
 layout_mode = 2
-size_flags_vertical = 4
-focus_behavior_recursive = 1
-text = "Pause"
+texture_normal = ExtResource("16_xtm2r")
+texture_pressed = ExtResource("17_kc1f2")
+stretch_mode = 3
+
+[node name="ContinueButton" type="TextureButton" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1566538723]
+visible = false
+layout_mode = 2
+texture_normal = ExtResource("18_6mpex")
+texture_pressed = ExtResource("19_mlhsj")
+stretch_mode = 3
