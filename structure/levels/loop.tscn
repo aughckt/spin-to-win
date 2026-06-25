@@ -27,6 +27,7 @@ total_credits = 60
 metadata/_custom_type_script = "uid://lglt8bhkbaeb"
 
 [node name="TemplateLevel" unique_id=251983101 instance=ExtResource("1_0cu82")]
+level_hp = 10
 waves = Array[Array]([[SubResource("Resource_d1jnj")], [SubResource("Resource_8qd04")]])
 
 [node name="SpawnPoint2" type="Node2D" parent="SpawnPointContainer" parent_id_path=PackedInt32Array(1156764314) index="0" unique_id=289845821]

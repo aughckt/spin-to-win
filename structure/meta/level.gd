@@ -7,7 +7,6 @@ extends Node2D
 
 @export_category("Custom stuff")
 @export var level_hp: int = 20
-@export var starting_budget: int = 10
 
 var spawn_points: Array[SpawnPoint] = []
 
