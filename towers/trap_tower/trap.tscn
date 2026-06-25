@@ -1,9 +1,48 @@
 [gd_scene format=3 uid="uid://dimgm6hfo2fot"]
 
 [ext_resource type="Script" uid="uid://bnrpoiaxrlnpq" path="res://towers/trap_tower/trap.gd" id="1_f8g6h"]
-[ext_resource type="Texture2D" uid="uid://btm4vlsmnxvyw" path="res://icon.svg" id="1_hibab"]
+[ext_resource type="Texture2D" uid="uid://pb37pubh5sm0" path="res://towers/trap_tower/BookDispenser_Projectile.png" id="2_f8g6h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fbxa2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2w8op"]
+atlas = ExtResource("2_f8g6h")
+region = Rect2(24, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8g6h"]
+atlas = ExtResource("2_f8g6h")
+region = Rect2(12, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00vmy"]
+atlas = ExtResource("2_f8g6h")
+region = Rect2(0, 0, 12, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_126ht"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2w8op")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8g6h")
+}],
+"loop": 1,
+"name": &"default2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_00vmy")
+}],
+"loop": 1,
+"name": &"default3",
+"speed": 5.0
+}]
 
 [node name="Trap" type="Area2D" unique_id=1568653871]
 collision_layer = 0
@@ -14,7 +53,6 @@ script = ExtResource("1_f8g6h")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1879159455]
 shape = SubResource("CircleShape2D_fbxa2")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=804667390]
-self_modulate = Color(1, 0, 0, 1)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_hibab")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=805484978]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_126ht")
