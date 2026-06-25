@@ -1,10 +1,25 @@
 [gd_scene format=3 uid="uid://bua7qsfwr841o"]
 
 [ext_resource type="Script" uid="uid://dru6i38ycl0fp" path="res://structure/meta/level_manager.gd" id="1_x4ns8"]
+[ext_resource type="Script" uid="uid://ce8myo2y6rl0p" path="res://audio/sound.gd" id="2_i2teg"]
 [ext_resource type="Script" uid="uid://bue8f1qndpe0f" path="res://structure/meta/trooper_spawner.gd" id="2_yi5s1"]
+[ext_resource type="AudioStream" uid="uid://dfwaqpptwnuji" path="res://environment/cararrival.ogg" id="3_xhd1a"]
+[ext_resource type="AudioStream" uid="uid://ctcqs0uug6atf" path="res://environment/Wavebegin.ogg" id="4_nf034"]
+
+[sub_resource type="Resource" id="Resource_kk4pc"]
+script = ExtResource("2_i2teg")
+stream = ExtResource("3_xhd1a")
+metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
+
+[sub_resource type="Resource" id="Resource_6a8xh"]
+script = ExtResource("2_i2teg")
+stream = ExtResource("4_nf034")
+metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
 
 [node name="LevelManager" type="Node2D" unique_id=1089132439]
 script = ExtResource("1_x4ns8")
+start_level_sound = SubResource("Resource_kk4pc")
+start_wave_sound = SubResource("Resource_6a8xh")
 
 [node name="Timers" type="Node" parent="." unique_id=94644071]
 

@@ -27,7 +27,7 @@ total_credits = 10
 metadata/_custom_type_script = "uid://lglt8bhkbaeb"
 
 [node name="LevelMultilane" unique_id=251983101 instance=ExtResource("1_gy7k6")]
-level_hp = 20
+level_hp = 10
 waves = Array[Array]([[SubResource("Resource_dgo3u")], [SubResource("Resource_kk4pc")]])
 
 [node name="SpawnPoint" parent="SpawnPointContainer" parent_id_path=PackedInt32Array(1156764314) index="0" unique_id=1691155891 instance=ExtResource("3_kk4pc")]

@@ -30,6 +30,10 @@ signal wave_started
 @onready var wave_banner: Control = %WavePhaseLabel
 @onready var build_banner: Control = %BuildPhaseLabel
 
+
+@export var start_level_sound: Sound
+@export var start_wave_sound: Sound
+
 signal wave_finished
 
 func _ready() -> void:
@@ -69,6 +73,7 @@ func lose_level() -> void:
 
 func load_level() -> void:
 	SoundBus.stop_all_sounds()
+	SoundBus.play_sound(start_level_sound)
 	if current_level != null:
 		current_level.queue_free()
 		TrooperSpawner.INST.finished.disconnect(end_wave)
@@ -103,6 +108,7 @@ func load_level() -> void:
 
 func start_wave() -> void:
 	set_build_phase(false)
+	SoundBus.play_sound(start_wave_sound)
 	if current_wave_index >= current_wave_max:
 		return
 	print("%s: Wave %s started!" % [name, current_wave_index])

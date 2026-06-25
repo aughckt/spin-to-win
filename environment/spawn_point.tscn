@@ -269,15 +269,15 @@ sprite_right = NodePath("SpriteRight")
 
 [node name="SpriteUp" type="AnimatedSprite2D" parent="." unique_id=1871596231]
 visible = false
+y_sort_enabled = true
 position = Vector2(-49, -39)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_fbxa2")
 animation = &"intro_up"
-frame = 7
-frame_progress = 1.0
 
 [node name="SpriteLeft" type="AnimatedSprite2D" parent="." unique_id=192564626]
 visible = false
+y_sort_enabled = true
 position = Vector2(12, -60)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_fbxa2")
@@ -287,6 +287,7 @@ frame_progress = 1.0
 
 [node name="SpriteRight" type="AnimatedSprite2D" parent="." unique_id=1372343749]
 visible = false
+y_sort_enabled = true
 position = Vector2(-12, -60)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_fbxa2")
