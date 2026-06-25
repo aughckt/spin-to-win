@@ -27,6 +27,7 @@ signal wave_started
 @onready var phase_transition_timer: Timer = %PhaseTransitionTimer
 @onready var wave_banner: Control = %WavePhaseLabel
 @onready var build_banner: Control = %BuildPhaseLabel
+@onready var background_banner: Control = %WavePhasePanel
 
 
 @export var start_level_sound: Sound
@@ -63,6 +64,7 @@ func win_level() -> void:
 	current_level_index += 1
 	level_won_timer.start()
 	level_won_banner.visible = true
+	background_banner.visible = true
 	TrooperSpawner.INST.disable()
 
 
@@ -74,6 +76,7 @@ func lose_level() -> void:
 	print("%s: Level %s lost" % [name, current_level_index])
 	level_lost_timer.start()
 	level_lost_banner.visible = true
+	background_banner.visible = true
 
 
 func load_level() -> void:
@@ -155,6 +158,7 @@ func set_build_phase(value: bool) -> void:
 	
 	wave_banner.visible = not value
 	build_banner.visible = value
+	background_banner.visible = true
 	phase_transition_timer.start()
 	if current_level:
 		current_level.set_build_phase(value)
@@ -172,13 +176,16 @@ func take_damage(amount: int) -> void:
 func _on_phase_transition_timeout() -> void:
 	wave_banner.visible = false
 	build_banner.visible = false
+	background_banner.visible = false
 
 
 func _on_lost_timer_timeout() -> void:
 	load_level()
 	level_lost_banner.visible = false
+	background_banner.visible = false
 
 
 func _on_won_timer_timeout() -> void:
 	load_level()
 	level_won_banner.visible = false
+	background_banner.visible = false
