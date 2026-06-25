@@ -13,8 +13,7 @@ var current_level: Level = null
 var current_hp: int = 10
 var is_build_phase: bool = true
 
-##array of array of WaveData
-var current_wave_list: Array[Array]
+var current_lanes: Array[LaneData]
 ## This is the amount of waves, maximum of all wave-lists in the level.
 var current_wave_max: int = 0
 var current_wave_index: int = 0
@@ -60,6 +59,9 @@ func win_level() -> void:
 
 
 func lose_level() -> void:
+	if TrooperSpawner.INST.finished.is_connected(end_wave):
+		TrooperSpawner.INST.finished.disconnect(end_wave)
+	
 	TrooperSpawner.INST.disable()
 	print("%s: Level %s lost" % [name, current_level_index])
 	level_lost_timer.start()
@@ -82,17 +84,16 @@ func load_level() -> void:
 	current_hp = current_level.level_hp
 	set_build_phase(true)
 	add_child(current_level)
-	current_wave_list = current_level.waves
-	for wave in current_wave_list:
-		for x: Variant in wave:
-			assert(x is WaveData)
-			var w := (x as WaveData).credit_curve
-			assert(w.sample(w.max_domain) as int >= 1, "The end of a curve should be >= 1 so that the credits can always be spent completely")
+	current_lanes = current_level.lanes
+	for lane in current_lanes:
+		for wd in lane.waves:
+			var cc := (wd as WaveData).credit_curve
+			assert(cc.sample(cc.max_domain) as int >= 1, "The end of a curve should be >= 1 so that the credits can always be spent completely")
 	
 	current_wave_max = 0
-	for wave: Array in current_wave_list:
-		if wave.size() > current_wave_max:
-			current_wave_max = wave.size()
+	for lane in current_lanes:
+		if lane.waves.size() > current_wave_max:
+			current_wave_max = lane.waves.size()
 	
 	current_wave_index = 0
 	TrooperSpawner.INST.spawn_points = current_level.spawn_points
@@ -105,9 +106,9 @@ func start_wave() -> void:
 		return
 	print("%s: Wave %s started!" % [name, current_wave_index])
 	var current_waves: Array[WaveData] = []
-	for spawn_idx in range(current_wave_list.size()):
+	for spawn_idx in range(current_lanes.size()):
 		#this being null is fine because the spawner ignores it
-		var wave: WaveData = current_wave_list[spawn_idx].get(current_wave_index)
+		var wave: WaveData = current_lanes[spawn_idx].waves.get(current_wave_index)
 		current_waves.push_back(wave)
 	
 	if current_waves.all(func(x: WaveData) -> bool: return x == null):

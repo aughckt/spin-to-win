@@ -3,31 +3,64 @@
 [ext_resource type="PackedScene" uid="uid://b04sr3oh5d0f3" path="res://structure/levels/template_level.tscn" id="1_0cu82"]
 [ext_resource type="Script" uid="uid://lglt8bhkbaeb" path="res://structure/meta/wave_data.gd" id="2_8qd04"]
 [ext_resource type="Script" uid="uid://dy1xq2uadaf4c" path="res://structure/levels/spawn_point.gd" id="2_d1jnj"]
+[ext_resource type="Script" uid="uid://cqeic2k8kt4v1" path="res://structure/meta/lane_data.gd" id="2_muf1e"]
+
+[sub_resource type="Curve" id="Curve_p6elp"]
+_limits = [0.0, 100.0, 0.0, 10.0]
+_data = [Vector2(0, 100), 0.0, 0.0, 0, 0, Vector2(4.9570813, 100), 0.0, 0.0, 0, 0, Vector2(10, 1.1235952), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_djfem"]
+script = ExtResource("2_8qd04")
+credit_curve = SubResource("Curve_p6elp")
+total_credits = 200
+metadata/_custom_type_script = "uid://lglt8bhkbaeb"
 
 [sub_resource type="Curve" id="Curve_muf1e"]
-_limits = [0.0, 20.0, 0.0, 10.0]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(4.9350653, 20), 0.0, 0.0, 0, 0, Vector2(10, 2.0224705), 0.0, 0.0, 0, 0]
+_limits = [0.0, 10.0, 0.0, 10.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(5.0000005, 7.52809), 0.0, 0.0, 0, 0, Vector2(10, 1.1235952), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="Resource" id="Resource_d1jnj"]
+[sub_resource type="Resource" id="Resource_ytcxk"]
 script = ExtResource("2_8qd04")
 credit_curve = SubResource("Curve_muf1e")
-total_credits = 60
+total_credits = 15
 metadata/_custom_type_script = "uid://lglt8bhkbaeb"
 
-[sub_resource type="Curve" id="Curve_ytcxk"]
-_limits = [0.0, 20.0, 0.0, 10.0]
-_data = [Vector2(0, 20), 0.0, 0.0, 0, 0, Vector2(5.0216455, 0), 0.0, 0.0, 0, 0, Vector2(10, 20), 0.0, 0.0, 0, 0]
+[sub_resource type="Resource" id="Resource_5jpk2"]
+script = ExtResource("2_muf1e")
+waves = Array[ExtResource("2_8qd04")]([SubResource("Resource_djfem"), SubResource("Resource_ytcxk")])
+metadata/_custom_type_script = "uid://cqeic2k8kt4v1"
+
+[sub_resource type="Curve" id="Curve_lslta"]
+_limits = [0.0, 10.0, 0.0, 10.0]
+_data = [Vector2(0, 7.1727743), 0.0, 0.0, 0, 0, Vector2(4.978541, 0.4712038), 0.0, 0.0, 0, 0, Vector2(10, 6.70157), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="Resource" id="Resource_8qd04"]
+[sub_resource type="Resource" id="Resource_a4ej5"]
 script = ExtResource("2_8qd04")
-credit_curve = SubResource("Curve_ytcxk")
-total_credits = 60
+credit_curve = SubResource("Curve_lslta")
+total_credits = 15
 metadata/_custom_type_script = "uid://lglt8bhkbaeb"
 
+[sub_resource type="Curve" id="Curve_wnt77"]
+_limits = [0.0, 10.0, 0.0, 10.0]
+_data = [Vector2(0, 7.1727743), 0.0, 0.0, 0, 0, Vector2(4.978541, 0.4712038), 0.0, 0.0, 0, 0, Vector2(10, 6.70157), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_vsrk3"]
+script = ExtResource("2_8qd04")
+credit_curve = SubResource("Curve_wnt77")
+total_credits = 15
+metadata/_custom_type_script = "uid://lglt8bhkbaeb"
+
+[sub_resource type="Resource" id="Resource_nq84j"]
+script = ExtResource("2_muf1e")
+waves = Array[ExtResource("2_8qd04")]([SubResource("Resource_a4ej5"), SubResource("Resource_vsrk3")])
+metadata/_custom_type_script = "uid://cqeic2k8kt4v1"
+
 [node name="TemplateLevel" unique_id=251983101 instance=ExtResource("1_0cu82")]
-waves = Array[Array]([[SubResource("Resource_d1jnj")], [SubResource("Resource_8qd04")]])
+lanes = Array[ExtResource("2_muf1e")]([SubResource("Resource_5jpk2"), SubResource("Resource_nq84j")])
 
 [node name="SpawnPoint2" type="Node2D" parent="SpawnPointContainer" parent_id_path=PackedInt32Array(1156764314) index="0" unique_id=289845821]
 position = Vector2(1696, 864)
@@ -46,11 +79,11 @@ tile_map_data = PackedByteArray("AAAFAAIAAAAEAAAAAAAFAAMAAAAEAAAAAAAFAAQAAAAEAAA
 [node name="GearMap" parent="Environment" parent_id_path=PackedInt32Array(123182581) index="3" unique_id=916456414]
 tile_map_data = PackedByteArray("AAAOAAgAAAABAAAAAAA=")
 
-[node name="ArrowTiles" parent="Environment" parent_id_path=PackedInt32Array(123182581) index="8" unique_id=108710037]
+[node name="ArrowTiles" parent="Environment" parent_id_path=PackedInt32Array(123182581) index="9" unique_id=108710037]
 z_index = 4096
 tile_map_data = PackedByteArray("AAALAA0AAAAAAAAAAAAMAA0AAAABAAEAAAAMAAwAAAACAAIAAAAMAAoAAAABAAEAAAAMAAYAAAABAAEAAAAMAAUAAAAAAAAAAAANAAUAAAAAAAAAAAANAAsAAAABAAIAAAALAAsAAAAAAAEAAAAPAAsAAAAAAAEAAAAQAAMAAAABAAAAAAARAAMAAAAAAAEAAAARAAUAAAAAAAAAAAAPAAUAAAACAAEAAAAQAAQAAAAAAAIAAAAQAAYAAAABAAAAAAAQAAcAAAAAAAAAAAAQAAkAAAABAAAAAAAQAAoAAAABAAAAAAAQAAsAAAAAAAEAAAAOAAUAAAAAAAAAAAAOAAsAAAAAAAEAAAARAAcAAAABAAAAAAARAAgAAAABAAAAAAARAAkAAAAAAAEAAAAMAAkAAAAAAAEAAAALAAkAAAABAAEAAAALAAgAAAABAAEAAAALAAcAAAAAAAAAAAAMAAcAAAABAAEAAAAUAAMAAAAAAAEAAAAVAAUAAAACAAEAAAAWAA0AAAABAAEAAAAXAAUAAAAAAAAAAAAXAA0AAAAAAAEAAAAYAAUAAAAAAAAAAAAYAA0AAAAAAAEAAAAZAAUAAAAAAAAAAAAZAA0AAAAAAAEAAAAaAA0AAAAAAAEAAAAUAAUAAAAAAAAAAAAVAAMAAAAAAAEAAAAWAAMAAAAAAAEAAAAWAAQAAAABAAEAAAAWAAYAAAACAAIAAAAWAAcAAAABAAEAAAAWAAgAAAABAAEAAAAWAAkAAAABAAEAAAAWAAoAAAABAAEAAAAWAAsAAAABAAEAAAAWAAwAAAABAAEAAAAaAAUAAAACAAAAAAAEAAMAAAAAAAAAAAAEAAsAAAAAAAEAAAAFAAMAAAAAAAAAAAAFAAsAAAAAAAEAAAAGAAMAAAABAAAAAAAHAAsAAAABAAIAAAAIAA0AAAAAAAAAAAACAAMAAAAAAAAAAAACAAsAAAACAAAAAAADAAMAAAAAAAAAAAADAAsAAAAAAAEAAAAGAAQAAAABAAAAAAAGAAUAAAABAAAAAAAGAAYAAAABAAAAAAAGAAcAAAABAAAAAAAGAAgAAAABAAAAAAAGAAkAAAABAAAAAAAGAAoAAAAAAAIAAAAGAAwAAAABAAAAAAAGAA0AAAAAAAAAAAAHAA0AAAAAAAAAAAAIAAsAAAAAAAEAAAAKAAsAAAAAAAEAAAAJAAsAAAAAAAEAAAATAAMAAAAAAAEAAAASAAMAAAAAAAEAAAAJAA0AAAAAAAAAAAAKAA0AAAAAAAAAAAASAAUAAAAAAAAAAAATAAUAAAAAAAAAAAA=")
 
-[node name="Player" parent="Environment" parent_id_path=PackedInt32Array(123182581) index="12" unique_id=1382910038]
+[node name="Player" parent="Environment" parent_id_path=PackedInt32Array(123182581) index="13" unique_id=1382910038]
 position = Vector2(904, 581)
 
 [editable path="Environment"]
