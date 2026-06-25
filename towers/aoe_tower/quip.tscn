@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://befmidherco1l"]
+
+[ext_resource type="Script" uid="uid://ecsctj8bg74u" path="res://towers/aoe_tower/quip.gd" id="1_fqaaj"]
+
+[node name="Quip" type="Node2D" unique_id=11048055 node_paths=PackedStringArray("label")]
+scale = Vector2(2, 2)
+script = ExtResource("1_fqaaj")
+label = NodePath("RichTextLabel")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1491182321]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -6.0
+offset_right = 60.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_separation = 8
+bbcode_enabled = true
+text = "[shake rate=10][wave amp=10.0 freq=3.5]Something clever"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+vertical_alignment = 1

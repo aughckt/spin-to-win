@@ -11,6 +11,7 @@ static var INST: Env
 @export var underground_gears: Node2D
 @export var bullets: Node2D
 @export var towers: Node2D
+@export var quips: Node2D
 @export var troopers: Node2D
 @export var coords_label: Label
 @export var budget: int = 20
