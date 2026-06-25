@@ -10,6 +10,8 @@ var data: TowerData
 @export var cost_label: Label
 @export var icon_rect: TextureRect
 
+const gear_icon: Texture = preload("res://environment/gears/gear.png")
+
 func _ready() -> void:
 	button.pressed.connect(_on_button_pressed)
 
@@ -18,7 +20,11 @@ func _on_button_pressed() -> void:
 
 func set_tower_data(tdata: TowerData) -> void:
 	data = tdata
-	
-	name_label.text = data.name
-	cost_label.text = "Cost: %s" % data.cost
-	icon_rect.texture = data.icon
+	if data != null:
+		name_label.text = data.name
+		cost_label.text = "Cost: %s" % data.cost
+		icon_rect.texture = data.icon
+	else:
+		name_label.text = "Gear"
+		cost_label.text = "Cost: %s" % Env.GEAR_COST
+		icon_rect.texture = gear_icon

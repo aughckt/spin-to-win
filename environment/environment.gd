@@ -506,7 +506,7 @@ func _on_data_selected(data: TowerData) -> void:
 	else:
 		tower_data = data
 	
-	print("Selected tower %s" % ("none" if tower_data == null else tower_data.name))
+	print("Selected tower %s" % ("gear" if tower_data == null else tower_data.name))
 	build_visual.set_data(tower_data)
 
 

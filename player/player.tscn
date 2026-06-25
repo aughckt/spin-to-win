@@ -29,6 +29,7 @@ radius = 44.011364
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g6k8r"]
 shader = ExtResource("1_g1dw6")
+shader_parameter/frames_y = 0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g6k8r"]
 atlas = ExtResource("3_qjkh3")
@@ -323,7 +324,6 @@ position = Vector2(0, -12)
 shape = SubResource("CircleShape2D_klfgw")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=854915160 node_paths=PackedStringArray("player")]
-zoom = Vector2(0.5, 0.5)
 script = ExtResource("6_boad6")
 player = NodePath("..")
 

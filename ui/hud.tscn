@@ -4,10 +4,17 @@
 [ext_resource type="PackedScene" uid="uid://deeabsnpj3v05" path="res://ui/tower_panel.tscn" id="1_rbyyf"]
 [ext_resource type="Theme" uid="uid://ofehi657nfwc" path="res://ui/theme.tres" id="2_276te"]
 [ext_resource type="Texture2D" uid="uid://daf10bu2v4pfp" path="res://ui/nose/nose.png" id="3_en2x2"]
+[ext_resource type="Texture2D" uid="uid://bbl8ngmdf8wf5" path="res://ui/UI_Border.png" id="3_spcu4"]
 [ext_resource type="Texture2D" uid="uid://kv40wvt1fi4w" path="res://ui/temp_health.png" id="4_en2x2"]
 [ext_resource type="Texture2D" uid="uid://dj0x68bdvuxei" path="res://ui/UI_HealthBar_Empty.png" id="6_srpbi"]
 [ext_resource type="Texture2D" uid="uid://rcardjl4llmq" path="res://ui/UI_HealthBar_Full.png" id="7_spcu4"]
 [ext_resource type="PackedScene" uid="uid://bgj5p7ryl1wl8" path="res://ui/health_chunk.tscn" id="8_srpbi"]
+[ext_resource type="Texture2D" uid="uid://dxxvj5oabfxxy" path="res://ui/UI_HealthIcon.png" id="9_ff8ar"]
+[ext_resource type="Texture2D" uid="uid://cffp71ar1hb08" path="res://ui/UI_ScreenBorder_cropped_2x.png" id="11_m0eg6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cyw1q"]
+texture = ExtResource("3_spcu4")
+texture_margin_left = 8.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ihmi"]
 content_margin_left = 0.0
@@ -21,7 +28,14 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[node name="HUD" type="Control" unique_id=1114338 node_paths=PackedStringArray("tower_panels", "health_label", "money_label", "start_wave_button", "pause_button", "nose_target", "health_chunk_parent")]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ff8ar"]
+texture = ExtResource("11_m0eg6")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 14.0
+
+[node name="HUD" type="Control" unique_id=1114338 node_paths=PackedStringArray("tower_panels", "health_label", "money_label", "start_wave_button", "pause_button", "nose_target", "health_icon", "health_chunk_parent")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,13 +44,14 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_en2x2")
-tower_panels = NodePath("PanelContainer/MarginContainer/VBoxContainer/TowerPanels")
+tower_panels = NodePath("PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TowerPanels")
 tower_panel_scene = ExtResource("1_rbyyf")
 health_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Health/HBoxContainer/Label")
 money_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Money/HBoxContainer/Label")
 start_wave_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/StartWaveButton")
 pause_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/PauseButton")
 nose_target = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Money/HBoxContainer/TextureRect")
+health_icon = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Health/HealthChunks/HealthIcon")
 health_chunk_parent = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Health/HealthChunks")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=518244129]
@@ -48,6 +63,7 @@ anchor_bottom = 1.0
 offset_left = -30.0
 grow_horizontal = 0
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_cyw1q")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1670239560]
 layout_mode = 2
@@ -61,25 +77,32 @@ theme_override_constants/margin_bottom = 15
 layout_mode = 2
 mouse_filter = 2
 
-[node name="TowerPanels" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1014919531]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1423326303]
 custom_minimum_size = Vector2(250, 380)
+custom_maximum_size = Vector2(250, 380)
 layout_mode = 2
+
+[node name="TowerPanels" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer" unique_id=1014919531]
+layout_mode = 2
+size_flags_horizontal = 4
 mouse_filter = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
 columns = 2
 
-[node name="TowerPanel" parent="PanelContainer/MarginContainer/VBoxContainer/TowerPanels" unique_id=2114563352 instance=ExtResource("1_rbyyf")]
+[node name="TowerPanel" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TowerPanels" unique_id=2114563352 instance=ExtResource("1_rbyyf")]
 layout_mode = 2
 
-[node name="TowerPanel2" parent="PanelContainer/MarginContainer/VBoxContainer/TowerPanels" unique_id=1992502857 instance=ExtResource("1_rbyyf")]
+[node name="TowerPanel2" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TowerPanels" unique_id=1992502857 instance=ExtResource("1_rbyyf")]
 layout_mode = 2
 
-[node name="TowerPanel3" parent="PanelContainer/MarginContainer/VBoxContainer/TowerPanels" unique_id=2081306274 instance=ExtResource("1_rbyyf")]
+[node name="TowerPanel3" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TowerPanels" unique_id=2081306274 instance=ExtResource("1_rbyyf")]
 layout_mode = 2
 
-[node name="TowerPanel4" parent="PanelContainer/MarginContainer/VBoxContainer/TowerPanels" unique_id=915984292 instance=ExtResource("1_rbyyf")]
+[node name="TowerPanel4" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TowerPanels" unique_id=915984292 instance=ExtResource("1_rbyyf")]
 layout_mode = 2
 
-[node name="TowerPanel5" parent="PanelContainer/MarginContainer/VBoxContainer/TowerPanels" unique_id=1600693671 instance=ExtResource("1_rbyyf")]
+[node name="TowerPanel5" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/TowerPanels" unique_id=1600693671 instance=ExtResource("1_rbyyf")]
 layout_mode = 2
 
 [node name="HealthAndMoney" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=242510589]
@@ -191,6 +214,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
+[node name="HealthIcon" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Health/HealthChunks" unique_id=1768288327]
+custom_minimum_size = Vector2(24, 24)
+custom_maximum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("9_ff8ar")
+
 [node name="TextureRect2" parent="PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Health/HealthChunks" unique_id=49117742 instance=ExtResource("8_srpbi")]
 layout_mode = 2
 
@@ -230,19 +259,24 @@ show_percentage = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Control" unique_id=1291061240]
+[node name="ScreenBorder" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Control" unique_id=1291061240]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -4.0
+offset_right = 4.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ff8ar")
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Control/PanelContainer" unique_id=717595009]
-custom_minimum_size = Vector2(250, 0)
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Control/ScreenBorder" unique_id=717595009]
+custom_minimum_size = Vector2(196, 0)
 layout_mode = 2
 theme = ExtResource("2_276te")
-text = "Free space, maybe show a portrait with some quirky text from enemies?"
+text = "Free space, maybe show
+a portrait with some 
+quirky text from enemies?"
 horizontal_alignment = 1
 autowrap_mode = 2
 
