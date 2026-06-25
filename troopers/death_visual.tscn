@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://dnmlbyhf2wcle"]
+
+[ext_resource type="Script" uid="uid://bxd33rkq0md8w" path="res://troopers/death_visual.gd" id="1_2n1nx"]
+[ext_resource type="Shader" uid="uid://dbq6axlvij5a7" path="res://troopers/trooper.gdshader" id="1_y8dm1"]
+[ext_resource type="Texture2D" uid="uid://rw3ynci3ddi2" path="res://troopers/Clown_01.png" id="2_2n1nx"]
+[ext_resource type="Texture2D" uid="uid://cflvlouopp11n" path="res://troopers/clown_left.png" id="3_tmwxl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l6kgk"]
+shader = ExtResource("1_y8dm1")
+shader_parameter/frames_y = 0
+shader_parameter/y_threshold = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sne7d"]
+atlas = ExtResource("2_2n1nx")
+region = Rect2(0, 0, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0h81s"]
+atlas = ExtResource("2_2n1nx")
+region = Rect2(36, 18, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ins0"]
+atlas = ExtResource("2_2n1nx")
+region = Rect2(54, 36, 18, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fbxa2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sne7d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0h81s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ins0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tmwxl")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="DeathVisual" type="Node2D" unique_id=1374137288 node_paths=PackedStringArray("sprite")]
+script = ExtResource("1_2n1nx")
+sprite = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2140458896]
+material = SubResource("ShaderMaterial_l6kgk")
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_fbxa2")
+frame_progress = 0.6968783
