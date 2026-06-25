@@ -4,12 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://cji2yg5dqgn0q" path="res://environment/environment.tscn" id="2_hiaeh"]
 
 [node name="TemplateLevel" type="Node2D" unique_id=251983101 node_paths=PackedStringArray("env", "spawn_point_container")]
+y_sort_enabled = true
 script = ExtResource("1_7lnir")
 env = NodePath("Environment")
 spawn_point_container = NodePath("SpawnPointContainer")
 
 [node name="SpawnPointContainer" type="Node2D" parent="." unique_id=1156764314]
 z_index = 50
+y_sort_enabled = true
 
 [node name="Environment" parent="." unique_id=123182581 instance=ExtResource("2_hiaeh")]
 unique_name_in_owner = true

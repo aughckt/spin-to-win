@@ -2,12 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://datjovsvr613g" path="res://towers/trap_tower/trap_tower.tscn" id="1_f24ow"]
 [ext_resource type="Script" uid="uid://b55436prbbuts" path="res://towers/tower_data.gd" id="1_x6jwh"]
+[ext_resource type="Texture2D" uid="uid://dgpoafspsrbeq" path="res://towers/trap_tower/bookdispensor_icon.png" id="1_yhtsm"]
 
 [resource]
 script = ExtResource("1_x6jwh")
 cost = 5
 scene = ExtResource("1_f24ow")
 name = "Trap"
+icon = ExtResource("1_yhtsm")
 shot_delay_sec = 2.0
 damage = 30
 metadata/_custom_type_script = "uid://b55436prbbuts"

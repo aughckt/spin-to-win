@@ -60,6 +60,8 @@ waves = Array[ExtResource("2_8qd04")]([SubResource("Resource_a4ej5"), SubResourc
 metadata/_custom_type_script = "uid://cqeic2k8kt4v1"
 
 [node name="TemplateLevel" unique_id=251983101 instance=ExtResource("1_0cu82")]
+level_hp = 10
+waves = Array[Array]([[SubResource("Resource_d1jnj")], [SubResource("Resource_8qd04")]])
 lanes = Array[ExtResource("2_muf1e")]([SubResource("Resource_5jpk2"), SubResource("Resource_nq84j")])
 
 [node name="SpawnPoint2" type="Node2D" parent="SpawnPointContainer" parent_id_path=PackedInt32Array(1156764314) index="0" unique_id=289845821]

@@ -23,7 +23,6 @@ func shoot() -> void:
 	var troopers: Array[Area2D] = aoe_area.get_overlapping_areas()
 	for area: Area2D in troopers:
 		if area is Trooper:
-			print("AOE DAMAGE")
 			var trooper: Trooper = area
 			trooper.take_damage(data.damage)
 	

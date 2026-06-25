@@ -1,11 +1,87 @@
 [gd_scene format=3 uid="uid://datjovsvr613g"]
 
-[ext_resource type="Texture2D" uid="uid://btm4vlsmnxvyw" path="res://icon.svg" id="1_aogww"]
 [ext_resource type="Script" uid="uid://cu8etchoxdp0v" path="res://towers/trap_tower/trap_tower.gd" id="1_hcdve"]
+[ext_resource type="Texture2D" uid="uid://b67vi4jx74dnv" path="res://towers/trap_tower/BookDispenser.png" id="2_hcdve"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0duy"]
+atlas = ExtResource("2_hcdve")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmsk4"]
+atlas = ExtResource("2_hcdve")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51jax"]
+atlas = ExtResource("2_hcdve")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3oknq"]
+atlas = ExtResource("2_hcdve")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2x4tf"]
+atlas = ExtResource("2_hcdve")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fncyv"]
+atlas = ExtResource("2_hcdve")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrsew"]
+atlas = ExtResource("2_hcdve")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hdxci"]
+atlas = ExtResource("2_hcdve")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_126ht"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0duy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmsk4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_51jax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3oknq")
+}],
+"loop": 0,
+"name": &"Dispense",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2x4tf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fncyv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mrsew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hdxci")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 10.0
+}]
 
 [node name="TrapTower" type="Node2D" unique_id=1485056362]
+y_sort_enabled = true
 script = ExtResource("1_hcdve")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1546133486]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_aogww")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=40340654]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_126ht")
+animation = &"Idle"
+frame_progress = 0.0055213403
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=1243866794]
+wait_time = 0.4
+one_shot = true

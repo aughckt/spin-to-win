@@ -7,8 +7,8 @@ static var INST: LevelManager
 var level_array: Array[PackedScene] = [
 	#load("res://structure/levels/loop.tscn"),
 	load("res://structure/levels/level_gunturn.tscn"),
-	load("res://structure/levels/level_aoe_intro.tscn"),
-	load("res://structure/levels/level_multilane.tscn")]
+	load("res://structure/levels/level_multilane.tscn"),
+	load("res://structure/levels/level_aoe_intro.tscn"),]
 var current_level: Level = null
 var current_hp: int = 10
 var is_build_phase: bool = true
@@ -28,6 +28,10 @@ signal wave_started
 @onready var wave_banner: Control = %WavePhaseLabel
 @onready var build_banner: Control = %BuildPhaseLabel
 
+
+@export var start_level_sound: Sound
+@export var start_wave_sound: Sound
+
 signal wave_finished
 
 func _ready() -> void:
@@ -44,10 +48,14 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	## Debug. Press space to skip level
-	if event.is_action_pressed("toggle_wave"):
+	if event.is_action_pressed("skip_level"):
 		current_level_index += 1
+		TrooperSpawner.INST.disable()
 		load_level()
-		set_build_phase(true)
+	elif event.is_action_pressed("restart_level"):
+		TrooperSpawner.INST.disable()
+		load_level()
+
 
 
 func win_level() -> void:
@@ -69,6 +77,8 @@ func lose_level() -> void:
 
 
 func load_level() -> void:
+	SoundBus.stop_all_sounds()
+	SoundBus.play_sound(start_level_sound)
 	if current_level != null:
 		current_level.queue_free()
 		TrooperSpawner.INST.finished.disconnect(end_wave)
@@ -102,6 +112,7 @@ func load_level() -> void:
 
 func start_wave() -> void:
 	set_build_phase(false)
+	SoundBus.play_sound(start_wave_sound)
 	if current_wave_index >= current_wave_max:
 		return
 	print("%s: Wave %s started!" % [name, current_wave_index])
