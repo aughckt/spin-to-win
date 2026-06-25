@@ -23,6 +23,7 @@ waves = Array[ExtResource("2_halu2")]([SubResource("Resource_tmwxl")])
 metadata/_custom_type_script = "uid://cqeic2k8kt4v1"
 
 [node name="LevelGunturn" unique_id=251983101 instance=ExtResource("1_5bju1")]
+level_hp = 10
 lanes = Array[ExtResource("2_cyw1q")]([SubResource("Resource_2n1nx")])
 
 [node name="SpawnPointContainer" parent="." index="0" unique_id=1156764314]
