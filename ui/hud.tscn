@@ -35,7 +35,7 @@ texture_margin_top = 12.0
 texture_margin_right = 12.0
 texture_margin_bottom = 14.0
 
-[node name="HUD" type="Control" unique_id=1114338 node_paths=PackedStringArray("tower_panels", "health_label", "money_label", "start_wave_button", "pause_button", "nose_target", "health_icon", "health_chunk_parent")]
+[node name="HUD" type="Control" unique_id=1114338 node_paths=PackedStringArray("tower_panels", "health_label", "money_label", "start_wave_button", "pause_button", "nose_target", "actual_shape", "health_icon", "health_chunk_parent")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,6 +51,7 @@ money_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndMo
 start_wave_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/StartWaveButton")
 pause_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/PauseButton")
 nose_target = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Money/HBoxContainer/TextureRect")
+actual_shape = NodePath("PanelContainer")
 health_icon = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Health/HealthChunks/HealthIcon")
 health_chunk_parent = NodePath("PanelContainer/MarginContainer/VBoxContainer/HealthAndMoney/HBoxContainer/Health/HealthChunks")
 

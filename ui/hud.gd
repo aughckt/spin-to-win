@@ -15,6 +15,9 @@ extends Control
 
 signal data_selected (data: TowerData)
 
+#the node that actually defines the huds visible shape and size
+@export var actual_shape: Control
+
 @export var health_icon: TextureRect
 @export var health_chunk_parent: HBoxContainer
 var health_chunk_scene: PackedScene = preload("res://ui/health_chunk.tscn")
