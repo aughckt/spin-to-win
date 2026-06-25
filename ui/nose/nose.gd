@@ -1,7 +1,7 @@
 class_name Nose
 extends Sprite2D
 
-const TURN_RATE: float = 5
+const TURN_RATE: float = 8
 const ACCEL: float = 10
 const TARGET_SPEED: float = 600
 const MIN_TARGET_DIST: float = 10

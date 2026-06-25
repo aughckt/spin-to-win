@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cl14joenf3alt" path="res://environment/gears/gear_visual.gd" id="1_yhgds"]
 [ext_resource type="Texture2D" uid="uid://cnrfesr4pr7aa" path="res://environment/gears/gear_anim.png" id="2_2tn7e"]
 [ext_resource type="Texture2D" uid="uid://cnj04kgh8tbgi" path="res://environment/gears/origin_gear.png" id="3_y4u4u"]
+[ext_resource type="Texture2D" uid="uid://b2kjudi2ngdpp" path="res://environment/gears/UndergroundGear.png" id="4_ekuh2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2tn7e"]
 atlas = ExtResource("2_2tn7e")
@@ -34,6 +35,22 @@ region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kldmd"]
 atlas = ExtResource("3_y4u4u")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iuhmo"]
+atlas = ExtResource("4_ekuh2")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2ou2"]
+atlas = ExtResource("4_ekuh2")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3eoi"]
+atlas = ExtResource("4_ekuh2")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nx08g"]
+atlas = ExtResource("4_ekuh2")
 region = Rect2(144, 0, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fbxa2"]
@@ -71,6 +88,23 @@ animations = [{
 "loop": 1,
 "name": &"ori_gear",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iuhmo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2ou2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3eoi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nx08g")
+}],
+"loop": 1,
+"name": &"underground",
+"speed": 5.0
 }]
 
 [node name="GearVisual" type="Node2D" unique_id=16609391 node_paths=PackedStringArray("anim")]

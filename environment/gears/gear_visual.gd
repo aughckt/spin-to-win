@@ -11,7 +11,9 @@ static var pool: Pool
 
 static func create_basic() -> GearVisual:
 	var visual: GearVisual = _get_pool().get_inst()
+	visual.is_origin = false
 	#visual.sprite.frame = 0
+	visual.anim.animation = "default"
 	return visual
 
 static func create_ori() -> GearVisual:
@@ -19,6 +21,12 @@ static func create_ori() -> GearVisual:
 	#visual.sprite.frame = 1
 	visual.is_origin = true
 	visual.anim.animation = "ori_gear"
+	return visual
+
+static func create_underground() -> GearVisual:
+	var visual: GearVisual = _get_pool().get_inst()
+	visual.is_origin = false
+	visual.anim.animation = "underground"
 	return visual
 
 static func _get_pool() -> Pool:
@@ -41,9 +49,5 @@ func unfreeze() -> void:
 	var x_rem := tile.x & 1
 	var y_rem := tile.y & 1
 	
-	if not is_origin:
-		anim.play("default", 1 if x_rem == y_rem else -1)
-	else:
-		anim.play("ori_gear", 1 if x_rem == y_rem else -1)
-	#anim.self_modulate = Color.YELLOW if x_rem == y_rem else Color.WHITE
+	anim.play("", 1 if x_rem == y_rem else -1)
 	frozen = false

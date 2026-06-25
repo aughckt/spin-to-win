@@ -214,10 +214,16 @@ func place_gear(tile: Vector2i, test_only: bool = false) -> String:
 			return ""
 		
 		gearmap.set_cell(tile, gearmap.tile_set.get_source_id(0), ATLAS_COORDS[BASIC_GEAR])
-		var visual := GearVisual.create_basic()
-		visual.global_position = gearmap.to_global(gearmap.map_to_local(tile))
+		var visual: GearVisual
 		var build_perms := get_perms(tile)
-		visual.reparent.call_deferred(underground_gears if build_perms == BuildPerms.Gears else gears)
+		if build_perms == BuildPerms.Gears:
+			visual = GearVisual.create_underground()
+			visual.reparent.call_deferred(underground_gears)
+		else:
+			visual = GearVisual.create_basic()
+			visual.reparent.call_deferred(gears)
+		
+		visual.global_position = gearmap.to_global(gearmap.map_to_local(tile))
 		tile_to_visual[tile] = visual
 		SoundBus.play_sound(gear_place_sound)
 		

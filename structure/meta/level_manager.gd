@@ -5,7 +5,7 @@ static var INST: LevelManager
 
 @export var current_level_index: int = 0
 var level_array: Array[PackedScene] = [
-	#load("res://structure/levels/loop.tscn"),
+	load("res://structure/levels/loop.tscn"),
 	load("res://structure/levels/level_gunturn.tscn"),
 	load("res://structure/levels/level_aoe_intro.tscn"),
 	load("res://structure/levels/level_multilane.tscn")]
