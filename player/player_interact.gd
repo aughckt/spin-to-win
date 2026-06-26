@@ -20,7 +20,7 @@ func _input(event: InputEvent) -> void:
 			var closest_gear: Vector2i = ori_gears[0]
 			var min_distance: float = INF
 			for gear: Vector2i in ori_gears:
-				var distance: float = (player.global_position - Vector2(gear)*64).length()
+				var distance: float = (interact_area.global_position - Vector2(gear)*64).length()
 				if distance < min_distance:
 					min_distance = distance
 					closest_gear = gear
