@@ -21,6 +21,7 @@ var hp: int = max_hp
 @onready var random_sound_timer: Timer = %RandomSoundTimer
 @onready var walk_sound_timer: Timer = %WalkSoundTimer
 
+
 var stun_time_s: float = 0
 
 static var pool: Pool
@@ -112,6 +113,20 @@ func set_sheet_height(height: int) -> void:
 
 func reach_end() -> void:
 	LevelManager.INST.take_damage(1)
+	
+	var spawn_points: Array[Node] = get_tree().get_nodes_in_group("SpawnPoint")
+	var min_distance: float = INF
+	var chosen_point: SpawnPoint = null
+	for point: Node in spawn_points:
+		if point is SpawnPoint:
+			var point2: SpawnPoint = (point as SpawnPoint)
+			var distance: float = ((global_position - point2.global_position) as Vector2).length()
+			if distance < min_distance:
+				min_distance = distance
+				chosen_point = point2
+	if chosen_point:
+		chosen_point.play_animation()
+		chosen_point.particles.global_position = global_position
 	remove()
 
 func take_damage(amount: int) -> void:

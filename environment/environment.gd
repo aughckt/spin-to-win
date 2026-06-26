@@ -22,6 +22,7 @@ static var INST: Env
 @export var remove_gear_sound: Sound
 @export var gear_place_sound: Sound
 @export var ori_gear_sound: Sound
+@export var party_sound: Sound
 
 var tower_data: TowerData = null
 

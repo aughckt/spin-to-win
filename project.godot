@@ -32,6 +32,10 @@ gdscript/warnings/static_called_on_instance=0
 
 window/stretch/mode="viewport"
 
+[global_group]
+
+SpawnPoint=""
+
 [gui]
 
 theme/default_font_antialiasing=0

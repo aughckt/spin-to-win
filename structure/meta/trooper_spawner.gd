@@ -103,7 +103,10 @@ func spawn_trooper(index: int) -> void:
 	
 	trooper.reparent.call_deferred(Env.INST.troopers)
 	trooper.global_position = spawn_points[index].global_position
+	spawn_points[index].play_spawn_aimation()
 	trooper.target_pos = trooper.global_position 
+	
+
 
 func spend_credits(count: int, idx: int) -> void:
 	wave_credits_active[idx] += count

@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cfh0tlhb5mhf2" path="res://environment/gears/gear_map.png" id="3_wjl7u"]
 [ext_resource type="AudioStream" uid="uid://bpiytpmdo00pq" path="res://environment/gearsareturning.wav" id="3_ypa7m"]
 [ext_resource type="Texture2D" uid="uid://cqy5ciq03741n" path="res://environment/arrows.png" id="5_3g2c1"]
+[ext_resource type="AudioStream" uid="uid://c88f00gb4xv1w" path="res://environment/partyhorn.wav" id="5_a4xkn"]
 [ext_resource type="Texture2D" uid="uid://bhh7jlosrnks0" path="res://environment/tiles.png" id="5_vh8kr"]
 [ext_resource type="PackedScene" uid="uid://u80uaujktp7f" path="res://ui/hud.tscn" id="6_ehb6n"]
 [ext_resource type="Resource" uid="uid://bvmp6r3hgihgj" path="res://towers/tower_data/gun_tower_data.tres" id="6_vh8kr"]
@@ -31,6 +32,17 @@ metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
 [sub_resource type="Resource" id="Resource_gewoo"]
 script = ExtResource("2_gewoo")
 stream = ExtResource("3_ypa7m")
+metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_a0onh"]
+random_pitch = 1.2599211
+streams_count = 1
+stream_0/stream = ExtResource("5_a4xkn")
+
+[sub_resource type="Resource" id="Resource_a4xkn"]
+script = ExtResource("2_gewoo")
+stream = SubResource("AudioStreamRandomizer_a0onh")
+volume_linear = 0.2
 metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nmo3v"]
@@ -257,6 +269,7 @@ build_visual = NodePath("BuildVisual")
 remove_gear_sound = SubResource("Resource_a0onh")
 gear_place_sound = SubResource("Resource_ypa7m")
 ori_gear_sound = SubResource("Resource_gewoo")
+party_sound = SubResource("Resource_a4xkn")
 hud_layer = NodePath("HUD")
 
 [node name="UndergroundGears" type="Node2D" parent="." unique_id=146573048]

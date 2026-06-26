@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dy1xq2uadaf4c" path="res://structure/levels/spawn_point.gd" id="1_i1pqf"]
 [ext_resource type="Texture2D" uid="uid://b721dlysyftrx" path="res://environment/car_left.png" id="1_lmdml"]
 [ext_resource type="Texture2D" uid="uid://t0lnxt0vd38j" path="res://environment/car_up.png" id="2_i1pqf"]
+[ext_resource type="Texture2D" uid="uid://daf10bu2v4pfp" path="res://ui/nose/nose.png" id="4_uykm8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uykm8"]
 atlas = ExtResource("1_lmdml")
@@ -261,7 +262,26 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="SpawnPoint" type="Node2D" unique_id=1691155891 node_paths=PackedStringArray("sprite_up", "sprite_left", "sprite_right")]
+[sub_resource type="Curve" id="Curve_cbjd8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_uykm8"]
+curve = SubResource("Curve_cbjd8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_126ht"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(32, 32, 1)
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 34.329998
+initial_velocity_max = 167.37999
+gravity = Vector3(0, 300, 0)
+scale_min = 4.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_uykm8")
+
+[node name="SpawnPoint" type="Node2D" unique_id=1691155891 node_paths=PackedStringArray("sprite_up", "sprite_left", "sprite_right") groups=["SpawnPoint"]]
 script = ExtResource("1_i1pqf")
 sprite_up = NodePath("SpriteUp")
 sprite_left = NodePath("SpriteLeft")
@@ -303,3 +323,19 @@ animation = &"door_open_left"
 frame = 3
 frame_progress = 1.0
 flip_h = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1430842191]
+emitting = false
+amount = 16
+texture = ExtResource("4_uykm8")
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_126ht")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="." unique_id=1875715564]
+emitting = false
+amount = 16
+texture = ExtResource("4_uykm8")
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_126ht")

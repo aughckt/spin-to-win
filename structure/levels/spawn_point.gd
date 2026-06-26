@@ -10,6 +10,8 @@ extends Node2D
 @export var sprite_right: Node2D
 
 var anim: AnimatedSprite2D
+@onready var particles: GPUParticles2D = $GPUParticles2D
+@onready var spawn_particles: GPUParticles2D = $GPUParticles2D2
 
 enum EntryDir {
 	Up,
@@ -47,3 +49,13 @@ func _on_intro_finished() -> void:
 func _on_door_open_finished() -> void:
 	anim.animation_finished.disconnect(_on_door_open_finished)
 	anim.play("idle_%s" % anim_postfix)
+
+
+func play_animation() -> void:
+	particles.restart()
+	particles.emitting = true
+
+
+func play_spawn_aimation() -> void:
+	spawn_particles.restart()
+	spawn_particles.emitting = true

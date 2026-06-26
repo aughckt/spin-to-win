@@ -6,9 +6,10 @@ static var INST: LevelManager
 @export var current_level_index: int = 0
 var level_array: Array[PackedScene] = [
 	load("res://structure/levels/level_gunturn.tscn"),
+	load("res://structure/levels/level_crossing.tscn"),
 	load("res://structure/levels/level_comeback.tscn"),
-	load("res://structure/levels/level_multilane.tscn"),
-	load("res://structure/levels/level_sniper.tscn"),]
+	load("res://structure/levels/level_sniper.tscn"),
+	load("res://structure/levels/level_multilane.tscn"),]
 var current_level: Level = null
 var current_hp: int = 10
 var is_build_phase: bool = true
@@ -187,6 +188,7 @@ func take_damage(amount: int) -> void:
 	if current_hp <= 0:
 		return
 	current_hp -= amount
+	SoundBus.play_sound(Env.INST.party_sound)
 	if current_hp <= 0:
 		lose_level()
 
