@@ -32,6 +32,9 @@ signal wave_started
 @onready var build_banner: Control = %BuildPhaseLabel
 @onready var background_banner: Control = %WavePhasePanel
 
+@onready var start_screen: Control = %StartScreen
+@onready var end_screen: Control = %EndScreen
+
 
 @export var start_level_sound: Sound
 @export var start_wave_sound: Sound
@@ -42,9 +45,6 @@ func _ready() -> void:
 	assert(INST == null)
 	INST = self
 	
-	if current_level == null:
-		load_level()
-	
 	phase_transition_timer.timeout.connect(_on_phase_transition_timeout)
 	level_won_timer.timeout.connect(_on_won_timer_timeout)
 	level_lost_timer.timeout.connect(_on_lost_timer_timeout)
@@ -52,11 +52,16 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	## Debug. Press space to skip level
-	if event.is_action_pressed("skip_level"):
+	
+	if (event.is_action_pressed("interact") or event.is_action_pressed("M1")) and current_level == null and end_screen.visible == false:
+		load_level()
+		start_screen.visible = false
+		
+	if event.is_action_pressed("skip_level") and current_level:
 		current_level_index += 1
 		TrooperSpawner.INST.disable()
 		load_level()
-	elif event.is_action_pressed("restart_level"):
+	elif event.is_action_pressed("restart_level") and current_level:
 		TrooperSpawner.INST.disable()
 		load_level()
 
@@ -94,6 +99,7 @@ func load_level() -> void:
 	
 	if level_array.size() <= current_level_index:
 		print("You won the game!")
+		end_game()
 		return
 	
 	current_level = level_array[current_level_index].instantiate()
@@ -171,7 +177,6 @@ func take_damage(amount: int) -> void:
 	if current_hp <= 0:
 		return
 	current_hp -= amount
-	print("%s: hp is now %s" % [name, current_hp])
 	if current_hp <= 0:
 		lose_level()
 
@@ -191,4 +196,12 @@ func _on_lost_timer_timeout() -> void:
 func _on_won_timer_timeout() -> void:
 	load_level()
 	level_won_banner.visible = false
+	background_banner.visible = false
+
+
+func end_game() -> void:
+	print("Game ended")
+	end_screen.visible = true
+	wave_banner.visible = false
+	build_banner.visible = false
 	background_banner.visible = false

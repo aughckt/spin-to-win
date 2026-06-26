@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://ce8myo2y6rl0p" path="res://audio/sound.gd" id="3_0v5en"]
 [ext_resource type="Texture2D" uid="uid://buwkyi672ob7l" path="res://troopers/jumbo.png" id="4_h4ien"]
 [ext_resource type="AudioStream" uid="uid://c8gt5oa6x8j6p" path="res://troopers/sounds/stompfinalmaybe.ogg" id="4_m8tba"]
+[ext_resource type="Texture2D" uid="uid://cby70tqtj0nn4" path="res://troopers/Clown_02_Read.png" id="6_m8tba"]
 
 [sub_resource type="Resource" id="Resource_yyerm"]
 script = ExtResource("3_0v5en")
@@ -17,11 +18,27 @@ metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
 [sub_resource type="CircleShape2D" id="CircleShape2D_11td1"]
 radius = 35.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0v5en"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m8tba"]
 resource_local_to_scene = true
 shader = ExtResource("2_vrclx")
 shader_parameter/frames_y = 4
 shader_parameter/y_threshold = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a75f6"]
+atlas = ExtResource("6_m8tba")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dx0rw"]
+atlas = ExtResource("6_m8tba")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amto4"]
+atlas = ExtResource("6_m8tba")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4gkx"]
+atlas = ExtResource("6_m8tba")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h4ien"]
 atlas = ExtResource("4_h4ien")
@@ -219,6 +236,23 @@ region = Rect2(352, 46, 32, 23)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_a75f6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dx0rw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_amto4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4gkx")
+}],
+"loop": 1,
+"name": &"read",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_h4ien")
 }, {
 "duration": 1.0,
@@ -393,7 +427,7 @@ position = Vector2(0, -14)
 shape = SubResource("CircleShape2D_11td1")
 
 [node name="AnimatedSprite2D" parent="." index="1" unique_id=1506180497]
-material = SubResource("ShaderMaterial_0v5en")
+material = SubResource("ShaderMaterial_m8tba")
 sprite_frames = SubResource("SpriteFrames_amto4")
 
 [node name="RandomSoundTimer" parent="." index="2" unique_id=976251566]
