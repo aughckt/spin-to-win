@@ -3,16 +3,22 @@
 [ext_resource type="Script" uid="uid://0m2njoouexwx" path="res://ui/tower_panel.gd" id="1_4fi7c"]
 [ext_resource type="Texture2D" uid="uid://df8fpi67rq44p" path="res://environment/gears/gear.png" id="1_i6c17"]
 [ext_resource type="Theme" uid="uid://ofehi657nfwc" path="res://ui/theme.tres" id="1_p4yss"]
+[ext_resource type="Texture2D" uid="uid://dsa0dieicfs4f" path="res://ui/button_border.png" id="2_3fj1x"]
+[ext_resource type="Texture2D" uid="uid://cyngsohdu6r1n" path="res://ui/button_border_hover.png" id="3_ht3io"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3fj1x"]
-bg_color = Color(0.14117648, 0.16862746, 0.2901961, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e1jfq"]
+texture = ExtResource("2_3fj1x")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4fi7c"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.2509804, 0.33333334, 0.47058824, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ht3io"]
+texture = ExtResource("3_ht3io")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
 
 [node name="TowerPanel" type="Control" unique_id=2114563352 node_paths=PackedStringArray("button", "name_label", "cost_label", "icon_rect")]
 custom_minimum_size = Vector2(98, 98)
@@ -31,49 +37,34 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_4fi7c")
-button = NodePath("PanelContainer/MarginContainer/Button")
-name_label = NodePath("PanelContainer/MarginContainer/DisplayElements/VBoxContainer/NameLabel")
-cost_label = NodePath("PanelContainer/MarginContainer/DisplayElements/VBoxContainer/CostLabel")
-icon_rect = NodePath("PanelContainer/MarginContainer/DisplayElements/VBoxContainer/TextureRect")
+button = NodePath("MarginContainer/Button")
+name_label = NodePath("MarginContainer/DisplayElements/VBoxContainer/NameLabel")
+cost_label = NodePath("MarginContainer/DisplayElements/VBoxContainer/CostLabel")
+icon_rect = NodePath("MarginContainer/DisplayElements/VBoxContainer/TextureRect")
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=993517072]
-custom_minimum_size = Vector2(98, 98)
-custom_maximum_size = Vector2(98, 98)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -45.0
-offset_top = -46.0
-offset_right = 45.0
-offset_bottom = 46.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1109118059]
-custom_minimum_size = Vector2(96, 96)
-custom_maximum_size = Vector2(96, 96)
-layout_mode = 2
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1109118059]
+custom_minimum_size = Vector2(92, 92)
+custom_maximum_size = Vector2(92, 92)
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 93.0
+offset_bottom = 93.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer" unique_id=1770499033]
+[node name="Button" type="Button" parent="MarginContainer" unique_id=1770499033]
 custom_minimum_size = Vector2(92, 92)
 custom_maximum_size = Vector2(92, 92)
 layout_mode = 2
 focus_behavior_recursive = 1
-theme_override_styles/normal = SubResource("StyleBoxFlat_3fj1x")
-theme_override_styles/hover = SubResource("StyleBoxFlat_4fi7c")
+theme_override_styles/normal = SubResource("StyleBoxTexture_e1jfq")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ht3io")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ht3io")
+theme_override_styles/focus = SubResource("StyleBoxTexture_ht3io")
 
-[node name="DisplayElements" type="MarginContainer" parent="PanelContainer/MarginContainer" unique_id=2127666886]
+[node name="DisplayElements" type="MarginContainer" parent="MarginContainer" unique_id=2127666886]
 custom_minimum_size = Vector2(92, 92)
 custom_maximum_size = Vector2(92, 92)
 layout_mode = 2
@@ -85,7 +76,7 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/DisplayElements" unique_id=1843880480]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/DisplayElements" unique_id=1843880480]
 custom_minimum_size = Vector2(84, 84)
 custom_maximum_size = Vector2(84, 84)
 layout_mode = 2
@@ -94,21 +85,21 @@ size_flags_vertical = 4
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="NameLabel" type="Label" parent="PanelContainer/MarginContainer/DisplayElements/VBoxContainer" unique_id=520672526]
+[node name="NameLabel" type="Label" parent="MarginContainer/DisplayElements/VBoxContainer" unique_id=520672526]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource("1_p4yss")
 text = "Cool Tower"
 
-[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/DisplayElements/VBoxContainer" unique_id=911187822]
+[node name="Separator" type="Control" parent="MarginContainer/DisplayElements/VBoxContainer" unique_id=911187822]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/DisplayElements/VBoxContainer" unique_id=1765374855]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/DisplayElements/VBoxContainer" unique_id=1765374855]
 texture_filter = 1
 custom_minimum_size = Vector2(36, 36)
 custom_maximum_size = Vector2(36, 36)
@@ -118,14 +109,14 @@ mouse_filter = 2
 texture = ExtResource("1_i6c17")
 stretch_mode = 5
 
-[node name="Separator2" type="Control" parent="PanelContainer/MarginContainer/DisplayElements/VBoxContainer" unique_id=1427953220]
+[node name="Separator2" type="Control" parent="MarginContainer/DisplayElements/VBoxContainer" unique_id=1427953220]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 mouse_filter = 2
 
-[node name="CostLabel" type="Label" parent="PanelContainer/MarginContainer/DisplayElements/VBoxContainer" unique_id=912504147]
+[node name="CostLabel" type="Label" parent="MarginContainer/DisplayElements/VBoxContainer" unique_id=912504147]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
