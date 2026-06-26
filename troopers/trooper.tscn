@@ -5,6 +5,7 @@
 [ext_resource type="Shader" uid="uid://dbq6axlvij5a7" path="res://troopers/trooper.gdshader" id="2_kbjsr"]
 [ext_resource type="Texture2D" uid="uid://rw3ynci3ddi2" path="res://troopers/Clown_01.png" id="3_kbjsr"]
 [ext_resource type="AudioStream" uid="uid://ctn85wkn0lldi" path="res://troopers/sounds/hit.ogg" id="4_u8vmv"]
+[ext_resource type="Texture2D" uid="uid://cmetg4vxv376o" path="res://troopers/Clown_01_Read.png" id="5_yyerm"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yyerm"]
 random_pitch = 1.122462
@@ -52,6 +53,10 @@ resource_local_to_scene = true
 shader = ExtResource("2_kbjsr")
 shader_parameter/frames_y = 3
 shader_parameter/y_threshold = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ve6hf"]
+atlas = ExtResource("5_yyerm")
+region = Rect2(0, 0, 18, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hlcmw"]
 atlas = ExtResource("3_kbjsr")
@@ -127,6 +132,14 @@ region = Rect2(90, 36, 18, 18)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fbxa2"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ve6hf")
+}],
+"loop": 1,
+"name": &"read",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hlcmw")

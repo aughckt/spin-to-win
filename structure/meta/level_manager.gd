@@ -175,7 +175,6 @@ func take_damage(amount: int) -> void:
 	if current_hp <= 0:
 		return
 	current_hp -= amount
-	print("%s: hp is now %s" % [name, current_hp])
 	if current_hp <= 0:
 		lose_level()
 
