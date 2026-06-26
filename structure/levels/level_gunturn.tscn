@@ -9,14 +9,14 @@
 
 [sub_resource type="Curve" id="Curve_sne7d"]
 _limits = [0.0, 10.0, 0.0, 5.0]
-_data = [Vector2(0, 4.0837693), 0.0, 0.0, 0, 0, Vector2(5, 4.136125), 0.0, 0.0, 0, 0]
+_data = [Vector2(1e-05, 10), 0.0, 0.0, 0, 0, Vector2(5, 10), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Resource" id="Resource_tmwxl"]
 script = ExtResource("2_halu2")
 credit_curve = SubResource("Curve_sne7d")
 total_credits = 10
-max_jumbos = 0
+max_jumbos = 5
 metadata/_custom_type_script = "uid://lglt8bhkbaeb"
 
 [sub_resource type="Resource" id="Resource_2n1nx"]
@@ -40,16 +40,16 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAHAAAAAAAAAAEAAAAHAAAAAAAAAAIAAAAHAAA
 [node name="FadeTiles" parent="Environment" parent_id_path=PackedInt32Array(123182581) index="2" unique_id=817108041]
 tile_map_data = PackedByteArray("AAADAAIAAAADAAAAAAAEAAIAAAADAAAAAAAFAAIAAAADAAAAAAAGAAIAAAADAAAAAAAHAAIAAAADAAAAAAAIAAIAAAADAAAAAAAJAAIAAAADAAAAAAAKAAIAAAADAAAAAAALAAIAAAADAAAAAAAMAAMAAAAGAAAAAAAMAAQAAAAGAAAAAAAMAAUAAAAGAAAAAAAMAAYAAAAGAAAAAAAMAAcAAAAGAAAAAAAMAAgAAAAGAAAAAAADAAkAAAAFAAAAAAAEAAkAAAAFAAAAAAAFAAkAAAAFAAAAAAAGAAkAAAAFAAAAAAAHAAkAAAAFAAAAAAAIAAkAAAAFAAAAAAAJAAkAAAAFAAAAAAAKAAkAAAAFAAAAAAALAAkAAAAFAAAAAAACAAIAAAAFAAEAAAACAAMAAAAEAAAAAAACAAQAAAAEAAAAAAACAAUAAAAEAAAAAAACAAYAAAAEAAAAAAACAAcAAAAEAAAAAAACAAgAAAAEAAAAAAAMAAIAAAAGAAEAAAACAAkAAAAFAAIAAAAMAAkAAAAGAAIAAAA=")
 
-[node name="GearMap" parent="Environment" parent_id_path=PackedInt32Array(123182581) index="3" unique_id=916456414]
+[node name="GearMap" parent="Environment" parent_id_path=PackedInt32Array(123182581) index="4" unique_id=916456414]
 tile_map_data = PackedByteArray("AAAKAAgAAAABAAAAAAA=")
 
-[node name="ArrowTiles" parent="Environment" parent_id_path=PackedInt32Array(123182581) index="9" unique_id=108710037]
+[node name="ArrowTiles" parent="Environment" parent_id_path=PackedInt32Array(123182581) index="10" unique_id=108710037]
 tile_map_data = PackedByteArray("AAAIAAUAAAABAAEAAAADAAcAAAAAAAAAAAAEAAcAAAAAAAAAAAAFAAcAAAAAAAAAAAAGAAcAAAAAAAAAAAAHAAcAAAABAAEAAAAIAAYAAAABAAEAAAAIAAQAAAABAAEAAAAIAAMAAAACAAAAAAAHAAYAAAAAAAAAAAA=")
 
 [node name="HUD" parent="Environment/HUD" parent_id_path=PackedInt32Array(123182581, 1083079759) index="0" unique_id=1114338]
 towers = Array[ExtResource("5_oj0pf")]([])
 
-[node name="Player" parent="Environment" parent_id_path=PackedInt32Array(123182581) index="13" unique_id=1382910038]
+[node name="Player" parent="Environment" parent_id_path=PackedInt32Array(123182581) index="14" unique_id=1382910038]
 position = Vector2(672, 480)
 
 [node name="Tutorial" type="Node" parent="." index="2" unique_id=773734363]

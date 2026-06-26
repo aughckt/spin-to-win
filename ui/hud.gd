@@ -8,8 +8,9 @@ extends Control
 @export var health_label: Label
 @export var money_label: Label
 
-@export var start_wave_button: Button
-@export var pause_button: Button
+@export var start_wave_button: TextureButton
+@export var continue_wave_button: TextureButton
+@export var pause_button: TextureButton
 
 @export var speech_bubble: SpeechBubble
 
@@ -44,6 +45,8 @@ func _ready() -> void:
 	
 	pause_button.pressed.connect(_on_pause_button_pressed)
 	pause_button.process_mode = Node.PROCESS_MODE_ALWAYS
+	continue_wave_button.pressed.connect(_on_continue_button_pressed)
+	continue_wave_button.process_mode = Node.PROCESS_MODE_ALWAYS
 	
 	for node in tower_panels.get_children():
 		if node is TowerPanel:
@@ -85,6 +88,7 @@ func _on_start_wave_button_pressed() -> void:
 	pause_button.show()
 	LevelManager.INST.start_wave()
 
+
 func _on_wave_finished() -> void:
 	start_wave_button.show()
 	pause_button.hide()
@@ -92,8 +96,13 @@ func _on_wave_finished() -> void:
 
 func _on_pause_button_pressed() -> void:
 	var tree := get_tree()
-	if tree.paused:
-		pause_button.text = "Pause"
-	else:
-		pause_button.text = "Continue"
-	tree.paused = !tree.paused
+	tree.paused = true
+	pause_button.visible = false
+	continue_wave_button.visible = true
+
+
+func _on_continue_button_pressed() -> void:
+	var tree := get_tree()
+	tree.paused = false
+	pause_button.visible = true
+	continue_wave_button.visible = false

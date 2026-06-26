@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_rb85v")
-cost = 8
+cost = 14
 scene = ExtResource("1_ir7sx")
 name = "Pierce"
 icon = ExtResource("1_1m060")

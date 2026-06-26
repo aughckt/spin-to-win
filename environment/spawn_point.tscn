@@ -269,16 +269,22 @@ sprite_right = NodePath("SpriteRight")
 
 [node name="SpriteUp" type="AnimatedSprite2D" parent="." unique_id=1871596231]
 visible = false
+modulate = Color(1, 1, 1, 0.7137255)
+z_index = 201
 y_sort_enabled = true
-position = Vector2(-49, -39)
+position = Vector2(-96, -32)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_fbxa2")
 animation = &"intro_up"
+frame = 7
+frame_progress = 1.0
 
 [node name="SpriteLeft" type="AnimatedSprite2D" parent="." unique_id=192564626]
 visible = false
+modulate = Color(1, 1, 1, 0.7137255)
+z_index = 201
 y_sort_enabled = true
-position = Vector2(12, -60)
+position = Vector2(12, -96)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_fbxa2")
 animation = &"intro_left"
@@ -287,8 +293,10 @@ frame_progress = 1.0
 
 [node name="SpriteRight" type="AnimatedSprite2D" parent="." unique_id=1372343749]
 visible = false
+modulate = Color(1, 1, 1, 0.7137255)
+z_index = 201
 y_sort_enabled = true
-position = Vector2(-12, -60)
+position = Vector2(-12, -96)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_fbxa2")
 animation = &"door_open_left"

@@ -26,7 +26,8 @@ if you connect some|gears to the origin|theyll start spinning too
 now if you select a tower|from the menu you|can place it on any gear
 just be mindful,|the gear needs to be spinning|for the tower to be active
 @TOWER_SHOOT
-if you want to sell a tower|you can do that with right click
+you can rotate towers|with the mouse wheel|or arrow keys
+if you want to sell|a gear or tower you can|do that with right click
 also be on the lookout for noses
 theyre basically concentrated joy,|extremely valuable
 you can use them to buy|more towers and gears

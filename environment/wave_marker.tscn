@@ -1,14 +1,7 @@
 [gd_scene format=3 uid="uid://rnqt42kf2ex"]
 
 [ext_resource type="Script" uid="uid://cqhj5ybc42w3m" path="res://environment/wave_marker.gd" id="1_e7v72"]
-
-[sub_resource type="Gradient" id="Gradient_skwmi"]
-colors = PackedColorArray(0.29803923, 0.56078434, 0.50980395, 1, 0.29803923, 0.56078434, 0.50980395, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_wjifc"]
-gradient = SubResource("Gradient_skwmi")
-width = 8
-height = 8
+[ext_resource type="Texture2D" uid="uid://qld82bp7138a" path="res://environment/Effect_Navigator.png" id="2_h73gp"]
 
 [sub_resource type="Curve" id="Curve_e7v72"]
 _limits = [0.0, 100.0, 0.0, 1.0]
@@ -17,6 +10,13 @@ point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_3c1eq"]
 curve = SubResource("Curve_e7v72")
+
+[sub_resource type="Curve" id="Curve_h73gp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_h73gp"]
+curve = SubResource("Curve_h73gp")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fbxa2"]
 particle_flag_disable_z = true
@@ -28,6 +28,9 @@ initial_velocity_min = 15.0
 initial_velocity_max = 25.0
 gravity = Vector3(0, 0, 0)
 damping_curve = SubResource("CurveTexture_3c1eq")
+scale_min = 4.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_h73gp")
 
 [node name="WaveMarker" type="Node2D" unique_id=944576945 node_paths=PackedStringArray("particles")]
 z_index = 100
@@ -37,6 +40,6 @@ particles = NodePath("GPUParticles2D")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1522238229]
 amount = 32
-texture = SubResource("GradientTexture2D_wjifc")
+texture = ExtResource("2_h73gp")
 visibility_rect = Rect2(0, 0, 0, 0)
 process_material = SubResource("ParticleProcessMaterial_fbxa2")

@@ -6,6 +6,7 @@ const TRAP_SCENE: PackedScene = preload("res://towers/trap_tower/trap.tscn")
 var positions: Array[Vector2] = []
 const MAX_DIFF_FROM_TARGET_POS: float = 15
 @onready var animated_spites: AnimatedSprite2D = $AnimatedSprite2D
+@export var book_sound: Sound 
 @onready var spawn_timer: Timer = $SpawnTimer
 
 const MAX_TRAPS: int = 5
@@ -60,6 +61,7 @@ func _on_animation_finished() -> void:
 func _on_timer_timeout() -> void:
 	var pos: Vector2 = positions.pick_random()
 	pos += Vector2.RIGHT.rotated(randf_range(0, TAU)) * randfn(0, MAX_DIFF_FROM_TARGET_POS)
+	SoundBus.play_sound(book_sound)
 	
 	var trap := Trap.create()
 	trap.global_position = pos
