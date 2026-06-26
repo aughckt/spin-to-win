@@ -135,6 +135,8 @@ func start_wave() -> void:
 		var wave: WaveData = current_lanes[spawn_idx].waves.get(current_wave_index)
 		current_waves.push_back(wave)
 	
+	Env.INST.last_placed_tower = null
+	
 	if current_waves.all(func(x: WaveData) -> bool: return x == null):
 		win_level()
 		return

@@ -60,6 +60,8 @@ var is_build_phase: bool = true
 ###emitted when any origin gear is powered on or off. new_status is true if the power is on, false otherwise.
 #signal OriGearPowerSet(tile: Vector2i, new_status: bool)
 
+var last_placed_tower: GenericTower = null
+
 func _ready() -> void:
 	hud.data_selected.connect(_on_data_selected)
 	
@@ -489,6 +491,7 @@ func place_tower(tile: Vector2i, test_only: bool = false) -> String:
 	if tower is GunTower:
 		(tower as GunTower).set_gun_rotation(tower_rotation)
 	
+	last_placed_tower = tower
 	tile_to_tower[tile] = tower
 	return ""
 
@@ -498,8 +501,12 @@ func remove_tower(tile: Vector2i) -> void:
 	if tile == null:
 		return
 	
-	@warning_ignore("integer_division")
-	spend(-tower.data.cost / 2)
+	if tower == last_placed_tower:
+		spend(-tower.data.cost)
+		last_placed_tower = null
+	else:
+		@warning_ignore("integer_division")
+		spend(-tower.data.cost / 2)
 	if tower.data.cost & 1 != 0:
 		push_warning("Tower %s has a cost of %s, which is not divisible by 2. Rounding down." % [tower.data.name, tower.data.cost])
 	
