@@ -53,7 +53,7 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	## Debug. Press space to skip level
 	
-	if (event.is_action_pressed("interact") or event.is_action_pressed("M1")) and current_level == null and end_screen.visible == false:
+	if  event.is_action_pressed("M1") and current_level == null and end_screen.visible == false:
 		load_level()
 		start_screen.visible = false
 		
