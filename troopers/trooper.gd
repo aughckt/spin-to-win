@@ -33,6 +33,8 @@ signal removed(trooper: Trooper)
 
 const WALK_SOUND_CD_S: float = 1.5
 
+var active: bool
+
 func _ready() -> void:
 	target_pos = global_position
 	walk_normal = Vector2.ZERO
@@ -132,6 +134,7 @@ static func create() -> Trooper:
 	return trooper
 
 func setup() -> void:
+	active = true
 	set_deferred("monitorable", true)
 	set_deferred("monitoring", true)
 	hp = max_hp
@@ -152,6 +155,10 @@ func _on_walk_sound_timer_timeout() -> void:
 		SoundBus.play_sound(walk_sound)
 
 func remove() -> void:
+	if !active:
+		return
+	active = false
+	
 	removed.emit(self)
 	
 	_get_pool().pool(self)
