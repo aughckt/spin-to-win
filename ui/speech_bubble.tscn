@@ -73,3 +73,8 @@ TEXT TEXT TEXT TEXT"
 fit_content = true
 autowrap_mode = 0
 vertical_alignment = 1
+
+[node name="TalkTimer" type="Timer" parent="." unique_id=916535165]
+unique_name_in_owner = true
+wait_time = 2.0
+one_shot = true

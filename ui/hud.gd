@@ -30,6 +30,8 @@ var curr_health: int
 @onready var level_name: Label = $PanelContainer/MarginContainer/VBoxContainer/LevelName
 @onready var wave_count: Label = $PanelContainer/MarginContainer/VBoxContainer/WaveCount
 
+@onready var talky_guy: AnimatedSprite2D = %TalkyGuy
+
 
 func _ready() -> void:
 	show()

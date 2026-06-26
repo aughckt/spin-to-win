@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bgj5p7ryl1wl8" path="res://ui/health_chunk.tscn" id="8_srpbi"]
 [ext_resource type="Texture2D" uid="uid://dxxvj5oabfxxy" path="res://ui/UI_HealthIcon.png" id="9_ff8ar"]
 [ext_resource type="Texture2D" uid="uid://cffp71ar1hb08" path="res://ui/UI_ScreenBorder_cropped_2x.png" id="11_m0eg6"]
-[ext_resource type="Texture2D" uid="uid://bm2e8l2icmupi" path="res://ui/portrait_frame.png" id="12_b00kl"]
+[ext_resource type="Texture2D" uid="uid://6d6ed02svnc" path="res://ui/Portrait.png" id="13_mlhsj"]
 [ext_resource type="PackedScene" uid="uid://bhthadoomgigl" path="res://ui/speech_bubble.tscn" id="13_so1yu"]
 [ext_resource type="Texture2D" uid="uid://sjnpc7x08nxc" path="res://ui/UI_StartButton.png" id="14_65xic"]
 [ext_resource type="Texture2D" uid="uid://cur8mu634862p" path="res://ui/UI_StartButton_Pressed.png" id="15_mp5xd"]
@@ -30,6 +30,85 @@ texture_margin_left = 12.0
 texture_margin_top = 12.0
 texture_margin_right = 12.0
 texture_margin_bottom = 14.0
+
+[sub_resource type="Gradient" id="Gradient_6mpex"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.20784314, 0.4745098, 0.52156866, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mlhsj"]
+gradient = SubResource("Gradient_6mpex")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3e77"]
+atlas = ExtResource("13_mlhsj")
+region = Rect2(0, 80, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exqf6"]
+atlas = ExtResource("13_mlhsj")
+region = Rect2(96, 80, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ju8l"]
+atlas = ExtResource("13_mlhsj")
+region = Rect2(0, 160, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1px6"]
+atlas = ExtResource("13_mlhsj")
+region = Rect2(96, 160, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6mpex"]
+atlas = ExtResource("13_mlhsj")
+region = Rect2(0, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c3smh"]
+atlas = ExtResource("13_mlhsj")
+region = Rect2(0, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jwjf"]
+atlas = ExtResource("13_mlhsj")
+region = Rect2(96, 0, 96, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_126ht"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3e77")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exqf6")
+}],
+"loop": 1,
+"name": &"angry",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ju8l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1px6")
+}],
+"loop": 1,
+"name": &"happy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6mpex")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c3smh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5jwjf")
+}],
+"loop": 1,
+"name": &"normal",
+"speed": 5.0
+}]
 
 [node name="HUD" type="Control" unique_id=1114338 node_paths=PackedStringArray("tower_panels", "health_label", "money_label", "start_wave_button", "continue_wave_button", "pause_button", "speech_bubble", "nose_target", "actual_shape", "health_icon", "health_chunk_parent")]
 texture_filter = 1
@@ -266,7 +345,14 @@ texture_filter = 1
 custom_minimum_size = Vector2(234, 150)
 custom_maximum_size = Vector2(234, 150)
 layout_mode = 2
-texture = ExtResource("12_b00kl")
+texture = SubResource("GradientTexture1D_mlhsj")
+
+[node name="TalkyGuy" type="AnimatedSprite2D" parent="PanelContainer/MarginContainer/VBoxContainer/Control/ScreenBorder/TextureRect" unique_id=962772610 groups=["TalkyGuy"]]
+unique_name_in_owner = true
+position = Vector2(117, 74)
+scale = Vector2(1.8949924, 1.8949924)
+sprite_frames = SubResource("SpriteFrames_126ht")
+animation = &"happy"
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Control/ScreenBorder" unique_id=941882784]
 layout_mode = 2
