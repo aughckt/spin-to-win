@@ -27,6 +27,10 @@ var health_chunk_scene: PackedScene = preload("res://ui/health_chunk.tscn")
 var health_chunk_empty: Texture = preload("res://ui/UI_HealthChunk_Empty.png")
 var curr_health: int
 
+@onready var level_name: Label = $PanelContainer/MarginContainer/VBoxContainer/LevelName
+@onready var wave_count: Label = $PanelContainer/MarginContainer/VBoxContainer/WaveCount
+
+
 func _ready() -> void:
 	show()
 	LevelManager.INST.wave_finished.connect(_on_wave_finished)
@@ -69,6 +73,9 @@ func _process(_delta: float) -> void:
 	
 	health_label.text = str(LevelManager.INST.current_hp)
 	money_label.text = str(Env.INST.budget)
+	
+	level_name.text = LevelManager.INST.current_level.name
+	wave_count.text = "Wave %s / %s" % [LevelManager.INST.current_wave_index, LevelManager.INST.current_wave_max]
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_PREDELETE:

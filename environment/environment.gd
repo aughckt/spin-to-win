@@ -63,8 +63,7 @@ var is_build_phase: bool = true
 var last_placed_tower: GenericTower = null
 
 func _ready() -> void:
-	hud.data_selected.connect(_on_data_selected)
-	
+	hud.data_selected.connect(_on_data_selected)	
 	assert(INST == null)
 	INST = self
 	spend(0) #update budget display
@@ -563,3 +562,7 @@ func say(text: String) -> void:
 #func clear_speech_bubble() -> void:
 	#hud.speech_bubble.set_text("If you can see this there is a bug")
 	#hud.speech_bubble.hide()
+
+#var allow_click: bool = false
+#func allow_clicks() -> void:
+	#allow_click = true
