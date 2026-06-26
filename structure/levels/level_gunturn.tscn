@@ -9,13 +9,13 @@
 
 [sub_resource type="Curve" id="Curve_sne7d"]
 _limits = [0.0, 10.0, 0.0, 5.0]
-_data = [Vector2(0, 4.6067424), 0.0, 0.0, 0, 0, Vector2(2.5000002, 4.943821), 0.0, 0.0, 0, 0, Vector2(5, 1.2359552), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 4.6067424), 0.0, 0.0, 0, 0, Vector2(2.5000002, 4.943821), 0.0, 0.0, 0, 0, Vector2(5, 4.6067424), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Resource" id="Resource_tmwxl"]
 script = ExtResource("2_halu2")
 credit_curve = SubResource("Curve_sne7d")
-total_credits = 6
+total_credits = 1
 max_jumbos = 0
 metadata/_custom_type_script = "uid://lglt8bhkbaeb"
 
@@ -25,7 +25,7 @@ waves = Array[ExtResource("2_halu2")]([SubResource("Resource_tmwxl")])
 metadata/_custom_type_script = "uid://cqeic2k8kt4v1"
 
 [node name="Tutorial" unique_id=251983101 instance=ExtResource("1_5bju1")]
-level_hp = 3
+level_hp = 1
 lanes = Array[ExtResource("2_cyw1q")]([SubResource("Resource_2n1nx")])
 
 [node name="SpawnPointContainer" parent="." index="0" unique_id=1156764314]

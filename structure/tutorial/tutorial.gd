@@ -5,10 +5,10 @@ var env: Env
 
 var lines := "and youre the new guy
 basically youll have a bunch|of lunatics coming down|the lanes here
-its your job to make|them emplyable
+its your job to make|them employable
 also about the|rc robot thing
 the best i have is that it adds another degree to|any technically illegal activity|you might have to do on behalf of the company
-tried to ask legal but they wouldnt tell me
+tried to ask legal but they wouldn't tell me
 said it would \"make me complicit\"
 anyway you know wasd right?
 @MOVE
