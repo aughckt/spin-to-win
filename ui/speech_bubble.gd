@@ -7,6 +7,9 @@ extends Node2D
 
 var time_left: float = -1
 
+func _ready() -> void:
+	clear_text_important()
+
 func _process(delta: float) -> void:
 	if time_left < 0:
 		return
