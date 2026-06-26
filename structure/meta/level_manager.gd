@@ -5,6 +5,7 @@ static var INST: LevelManager
 
 @export var current_level_index: int = 0
 var level_array: Array[PackedScene] = [
+	load("res://structure/levels/lock.tscn"),
 	#load("res://structure/levels/lock.tscn"),
 	#load("res://structure/levels/loop.tscn"),
 	#load("res://structure/levels/level_gunturn.tscn"),
@@ -93,7 +94,8 @@ func load_level() -> void:
 	SoundBus.play_sound(start_level_sound)
 	if current_level != null:
 		current_level.queue_free()
-		TrooperSpawner.INST.finished.disconnect(end_wave)
+		if TrooperSpawner.INST.finished.is_connected(end_wave):
+			TrooperSpawner.INST.finished.disconnect(end_wave)
 	
 	if Env.INST:
 		Env.INST.delete()

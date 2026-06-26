@@ -4,6 +4,7 @@ extends Trooper
 const scene_jumbo: PackedScene = preload("res://troopers/jumbo.tscn")
 static var pool_jumbo: Pool
 
+
 static func _get_pool() -> Pool:
 	if pool_jumbo == null:
 		pool_jumbo = Pool.create(scene_jumbo)
@@ -17,9 +18,14 @@ static func create() -> Trooper:
 func remove() -> void:
 	super.remove()
 
-
 static func cost() -> int:
 	return 4
 
 func _has_left_anim() -> bool:
 	return true
+
+func sheet_height_walk() -> int:
+	return 4
+
+func sheet_height_read() -> int:
+	return 1

@@ -35,6 +35,8 @@ const WALK_SOUND_CD_S: float = 1.5
 
 var active: bool
 
+var current_sheet_height: int
+
 func _ready() -> void:
 	target_pos = global_position
 	walk_normal = Vector2.ZERO
@@ -49,8 +51,10 @@ func _physics_process(delta: float) -> void:
 	
 	if stun_time_s > 0:
 		stun_time_s = maxf(stun_time_s - delta, 0)
-		if sprite.animation != "read":
-			sprite.play("read")
+		if stun_time_s > 0:
+			play_read()
+		else:
+			play_walk()
 		return
 	
 	var new_pos := global_position + walk_normal * move_speed * delta
@@ -64,36 +68,47 @@ func _physics_process(delta: float) -> void:
 		if target_pos == global_position:
 			reach_end()
 			
-		
-		
 		walk_normal = global_position.direction_to(target_pos)
-		
-		var directions: PackedVector2Array = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]
-		var best_idx: int = 0
-		var best_dot: float = directions[best_idx].dot(walk_normal)
-		for idx in range(4):
-			var dot := directions[idx].dot(walk_normal)
-			if dot > best_dot:
-				best_dot = dot
-				best_idx = idx
-		
-		var animation := ""
-		match best_idx:
-			0:
-				animation = "walk_up"
-			1:
-				animation = "walk_down"
-			2:
-				animation = "walk_right" if !_has_left_anim() else "walk_left"
-			3:
-				animation = "walk_right"
-		sprite.flip_h = best_idx == 2 && !_has_left_anim()
-		sprite.play(animation)
-		
+		play_walk()
 		new_pos = global_position + walk_normal * move_speed * delta
 	
 	global_position = new_pos
 
+
+func play_walk() -> void:
+	var directions: PackedVector2Array = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]
+	var best_idx: int = 0
+	var best_dot: float = directions[best_idx].dot(walk_normal)
+	for idx in range(4):
+		var dot := directions[idx].dot(walk_normal)
+		if dot > best_dot:
+			best_dot = dot
+			best_idx = idx
+	
+	var animation := ""
+	match best_idx:
+		0:
+			animation = "walk_up"
+		1:
+			animation = "walk_down"
+		2:
+			animation = "walk_right" if !_has_left_anim() else "walk_left"
+		3:
+			animation = "walk_right"
+	sprite.flip_h = best_idx == 2 && !_has_left_anim()
+	sprite.play(animation)
+	set_sheet_height(sheet_height_walk())
+
+func play_read() -> void:
+	sprite.play("read")
+	set_sheet_height(sheet_height_read())
+
+func set_sheet_height(height: int) -> void:
+	if height == current_sheet_height:
+		return
+	
+	(sprite.material as ShaderMaterial).set_shader_parameter("frames_y", height)
+	current_sheet_height = height
 
 func reach_end() -> void:
 	LevelManager.INST.take_damage(1)
@@ -171,3 +186,9 @@ static func cost() -> int:
 
 func _has_left_anim() -> bool:
 	return false
+
+func sheet_height_walk() -> int:
+	return 3
+
+func sheet_height_read() -> int:
+	return 1
