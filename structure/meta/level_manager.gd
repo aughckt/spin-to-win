@@ -20,6 +20,8 @@ var current_wave_index: int = 0
 
 signal wave_started
 
+
+
 @onready var level_won_timer: Timer = %LevelWonTimer
 @onready var level_lost_timer: Timer = %LevelLostTimer
 @onready var level_lost_banner: Control = %LevelLostLabel

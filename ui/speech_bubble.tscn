@@ -10,9 +10,15 @@ texture_margin_top = 6.0
 texture_margin_right = 26.0
 texture_margin_bottom = 30.0
 
-[node name="SpeechBubble" type="Node2D" unique_id=1798231989 node_paths=PackedStringArray("label")]
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_fbxa2"]
+color = Color(0.29803923, 0.56078434, 0.50980395, 1)
+thickness = 2
+
+[node name="SpeechBubble" type="Node2D" unique_id=1798231989 node_paths=PackedStringArray("important_label", "temp_label", "separator")]
 script = ExtResource("1_sofsi")
-label = NodePath("PanelContainer/MarginContainer/RichTextLabel")
+important_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/RichTextLabel")
+temp_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/RichTextLabel2")
+separator = NodePath("PanelContainer/MarginContainer/VBoxContainer/HSeparator")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=837711668]
 anchors_preset = 3
@@ -33,7 +39,30 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = -15
 
-[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer" unique_id=37448975]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1660280659]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=37448975]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0.29803923, 0.56078434, 0.50980395, 1)
+theme_override_font_sizes/normal_font_size = 24
+text = "TEXT TEXT TEXT TEXT
+TEXT TEXT TEXT TEXT"
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=2061713515]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxLine_fbxa2")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=328223820]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

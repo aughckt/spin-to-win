@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://cqeic2k8kt4v1" path="res://structure/meta/lane_data.gd" id="2_cyw1q"]
 [ext_resource type="Script" uid="uid://lglt8bhkbaeb" path="res://structure/meta/wave_data.gd" id="2_halu2"]
 [ext_resource type="PackedScene" uid="uid://2aihi36nsg0w" path="res://environment/spawn_point.tscn" id="4_cyw1q"]
+[ext_resource type="Script" uid="uid://iuvu5f8f8tjj" path="res://structure/tutorial/tutorial.gd" id="5_7f8rm"]
+[ext_resource type="Script" uid="uid://b55436prbbuts" path="res://towers/tower_data.gd" id="5_oj0pf"]
 
 [sub_resource type="Curve" id="Curve_sne7d"]
 _limits = [0.0, 10.0, 0.0, 5.0]
@@ -23,7 +25,6 @@ waves = Array[ExtResource("2_halu2")]([SubResource("Resource_tmwxl")])
 metadata/_custom_type_script = "uid://cqeic2k8kt4v1"
 
 [node name="LevelGunturn" unique_id=251983101 instance=ExtResource("1_5bju1")]
-level_hp = 10
 lanes = Array[ExtResource("2_cyw1q")]([SubResource("Resource_2n1nx")])
 
 [node name="SpawnPointContainer" parent="." index="0" unique_id=1156764314]
@@ -45,7 +46,14 @@ tile_map_data = PackedByteArray("AAAKAAgAAAABAAAAAAA=")
 [node name="ArrowTiles" parent="Environment" parent_id_path=PackedInt32Array(123182581) index="9" unique_id=108710037]
 tile_map_data = PackedByteArray("AAAIAAUAAAABAAEAAAADAAcAAAAAAAAAAAAEAAcAAAAAAAAAAAAFAAcAAAAAAAAAAAAGAAcAAAAAAAAAAAAHAAcAAAABAAEAAAAIAAYAAAABAAEAAAAIAAQAAAABAAEAAAAIAAMAAAACAAAAAAAHAAYAAAAAAAAAAAA=")
 
+[node name="HUD" parent="Environment/HUD" parent_id_path=PackedInt32Array(123182581, 1083079759) index="0" unique_id=1114338]
+towers = Array[ExtResource("5_oj0pf")]([])
+
 [node name="Player" parent="Environment" parent_id_path=PackedInt32Array(123182581) index="13" unique_id=1382910038]
 position = Vector2(672, 480)
+
+[node name="Tutorial" type="Node" parent="." index="2" unique_id=773734363]
+script = ExtResource("5_7f8rm")
+metadata/_custom_type_script = "uid://iuvu5f8f8tjj"
 
 [editable path="Environment"]

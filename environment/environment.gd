@@ -36,7 +36,7 @@ enum BuildPerms {
 
 var tile_to_gear_set: Dictionary[Vector2i, GearSet] = {}
 var tile_to_visual: Dictionary[Vector2i, GearVisual] = {}
-var tile_to_tower: Dictionary[Vector2i, Node2D] = {}
+var tile_to_tower: Dictionary[Vector2i, GenericTower] = {}
 ##true if powered
 var ori_gear_state: Dictionary[Vector2i, bool] = {}
 
@@ -196,7 +196,7 @@ func place_gear(tile: Vector2i, test_only: bool = false) -> String:
 
 				if gset.has_ori_gear:
 						if has_powered_neighbour:
-							return "you cant connect 2 origin\ngears to each other"
+							return "you cant connect 2 sets\nthat are both connected\n to an origin gear"
 						else:
 							has_powered_neighbour = true
 							neighbour_ori = gset.ori_gear_tile
@@ -206,7 +206,7 @@ func place_gear(tile: Vector2i, test_only: bool = false) -> String:
 			else:
 				if gear_kind_at(candidate) == ORIGIN_GEAR:
 					if has_powered_neighbour:
-						return "you cant connect 2 origin\ngears to each other"
+						return "you cant connect 2 sets\nthat are both connected\n to an origin gear"
 
 					has_powered_neighbour = true
 					neighbour_ori = candidate
@@ -539,13 +539,20 @@ func spawn_money(amount: int, at: Vector2) -> void:
 		
 		nose.vel = (-at.direction_to(target)).rotated(angle) * speed
 
+#func say_untimed(text: String) -> void:
+	#if text == "":
+		#return
+	#
+	#hud.speech_bubble.set_text(text, -1)
+	#hud.speech_bubble.show()
+
 func say(text: String) -> void:
 	if text == "":
 		return
 	
-	hud.speech_bubble.set_text(text, 2)
+	hud.speech_bubble.set_text_temp(text, 2)
 	hud.speech_bubble.show()
 
-func clear_speech_bubble() -> void:
-	hud.speech_bubble.set_text("If you can see this there is a bug")
-	hud.speech_bubble.hide()
+#func clear_speech_bubble() -> void:
+	#hud.speech_bubble.set_text("If you can see this there is a bug")
+	#hud.speech_bubble.hide()

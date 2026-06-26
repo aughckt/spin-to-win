@@ -266,6 +266,8 @@ size_flags_vertical = 3
 
 [node name="ScreenBorder" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Control" unique_id=1291061240]
 texture_filter = 1
+custom_minimum_size = Vector2(258, 176)
+custom_maximum_size = Vector2(258, 176)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -288,6 +290,8 @@ autowrap_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/Control/ScreenBorder" unique_id=1410244612]
 texture_filter = 1
+custom_minimum_size = Vector2(234, 150)
+custom_maximum_size = Vector2(234, 150)
 layout_mode = 2
 texture = ExtResource("12_b00kl")
 
