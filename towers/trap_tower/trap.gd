@@ -10,6 +10,8 @@ signal triggered(trap: Trap)
 const STUN_TIME_S: float = 1.5
 var damage: int
 
+var active: bool
+
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	
@@ -41,7 +43,12 @@ static func _get_pool() -> Pool:
 
 
 static func create() -> Trap:
-	return _get_pool().get_inst()
+	var trap: Trap = _get_pool().get_inst()
+	trap.active = true
+	return trap
 
 func remove() -> void:
+	if !active:
+		return
+	active = false
 	_get_pool().pool(self)

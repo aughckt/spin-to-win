@@ -14,6 +14,8 @@ const scene: PackedScene = preload("res://towers/gun_tower/bullet.tscn")
 
 @export var sprite: Sprite2D
 
+var active: bool
+
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	body_entered.connect(_on_body_entered)
@@ -32,7 +34,7 @@ static func _get_pool() -> Pool:
 	return pool
 
 func _on_area_entered(area: Area2D) -> void:
-	if piercing < 0 || area.get_parent() == GeneralPool:
+	if !active || piercing < 0 || area.get_parent() == GeneralPool:
 		return
 	
 	if area is Trooper:
@@ -49,10 +51,14 @@ func _on_body_entered(_body: Node2D) -> void:
 
 static func create() -> Bullet:
 	var bullet: Bullet = _get_pool().get_inst()
-	
+	bullet.active = true
 	bullet.time_left = life_time
 	bullet.dir = Vector2.ZERO
 	return bullet
 
 func remove() -> void:
+	if !active:
+		return
+	
+	active = false
 	_get_pool().pool(self)
