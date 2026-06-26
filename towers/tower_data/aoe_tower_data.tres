@@ -11,5 +11,5 @@ scene = ExtResource("2_hxcat")
 name = "AOE"
 icon = ExtResource("1_n3jp2")
 shot_delay_sec = 1.3
-damage = 25
+damage = 20
 metadata/_custom_type_script = "uid://b55436prbbuts"

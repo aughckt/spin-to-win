@@ -89,6 +89,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	Env.INST.tower_rotation = gun_tower.gun_rotation
 
 func _process(_delta: float) -> void:
+	visible = LevelManager.INST.is_build_phase
+	
 	var map := Env.INST.gearmap
 	var mouse_pos := map.get_local_mouse_position()
 	var tile := map.local_to_map(mouse_pos)

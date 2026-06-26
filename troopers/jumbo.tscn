@@ -394,3 +394,9 @@ shape = SubResource("CircleShape2D_11td1")
 [node name="AnimatedSprite2D" parent="." index="1" unique_id=1506180497]
 material = SubResource("ShaderMaterial_0v5en")
 sprite_frames = SubResource("SpriteFrames_amto4")
+
+[node name="RandomSoundTimer" parent="." index="2" unique_id=976251566]
+wait_time = 0.6
+
+[node name="WalkSoundTimer" parent="." index="3" unique_id=154882033]
+wait_time = 0.2
