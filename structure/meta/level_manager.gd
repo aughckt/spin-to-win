@@ -82,6 +82,8 @@ func win_level() -> void:
 	level_won_banner.visible = true
 	background_banner.visible = true
 	TrooperSpawner.INST.disable()
+	
+	SoundBus.play_sound(preload("res://audio/win_sound.tres"))
 
 
 func lose_level() -> void:

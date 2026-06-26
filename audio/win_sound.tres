@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Sound" format=3 uid="uid://dosmi6lc1d07l"]
+
+[ext_resource type="Script" uid="uid://ce8myo2y6rl0p" path="res://audio/sound.gd" id="1_huavv"]
+[ext_resource type="AudioStream" uid="uid://42vbv32ncjjd" path="res://audio/winning.ogg" id="2_y8r65"]
+
+[resource]
+script = ExtResource("1_huavv")
+stream = ExtResource("2_y8r65")
+volume_linear = 0.8
+metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
