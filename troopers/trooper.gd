@@ -47,6 +47,8 @@ func _physics_process(delta: float) -> void:
 	
 	if stun_time_s > 0:
 		stun_time_s = maxf(stun_time_s - delta, 0)
+		if sprite.animation != "read":
+			sprite.play("read")
 		return
 	
 	var new_pos := global_position + walk_normal * move_speed * delta
@@ -104,7 +106,7 @@ func take_damage(amount: int) -> void:
 	SoundBus.play_sound(hit_sound)
 	
 	if hp <= 0:
-		var visual := DeathVisual.create()
+		var visual := DeathVisual.create(self is Jumbo)
 		visual.global_position = global_position
 		visual.reparent.call_deferred(Env.INST.bullets)
 		
