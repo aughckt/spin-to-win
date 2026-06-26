@@ -269,6 +269,7 @@ sprite_right = NodePath("SpriteRight")
 
 [node name="SpriteUp" type="AnimatedSprite2D" parent="." unique_id=1871596231]
 visible = false
+modulate = Color(1, 1, 1, 0.7137255)
 z_index = 201
 y_sort_enabled = true
 position = Vector2(-96, -32)
@@ -280,6 +281,7 @@ frame_progress = 1.0
 
 [node name="SpriteLeft" type="AnimatedSprite2D" parent="." unique_id=192564626]
 visible = false
+modulate = Color(1, 1, 1, 0.7137255)
 z_index = 201
 y_sort_enabled = true
 position = Vector2(12, -96)
@@ -291,6 +293,7 @@ frame_progress = 1.0
 
 [node name="SpriteRight" type="AnimatedSprite2D" parent="." unique_id=1372343749]
 visible = false
+modulate = Color(1, 1, 1, 0.7137255)
 z_index = 201
 y_sort_enabled = true
 position = Vector2(-12, -96)
