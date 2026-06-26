@@ -6,7 +6,7 @@ const cursor_pressed: Texture = preload("res://ui/cursor_pressed.png")
 
 func _ready() -> void:
 	make_current()
-	
+	Input.set_custom_mouse_cursor(cursor_normal)
 	await get_tree().physics_frame
 	
 	var hud := Env.INST.hud
@@ -15,4 +15,7 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func _process(_delta: float) -> void:
-	Input.set_custom_mouse_cursor(cursor_pressed if Input.is_action_pressed("M1") else cursor_normal)
+	if Input.is_action_just_pressed("M1"):
+		Input.set_custom_mouse_cursor(cursor_pressed)
+	elif Input.is_action_just_released("M1"):
+		Input.set_custom_mouse_cursor(cursor_normal)
