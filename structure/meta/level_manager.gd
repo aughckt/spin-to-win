@@ -8,7 +8,8 @@ var level_array: Array[PackedScene] = [
 	#load("res://structure/levels/loop.tscn"),
 	load("res://structure/levels/level_gunturn.tscn"),
 	load("res://structure/levels/level_multilane.tscn"),
-	load("res://structure/levels/level_aoe_intro.tscn"),]
+	load("res://structure/levels/level_aoe_intro.tscn"),
+	load("res://structure/levels/level_comeback.tscn"),]
 var current_level: Level = null
 var current_hp: int = 10
 var is_build_phase: bool = true
