@@ -15,6 +15,10 @@ run/main_scene="uid://bua7qsfwr841o"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+driver/output_latency.web=100
+
 [autoload]
 
 GeneralPool="*uid://dw2jlff5d1yeb"

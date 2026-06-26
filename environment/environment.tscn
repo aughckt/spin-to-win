@@ -319,6 +319,7 @@ tile_set = SubResource("TileSet_wetts")
 rendering_quadrant_size = 100
 
 [node name="DebugHUD" type="CanvasLayer" parent="." unique_id=1436650702]
+visible = false
 
 [node name="CoordsLabel" type="Label" parent="DebugHUD" unique_id=1591894278]
 offset_right = 40.0
