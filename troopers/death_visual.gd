@@ -29,6 +29,7 @@ static func create(is_jumbo: bool) -> DeathVisual:
 		dv.sprite.play("little")
 		dv.poof_sprite.play("default2")
 	dv.ori_set = false
+	dv.poof_sprite.visible = true
 	return dv
 
 

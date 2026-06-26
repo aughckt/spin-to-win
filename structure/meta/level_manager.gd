@@ -9,6 +9,7 @@ var level_array: Array[PackedScene] = [
 	#load("res://structure/levels/lock.tscn"),
 	#load("res://structure/levels/loop.tscn"),
 	#load("res://structure/levels/level_gunturn.tscn"),
+	load("res://structure/levels/level_sniper.tscn"),
 	load("res://structure/levels/level_multilane.tscn"),
 	load("res://structure/levels/level_aoe_intro.tscn"),
 	load("res://structure/levels/level_comeback.tscn"),]
@@ -66,6 +67,14 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("restart_level") and current_level:
 		TrooperSpawner.INST.disable()
 		load_level()
+	elif event.is_action_pressed("skip_wave") and is_build_phase and current_level and background_banner.visible == false:
+		end_wave()
+		if current_wave_index >= current_wave_max:
+			return
+		var money: int = 0
+		for data: LaneData in current_level.lanes:
+			money += data.waves[current_wave_index - 1].total_credits
+		Env.INST.budget += money
 
 
 
@@ -104,7 +113,7 @@ func load_level() -> void:
 		print("You won the game!")
 		end_game()
 		return
-	
+	background_banner.visible = true
 	current_level = level_array[current_level_index].instantiate()
 	current_hp = current_level.level_hp
 	set_build_phase(true)
@@ -195,13 +204,11 @@ func _on_phase_transition_timeout() -> void:
 func _on_lost_timer_timeout() -> void:
 	load_level()
 	level_lost_banner.visible = false
-	background_banner.visible = false
 
 
 func _on_won_timer_timeout() -> void:
 	load_level()
 	level_won_banner.visible = false
-	background_banner.visible = false
 
 
 func end_game() -> void:
