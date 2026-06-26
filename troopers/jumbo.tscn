@@ -419,7 +419,7 @@ animations = [{
 [node name="Jumbo" unique_id=182051846 instance=ExtResource("1_11td1")]
 script = ExtResource("2_3mpbw")
 move_speed = 60.0
-max_hp = 200
+max_hp = 600
 walk_sound = SubResource("Resource_yyerm")
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=807592597]

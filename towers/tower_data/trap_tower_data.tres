@@ -6,10 +6,10 @@
 
 [resource]
 script = ExtResource("1_x6jwh")
-cost = 5
+cost = 14
 scene = ExtResource("1_f24ow")
-name = "Trap"
+name = "Book Trap"
 icon = ExtResource("1_yhtsm")
 shot_delay_sec = 2.0
-damage = 30
+damage = 25
 metadata/_custom_type_script = "uid://b55436prbbuts"

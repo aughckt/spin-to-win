@@ -25,7 +25,7 @@ static var INST: Env
 
 var tower_data: TowerData = null
 
-const GEAR_COST := 2
+const GEAR_COST := 3#2
 
 const BuildPermsName = "BuildPerms"
 enum BuildPerms {

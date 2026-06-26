@@ -6,10 +6,10 @@
 
 [resource]
 script = ExtResource("3_j53xf")
-cost = 2
+cost = 6
 scene = ExtResource("2_5jrpd")
-name = "Gun"
+name = "Tie Shooter"
 icon = ExtResource("1_j8smh")
-shot_delay_sec = 1.0
+shot_delay_sec = 0.5
 damage = 35
 metadata/_custom_type_script = "uid://b55436prbbuts"
