@@ -45,7 +45,6 @@ func _process(delta: float) -> void:
 	
 	global_position.y -= SPEED * delta
 	if ori.y - global_position.y >= TARGET_DIST:
-		print("FREE THINGY")
 		_get_pool().pool(self)
 
 
