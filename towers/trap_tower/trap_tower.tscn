@@ -2,6 +2,19 @@
 
 [ext_resource type="Script" uid="uid://cu8etchoxdp0v" path="res://towers/trap_tower/trap_tower.gd" id="1_hcdve"]
 [ext_resource type="Texture2D" uid="uid://b67vi4jx74dnv" path="res://towers/trap_tower/BookDispenser.png" id="2_hcdve"]
+[ext_resource type="Script" uid="uid://ce8myo2y6rl0p" path="res://audio/sound.gd" id="2_j0duy"]
+[ext_resource type="AudioStream" uid="uid://bge0n8qioe08e" path="res://towers/trap_tower/bookfall.ogg" id="3_rmsk4"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_51jax"]
+random_pitch = 1.122462
+streams_count = 1
+stream_0/stream = ExtResource("3_rmsk4")
+
+[sub_resource type="Resource" id="Resource_hcdve"]
+script = ExtResource("2_j0duy")
+stream = SubResource("AudioStreamRandomizer_51jax")
+volume_linear = 0.5
+metadata/_custom_type_script = "uid://ce8myo2y6rl0p"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j0duy"]
 atlas = ExtResource("2_hcdve")
@@ -75,6 +88,7 @@ animations = [{
 [node name="TrapTower" type="Node2D" unique_id=1485056362]
 y_sort_enabled = true
 script = ExtResource("1_hcdve")
+book_sound = SubResource("Resource_hcdve")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=40340654]
 scale = Vector2(4, 4)
