@@ -63,6 +63,9 @@ func _ready() -> void:
 		add_tower_data(tower)
 
 func _process(_delta: float) -> void:
+	if not Env.INST:
+		return
+	
 	var new_hp := LevelManager.INST.current_hp
 	if new_hp != curr_health && new_hp >= 0:
 		while new_hp < curr_health:

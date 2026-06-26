@@ -55,7 +55,7 @@ func _update_nodes(node: Node) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	#really dont like this
-	if tower == null || tower is not GunTower:
+	if tower == null || tower is not GunTower || not LevelManager.INST.is_build_phase:
 		return
 	
 	var gun_tower := tower as GunTower
@@ -88,7 +88,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	Env.INST.tower_rotation = gun_tower.gun_rotation
 
+
 func _process(_delta: float) -> void:
+	if not Env.INST:
+		return
+	
 	visible = LevelManager.INST.is_build_phase
 	
 	var map := Env.INST.gearmap

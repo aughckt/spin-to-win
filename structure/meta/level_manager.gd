@@ -211,6 +211,17 @@ func _on_won_timer_timeout() -> void:
 
 func end_game() -> void:
 	print("Game ended")
+	
+	SoundBus.stop_all_sounds()
+	SoundBus.play_sound(start_level_sound)
+	if current_level != null:
+		current_level.queue_free()
+		if TrooperSpawner.INST.finished.is_connected(end_wave):
+			TrooperSpawner.INST.finished.disconnect(end_wave)
+	
+	if Env.INST:
+		Env.INST.delete()
+	
 	end_screen.visible = true
 	wave_banner.visible = false
 	build_banner.visible = false
