@@ -8,6 +8,7 @@ var level_array: Array[PackedScene] = [
 	#load("res://structure/levels/lock.tscn"),
 	#load("res://structure/levels/loop.tscn"),
 	#load("res://structure/levels/level_gunturn.tscn"),
+	load("res://structure/levels/level_sniper.tscn"),
 	load("res://structure/levels/level_multilane.tscn"),
 	load("res://structure/levels/level_aoe_intro.tscn"),
 	load("res://structure/levels/level_comeback.tscn"),]
